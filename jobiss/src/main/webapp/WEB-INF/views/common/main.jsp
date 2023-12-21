@@ -9,5 +9,7 @@
 </head>
 <body>
 	메인입니다.
+	
+	<button type="button" onclick="location.href='community.do'">커뮤니티 게시판</button>
 </body>
 </html>
