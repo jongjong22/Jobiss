@@ -24,42 +24,11 @@ public class MainController {
 		List<Member> memberList = new ArrayList<Member>();
 		int count = 0;
 
-		memberList = ms.memberList();
 		count = ms.count();
 
-		model.addAttribute("list", memberList);
 		model.addAttribute("count", count);
 		return "common/main";
 	}
 
-	@RequestMapping("updateForm.do")
-	public String updateForm(Model model, Member member, int id) {
-		System.out.println("updateForm");
-		member = ms.selectMemberOne(id);
-
-		model.addAttribute("member", member);
-		return "common/updateForm";
-	}
-
-	@RequestMapping("update.do")
-	public String update(Model model, Member member) {
-		System.out.println("update");
-		int result = 0;
-		result = ms.updateMember(member);
-		 
-		System.out.println("수정결과 : " + result);
-		model.addAttribute("result", result);
-		return "common/memberMove";
-	}
-
-	@RequestMapping("delete.do")
-	public String delete(Model model, Member member) {
-		System.out.println("delete");
-		int result = 0;
-
-		result = ms.updateMember(member);
-		System.out.println("수정결과 : " + result);
-		model.addAttribute("result", result);
-		return "common/memberMove";
-	}
+	
 }

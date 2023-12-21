@@ -15,19 +15,6 @@
 			<th>나이</th>
 			<th colspan="2">관리</th>
 		</tr>
-		<c:forEach items="${list }" var="member">
-			<tr>
-				<td>${member.id }</td>
-				<td>${member.name }</td>
-				<td>${member.age }</td>
-				<td>
-					<button onclick="location.href='updateForm.do?id=${member.id }'">수정</button>
-				</td>
-				<td>
-					<button onclick="location.href='delete.do?id=${member.id }'">삭제</button>
-				</td>
-			</tr>
-		</c:forEach>
 		<tr>
 			<th>글갯수 : ${count }</th>
 		</tr>
