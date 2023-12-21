@@ -6,99 +6,99 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("member")
 public class Member {
-	private String mEmail;
-	private String mPW;
-	private String mName;
-	private String mPhone;
-	private String mAge;
-	private String mGender;
-	private String mAddress;
-	private String mCareer;
-	private String mEducation;
-	private String mMajor;
-	private String mCertification;
-	private String mLang;
-	private String mDb;
+	private String memail;
+	private String mpw;
+	private String mname;
+	private String mphone;
+	private String mage;
+	private String mgender;
+	private String maddress;
+	private String mcareer;
+	private String meducation;
+	private String mmajor;
+	private String mcertification;
+	private String mlang;
+	private String mdb;
 	private Timestamp mreg;
-	private String mDrop;
+	private String mdrop;
 	
-	public String getmEmail() {
-		return mEmail;
+	public String getMemail() {
+		return memail;
 	}
-	public void setmEmail(String mEmail) {
-		this.mEmail = mEmail;
+	public void setMemail(String memail) {
+		this.memail = memail;
 	}
-	public String getmPW() {
-		return mPW;
+	public String getMpw() {
+		return mpw;
 	}
-	public void setmPW(String mPW) {
-		this.mPW = mPW;
+	public void setMpw(String mpw) {
+		this.mpw = mpw;
 	}
-	public String getmName() {
-		return mName;
+	public String getMname() {
+		return mname;
 	}
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
-	public String getmPhone() {
-		return mPhone;
+	public String getMphone() {
+		return mphone;
 	}
-	public void setmPhone(String mPhone) {
-		this.mPhone = mPhone;
+	public void setMphone(String mphone) {
+		this.mphone = mphone;
 	}
-	public String getmAge() {
-		return mAge;
+	public String getMage() {
+		return mage;
 	}
-	public void setmAge(String mAge) {
-		this.mAge = mAge;
+	public void setMage(String mage) {
+		this.mage = mage;
 	}
-	public String getmGender() {
-		return mGender;
+	public String getMgender() {
+		return mgender;
 	}
-	public void setmGender(String mGender) {
-		this.mGender = mGender;
+	public void setMgender(String mgender) {
+		this.mgender = mgender;
 	}
-	public String getmAddress() {
-		return mAddress;
+	public String getMaddress() {
+		return maddress;
 	}
-	public void setmAddress(String mAddress) {
-		this.mAddress = mAddress;
+	public void setMaddress(String maddress) {
+		this.maddress = maddress;
 	}
-	public String getmCareer() {
-		return mCareer;
+	public String getMcareer() {
+		return mcareer;
 	}
-	public void setmCareer(String mCareer) {
-		this.mCareer = mCareer;
+	public void setMcareer(String mcareer) {
+		this.mcareer = mcareer;
 	}
-	public String getmEducation() {
-		return mEducation;
+	public String getMeducation() {
+		return meducation;
 	}
-	public void setmEducation(String mEducation) {
-		this.mEducation = mEducation;
+	public void setMeducation(String meducation) {
+		this.meducation = meducation;
 	}
-	public String getmMajor() {
-		return mMajor;
+	public String getMmajor() {
+		return mmajor;
 	}
-	public void setmMajor(String mMajor) {
-		this.mMajor = mMajor;
+	public void setMmajor(String mmajor) {
+		this.mmajor = mmajor;
 	}
-	public String getmCertification() {
-		return mCertification;
+	public String getMcertification() {
+		return mcertification;
 	}
-	public void setmCertification(String mCertification) {
-		this.mCertification = mCertification;
+	public void setMcertification(String mcertification) {
+		this.mcertification = mcertification;
 	}
-	public String getmLang() {
-		return mLang;
+	public String getMlang() {
+		return mlang;
 	}
-	public void setmLang(String mLang) {
-		this.mLang = mLang;
+	public void setMlang(String mlang) {
+		this.mlang = mlang;
 	}
-	public String getmDb() {
-		return mDb;
+	public String getMdb() {
+		return mdb;
 	}
-	public void setmDb(String mDb) {
-		this.mDb = mDb;
+	public void setMdb(String mdb) {
+		this.mdb = mdb;
 	}
 	public Timestamp getMreg() {
 		return mreg;
@@ -106,12 +106,13 @@ public class Member {
 	public void setMreg(Timestamp mreg) {
 		this.mreg = mreg;
 	}
-	public String getmDrop() {
-		return mDrop;
+	public String getMdrop() {
+		return mdrop;
 	}
-	public void setmDrop(String mDrop) {
-		this.mDrop = mDrop;
+	public void setMdrop(String mdrop) {
+		this.mdrop = mdrop;
 	}
+	
 	
 	
 }
