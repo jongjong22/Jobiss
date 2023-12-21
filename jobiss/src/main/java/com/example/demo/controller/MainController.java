@@ -18,9 +18,5 @@ public class MainController {
 		return "common/main";
 	}
 
-	@RequestMapping("community.do")
-	public String community(Model model) {
-		System.out.println("community.do");
-		return "community/community";
-	}
+	
 }
