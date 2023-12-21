@@ -5,7 +5,7 @@
 
 	<!-- 회원목록 조회 -->
 	<select id="count" resultType="int">
-		select count(*) from Member
+		select count(*) from member
 	</select>
 	
 </mapper>
