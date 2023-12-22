@@ -20,6 +20,7 @@
             <br>
             <a href="logout.do">로그아웃</a>
         </c:if>
-  	<button onclick="location.href='gptMain' ">GPT테스트</button>
+  	<button onclick="location.href='gptMain' ">종윤GPT테스트</button>
+  <input type="button" onClick="location.href='masterMemberList.do'" value="창민이동">
 </body>
 </html>
