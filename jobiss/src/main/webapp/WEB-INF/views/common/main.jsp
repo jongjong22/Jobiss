@@ -9,5 +9,6 @@
 </head>
 <body>
 	메인입니다.
+	<button onclick="location.href='gptMain' ">GPT테스트</button>
 </body>
 </html>
