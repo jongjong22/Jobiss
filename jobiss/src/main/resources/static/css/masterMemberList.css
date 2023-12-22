@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* 스타일을 적용할 클래스명을 사용하여 스타일 작성 */
+.Big_container {
+    text-align: center;
+}
+
+.container1 {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* 회원이 없을 때의 스타일 */
+h1 {
+    color: #555;
+}
+
+/* 가입된 회원이 없을 때의 스타일 */
+h1:empty {
+    color: #f00; /* 빨간색 텍스트 */
+}
