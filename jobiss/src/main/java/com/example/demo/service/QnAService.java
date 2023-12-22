@@ -2,11 +2,14 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.model.QnADTO;
+import org.springframework.stereotype.Service;
 
+import com.example.demo.model.QnA;
+
+@Service
 public class QnAService {
 
-	public int qnaInsert(QnADTO qna) {
+	public int qnaInsert(QnA qna) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -16,7 +19,7 @@ public class QnAService {
 		return 0;
 	}
 
-	public List<QnADTO> getqnaList(int page) {
+	public List<QnA> getqnaList(int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -26,7 +29,7 @@ public class QnAService {
 		
 	}
 
-	public QnADTO getQnA(int qid) {
+	public QnA getQnA(int qid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,7 +39,7 @@ public class QnAService {
 		return 0;
 	}
 
-	public int QnAUpdate(QnADTO qna) {
+	public int QnAUpdate(QnA qna) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
