@@ -22,5 +22,6 @@
         </c:if>
   	<button onclick="location.href='gptMain' ">종윤GPT테스트</button>
   <input type="button" onClick="location.href='masterMemberList.do'" value="창민이동">
+  <button type="button" onclick="location.href='community.do'">현배커뮤니티</button>
 </body>
 </html>
