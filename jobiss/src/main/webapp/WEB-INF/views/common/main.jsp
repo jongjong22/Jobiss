@@ -20,5 +20,6 @@
             <br>
             <a href="logout.do">로그아웃</a>
         </c:if>
+  	<button onclick="location.href='gptMain' ">GPT테스트</button>
 </body>
 </html>
