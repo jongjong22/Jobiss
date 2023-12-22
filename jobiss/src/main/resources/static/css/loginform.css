@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+form {
+	margin: 20px auto;
+	width: 500px;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+th, td {
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+caption {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="tel"] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+
+input[type="radio"] {
+	margin-right: 5px;
+}
+
+button {
+	padding: 10px;
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+button[type="button"] {
+	background-color: #ccc;
+	margin-left: 10px;
+}
+
+button[type="button"]:hover {
+	background-color: #bbb;
+}
+
+td:last-child {
+	text-align: center;
+}
