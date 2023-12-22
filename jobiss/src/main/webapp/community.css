@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.container {
+  display: flex; /* Flexbox를 사용하여 요소들을 일자로 정렬합니다 */
+}
+
+.box {
+  width: 100px; /* 네모박스의 가로 크기 */
+  height: 100px; /* 네모박스의 세로 크기 */
+  background-color: #ccc; /* 배경색 */
+  margin: 5px; /* 네모박스 간의 간격 */
+}
