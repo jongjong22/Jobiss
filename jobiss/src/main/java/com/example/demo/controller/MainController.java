@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.service.GptService;
 import com.example.demo.service.MemberService;
 
 @Controller
@@ -18,5 +19,10 @@ public class MainController {
 		return "common/main";
 	}
 
-	
+
+	@RequestMapping("community.do")
+	public String community() {
+		
+		return "community/communityForm";
+	}
 }

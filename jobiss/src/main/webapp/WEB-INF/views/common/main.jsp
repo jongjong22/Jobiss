@@ -268,7 +268,21 @@
 	</div>
 </footer>
 
-
+<!-- 세션 로그인이 없을경우 -->
+	<c:if test="${empty sessionScope.member.memail}">
+	메인입니다.
+	<input type="button" value="로그인" onclick="location.href='loginform.do'">
+	
+	</c:if>
+	 <!-- 세션에 로그인 정보가 있을 경우 -->
+        <c:if test="${not empty sessionScope.member.memail}">
+             ${sessionScope.member.mname}님
+            <br>
+            <a href="logout.do">로그아웃</a>
+        </c:if>
+  	<button onclick="location.href='gptMain' ">종윤GPT테스트</button>
+  <input type="button" onClick="location.href='masterMemberList.do'" value="창민이동">
+  <button type="button" onclick="location.href='community.do'">현배커뮤니티</button>
 
 <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -282,6 +296,5 @@
   });
 	
   </script>
-
 </body>
 </html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MasterMemberDao">
+
+	<!--회원 목록 구해오기 -->
+	<select id="mlist" resultType="member">
+		select * from member order by mdrop asc, mreg desc
+	</select>
+	
+	<!-- 회원 삭제 -->
+	<update id="masterMemberDelete">
+		update member set mdrop = 'Y' where memail = #{memail}
+	</update>	
+	
+	<!-- 회원 한 명 상세정보 구해오기 -->
+	<select id="member" resultType="member">
+		select * from member where memail = #{memail}
+	</select>
+	
+</mapper>
