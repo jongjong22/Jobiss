@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.QnADTO;
+import com.example.demo.model.QnA;
 import com.example.demo.service.QnAService;
 
 
 
 @Controller
-public class QnA {
+public class QnaController {
 	
 	@Autowired
 	private QnAService qs;
@@ -28,7 +26,7 @@ public class QnA {
 	}
 	
 	@RequestMapping("QnAwrite")
-	public String QnAwrite(@ModelAttribute QnADTO qna,
+	public String QnAwrite(@ModelAttribute QnA qna,
 							Model model) {
 		
 		int result = qs.qnaInsert(qna);
@@ -49,7 +47,7 @@ public class QnA {
 		int listCount = qs.getqnaCount();
 		System.out.println("listcount");
 		
-		List<QnADTO> qnaList = qs.getqnaList(page);
+		List<QnA> qnaList = qs.getqnaList(page);
 		System.out.println("qnalist");
 		
 		int pageCount = listCount/limit+((listCount%10 == 0)?0:1);
@@ -75,7 +73,7 @@ public class QnA {
 							  @RequestParam("page") String page,
 							  Model model) {
 		qs.QnAUpdateCount(qid);
-		QnADTO qna = qs.getQnA(qid);		
+		QnA qna = qs.getQnA(qid);		
 		String qcontent = qna.getQcontent().replace("\n","<br>");
 		
 		model.addAttribute("qna", qna);
@@ -86,7 +84,7 @@ public class QnA {
 	}
 	
 	@RequestMapping("QnAupdate")
-	public String QnAupdate(@ModelAttribute QnADTO qna,
+	public String QnAupdate(@ModelAttribute QnA qna,
 							  @RequestParam("page") String page,
 							  Model model) {
 		
@@ -101,11 +99,11 @@ public class QnA {
 	}
 
 	@RequestMapping("QnAdelete")
-	public String QnAdelete(@ModelAttribute QnADTO qna,
+	public String QnAdelete(@ModelAttribute QnA qna,
 							  @RequestParam("page") String page,
 							  Model model) {
 		
-		int result = qs.delete(qna.getQid());
+		int result = qs.delete(qna.getQid()); 
 		
 		model.addAttribute("result", result);
 		model.addAttribute("page", page);

@@ -1,5 +1,5 @@
 package com.example.demo.dao;
 
-public class ReQnADAO {
+public class QnADao {
 
 }
