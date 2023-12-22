@@ -9,5 +9,8 @@
 </head>
 <body>
 	메인입니다.
+	
+	<input type="button" onClick="location.href='masterMemberList.do'" value="이동">
+	
 </body>
 </html>
