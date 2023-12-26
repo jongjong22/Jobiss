@@ -142,7 +142,7 @@
 						<!-- 세션에 로그인 정보가 있을 경우 -->
 						<c:if test="${not empty sessionScope.member.memail}">
              ${sessionScope.member.mname}님 환영합니다
-						<li><a href="#">MYPAGE</a></li>
+						<li><a href="mypage.do">MYPAGE</a></li>
 						<li><a href="logout.do">로그아웃</a></li>
 						</c:if>
 					</ul>
