@@ -7,21 +7,42 @@
 	<insert id="insert" parameterType="review">
 		INSERT
 		INTO review
-		VALUES (null,'ock2k@naver.com', #{rtitle}, #{rcontent}, #{rsuccess}, now(),
+		VALUES
+		(null,'ock2k@naver.com', #{rtitle}, #{rcontent}, #{rsuccess}, now(),
 		default,
 		default)
 	</insert>
 
-	<select id="getList" parameterType="review" resultType="review">
+	<select id="getList" parameterType="int" resultType="review">
 		SELECT *
 		FROM review
+		WHERE rconfirm = 'N' AND rdrop = 'N'
 		ORDER BY rid DESC
-		LIMIT #{startRow}, #{endRow}
+		LIMIT #{start}, 10
 
 	</select>
 
 	<select id="getCount" resultType="int">
-		select count(*) from review
+		select count(*) from review WHERE rconfirm = 'N' AND rdrop = 'N'
 	</select>
+
+	<select id="getBoard" parameterType="int" resultType="review">
+		select *
+		from review where rid= #{rid}
+	</select>
+
+	<update id="update" parameterType="review">
+		UPDATE review
+		SET rtitle = #{rtitle},
+		rcontent = #{rcontent},
+		rsuccess = #{rsuccess}
+		WHERE rid = #{rid}
+	</update>
+
+	<update id="delete" parameterType="int">
+		update review set rdrop='Y' 
+		where rid=#{rid}
+	</update>
+
 
 </mapper>

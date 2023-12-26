@@ -15,7 +15,13 @@ public interface ReviewDao {
 
 	public int insert(Review review);
 
-	public List<Review> getList(Review review);
+	public List<Review> getList(int start);
 
 	public int getCount();
+
+	public Review getBoard(int rid);
+
+	public int update(Review review);
+
+	public int delete(int rid);
 }
