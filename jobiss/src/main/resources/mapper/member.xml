@@ -13,4 +13,11 @@
 	<select id="dbselectone" resultType="member" >
 		select * from member where memail = #{memail} and mdrop = 'N'
 	</select>
+	
+	<!-- 회원수정 -->
+<!-- 	<update id="updatemember" parameterType="member"> -->
+<!-- 		update member set memail=#{memail}, mpw = #{mpw},mname=#{mname},mphone = #{mphone}, mage= #{mage}, mgender=#{mgender},maddress=#{maddress},mcareer=#{mcareer},meducation=#{meducation}, -->
+<!-- 		mmajor=#{mmajor},mcertification=#{mcertification),mlang=#{mlang},mdb=#{mdb},sysdate(),default where memail=#{memail} -->
+<!-- 	</update> -->
+	
 </mapper>
