@@ -6,7 +6,7 @@
 
 /* 회원 상세 정보 팝업창 띄우기 */
 function openMemberDetails(memail) {
-	 window.open('masterMember.do?memail=' + memail, '_blank', 'width=1000,height=400');
+	 location.href = 'masterMember.do?memail=' + memail;
 }
 
 /* 회원 삭제 하기 */
@@ -35,5 +35,65 @@ function masterMemberDelete(memail) {
 	}
 	
 }
+
+/* masterReviewList.jsp */
+
+function openReview(rid) {
+	 location.href = 'masterReview.do?rid=' + rid;
+}
+
+/* masterReview.jsp  */
+
+function masterReviewConfirm(rid) {
+	var confirmCheck = confirm('정말 수락하시겠습니까?');
+	
+	if(confirmCheck){
+		$.ajax ({
+			type : 'POST',
+			url : 'masterReviewConfirm.do',
+			data : { rid : rid },
+			success : function(result) {
+				if(result === 'Y') {
+					alert('수락 성공 하였습니다.');
+					location.href = 'masterReviewList.do';
+				} else {
+					alert('수락 실패하였습니다.');
+				}
+			},
+			error : function(error) {
+				console.error('Error',error);
+			}
+		});
+	}
+}
+
+function masterReviewDelete(rid) {
+	var deleteCheck = confirm('정말 삭제하시겠습니까?');
+	
+	if(deleteCheck){
+	$.ajax ({
+		type : 'POST',
+		url : 'masterReviewDelete.do',
+		data : { rid : rid },
+		success : function(result) {
+		
+		if(result === 'Y'){
+		
+			alert('삭제 완료 되었습니다.');
+			window.close();
+			location.href = 'masterReviewList.do';
+					
+			} else{
+				alert('삭제에 실패하였습니다.');
+			  }
+		},
+		error : function(error) {
+			console.error('Error',error);
+		}
+	});
+	}
+}
+
+
 
 

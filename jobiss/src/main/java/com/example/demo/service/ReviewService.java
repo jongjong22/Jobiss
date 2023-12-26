@@ -25,14 +25,29 @@ public class ReviewService {
 		return dao.insert(review);
 	}
 
-	public List<Review> getList(Review review) {
+	public List<Review> getList(int start) {
 	
-		return dao.getList(review);
+		return dao.getList(start);
 	}
 
 	public int getCount() {
 		
 		return dao.getCount();
+	}
+
+	public Review getBoard(int rid) {
+
+		return dao.getBoard(rid);
+	}
+
+	public int update(Review review) {
+		
+		return dao.update(review);
+	}
+
+	public int delete(int rid) {
+		
+		return dao.delete(rid);
 	}
 	
 

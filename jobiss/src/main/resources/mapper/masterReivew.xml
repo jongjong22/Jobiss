@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MasterReviewDao">
+
+	<!--회원 목록 구해오기 -->
+	<select id="masterReviewList" resultType="review"
+		parameterType="int">
+		select *
+		from review
+		order by rdrop asc, rreg desc
+		LIMIT
+		#{start}, 10
+	</select>
+
+	<!-- 전체 갯수 구하기 -->
+	<select id="getCount" resultType="int">
+		select count(*) from review
+	</select>
+
+	<!-- 리뷰 상세 페이지 -->
+	<select id="masterReview" resultType="review"
+		parameterType="int">
+		select * from review where rid = #{rid}
+	</select>
+
+	<!-- 후기 삭제 -->
+	<update id="masterReviewDelete" parameterType="int">
+		update review set
+		rdrop = 'Y' where rid = #{rid}
+	</update>
+	
+	<!-- 후기 글 작성 요청 수락하기 -->
+	<update id="masterReviewConfirm" parameterType="int">
+	    update review set
+	    	rconfirm = 'N' where rid = #{rid}
+	</update>
+
+	<!-- 후기 목록 갯수 구하기 -->
+	<select id="sgetCount" parameterType="Map" resultType="int">
+		select count(*) from review where
+		<choose>
+			<when test="searchtype == 'memail'">
+				memail like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'rtitle'">
+				rtitle like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'rcontent'">
+				rcontent like '%' #{keyword} '%'
+			</when>
+		</choose>
+	</select>
+
+	<!-- 후기 검색 목록 구해오기 -->
+	<select id="masterSearchReviewList" parameterType="Map"
+		resultType="review">
+		select * from review where
+		<choose>
+			<when test="searchtype == 'memail'">
+				memail like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'rtitle'">
+				rtitle like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'rcontent'">
+				rcontent like '%' #{keyword} '%'
+			</when>
+		</choose>
+		order by rdrop asc, rreg desc
+		LIMIT #{start}, 10
+	</select>
+
+</mapper>
