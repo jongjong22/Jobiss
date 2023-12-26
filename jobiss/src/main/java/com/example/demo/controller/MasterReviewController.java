@@ -11,27 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.model.Member;
-import com.example.demo.service.MasterMemberService;
+import com.example.demo.model.Review;
+import com.example.demo.service.MasterReviewService;
 
 @Controller
-public class MasterMemberController {
+public class MasterReviewController {
 
 	@Autowired
-	private MasterMemberService service;
-
-	// 회원 관리페이지 이동
-	@RequestMapping("masterMemberList.do")
-	public String masterMemberList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-		System.out.println("회원 관리 페이지 이동");
-
+	private MasterReviewService service;
+	
+	// 리뷰 리스트 가져오기
+	@RequestMapping("masterReviewList.do")
+	public String masterReviewList(@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
+		
 		int limit = 10; // 한 페이지에 출력할 데이터 개수
 
 		int listcount = service.getCount(); // 전체 데이터 개수
 
 		int start = (page - 1) * 10;
-		List<Member> mlist = service.mlist(start); // 회원 목록 불러오기
-
+		List<Review> rlist = service.masterReviewList(start);
+		
 		int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
 		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
@@ -40,72 +39,85 @@ public class MasterMemberController {
 			endPage = pageCount;
 		}
 
-		model.addAttribute("mlist", mlist);
+		model.addAttribute("rlist", rlist);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("page", page);
-		return "master/masterMember/masterMemberList";
+		
+		return "master/masterReview/masterReviewList";
 	}
-
-	// 회원 상세정보 보기
-	@RequestMapping("masterMember.do")
-	public String masterMember(String memail, Model model) {
-
-		Member member = service.member(memail);
-
-		model.addAttribute("member", member);
-		return "master/masterMember/masterMember";
+	
+	// 리뷰 상세페이지
+	@RequestMapping("masterReview.do")
+	public String masterReview(int rid,Model model) {
+		
+		Review review = service.masterReview(rid);
+		
+		model.addAttribute("review", review);
+		return "master/masterReview/masterReview";
 	}
-
-	// 회원 탈퇴 시키기
-	@RequestMapping("masterMemberDelete.do")
+	
+	//후기 삭제하기
+	@RequestMapping("masterReviewDelete.do")
 	@ResponseBody
-	public String masterMemberDelete(String memail) {
-
-		int result = service.masterMemberDelete(memail);
-
-		if (result == 1) {
+	public String masterReviewDelete(int rid) {
+		
+		int result = service.masterReviewDelete(rid);
+		
+		if(result == 1) {
 			return "Y";
-		} else {
+		}else {
 			return "N";
 		}
 	}
 	
-	// 회원 검색 하기
-	@RequestMapping("masterMemberSearch.do")
-	public String masterMemberSearch(@RequestParam(value = "page", defaultValue = "1") int page, Model model,@RequestParam("searchtype")String searchtype, @RequestParam("keyword")String keyword) {
+	// 글 컨펌 수락하기
+    @RequestMapping("masterReviewConfirm.do")
+    @ResponseBody
+    public String masterReviewConfirm(int rid) {
+    	
+    	int result = service.masterReviewConfirm(rid);
+    	
+    	if(result == 1) {
+    		return "Y";
+    	}else {
+    		return "N";
+    	}
+    }
+	
+	// 리뷰 검색 하기
+	@RequestMapping("masterSearchReview.do")
+	public String masterSearchReview(@RequestParam(value = "page", defaultValue = "1") int page,Model model, @RequestParam("searchtype")String searchtype, @RequestParam("keyword")String keyword) {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("searchtype", searchtype);
 		map.put("keyword", keyword);
 		
 		int limit = 10; // 한 페이지에 출력할 데이터 개수
-
-		int listcount = service.sgetCount(map); // 검색 된 데이터 개수
+		
+		int listcount = service.sgetCount(map); // 전체 데이터 개수
 		
 		int start = (page - 1) * 10;
 		map.put("start", start);
-		
-		List<Member> mlist = service.searchMember(map); // 검색 목록 불러오기
+		List<Review> rlist = service.masterSearchReviewList(map);
 		
 		int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
-
+		
 		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
 		int endPage = startPage + 9; // 끝 페이지
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
 		
-		model.addAttribute("mlist", mlist);
+		model.addAttribute("rlist", rlist);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("page", page);
 		
-		return "master/masterMember/masterMemberList";
+		return "master/masterReview/masterReviewList";
 	}
-
 }
