@@ -74,15 +74,17 @@
 
 <body>
     <div class="layout">
-        <form action="reviewWrite.do" method="post">
+        <form action="reviewWrite.do" method="post" enctype="multipart/form-data">
             <input name="rtitle" id="rtitle" type="text" placeholder="글 제목">
             <textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
-            <input type="file" id="rsuccess" name="rsuccess">
+          	<input type="file" id="rsuccess1" name="rsuccess1">	
             <div class="form-actions">
                 <input type="submit" value="등록">
                 <input type="reset" value="취소">
             </div>
         </form>
+     
+     
     </div>
 </body>
 </html>
