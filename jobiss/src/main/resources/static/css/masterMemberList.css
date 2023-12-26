@@ -1,8 +1,14 @@
 @charset "UTF-8";
 
+/* Window.open한 멤버 상세정보 */
+.Window_container {
+	text-align: center;
+}
+
 /* 스타일을 적용할 클래스명을 사용하여 스타일 작성 */
 .Big_container {
     text-align: center;
+    margin-left: 94px;
 }
 
 .container1 {
@@ -32,4 +38,8 @@ h1 {
 /* 가입된 회원이 없을 때의 스타일 */
 h1:empty {
     color: #f00; /* 빨간색 텍스트 */
+}
+
+a {
+	text-decoration: none;
 }

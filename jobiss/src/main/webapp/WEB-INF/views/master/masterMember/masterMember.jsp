@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../common/nav.html"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 	<div class="Big_container">
 		<h1>회원 상세 정보</h1>
 
-		<div class="container1">
+		<div class="container_detailmember">
 			<table border="1">
 				<tr>
 					<th>이메일</th>
