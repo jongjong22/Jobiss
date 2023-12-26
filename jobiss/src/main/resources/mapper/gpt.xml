@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.GptDao">
+
+	<!-- GPT 입력 -->
+	<insert id="insertGpt" parameterType="gpt">
+		insert into gpt
+		values(null, #{memail}, sysdate(), sysdate() )
+	</insert>
+
+	<!-- GPT 최신글 출력 -->
+	<select id="selectGptTop" resultType="gpt"
+		parameterType="String">
+		select * from gpt where mEmail = 'master' order by
+		gquestionreg desc limit 1
+	</select>
+
+	<!-- GPT 시간 초기화 -->
+	<update id="updateGptReg" parameterType="int">
+		update gpt set ganswerreg = sysdate() where gid = #{gid}
+	</update>
+
+	<!-- GptGrow 입력 -->
+	<insert id="insertGptGrow" parameterType="gptgrow">
+		insert into gptgrow
+		values(null, #{gid}, #{gptgcontent}, #{gptganswer}, sysdate(),
+		sysdate() )
+	</insert>
+
+	<!-- GptGrow 중복입력 -->
+	<update id="updateGrow" parameterType="gptgrow">
+		update gptgrow set
+		gid=#{gid},
+		gptgcontent = #{gptgcontent},gptganswer = #{gptganswer},
+		gptgquestionreg = sysdate(), gptganswerreg = sysdate()
+		where gid =
+		#{gid}
+	</update>
+
+	<!-- GptGrow 최신글 출력 -->
+	<select id="selectGptGrowTop" resultType="gptgrow"
+		parameterType="int">
+		select * from gptgrow where gid = #{gid} order by
+		gptgquestionreg desc limit 1
+	</select>
+
+	<!-- GptGrow 글갯수 출력 -->
+	<select id="countGptGrow" resultType="int">
+		select count(*) from
+		gptgrow
+	</select>
+
+
+
+
+
+
+</mapper>

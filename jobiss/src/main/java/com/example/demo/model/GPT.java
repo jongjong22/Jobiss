@@ -3,8 +3,9 @@ package com.example.demo.model;
 import java.sql.Timestamp;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.type.Alias;
 
-@Mapper
+@Alias("gpt")
 public class GPT {
 
 	private int gid; // PK
