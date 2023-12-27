@@ -29,18 +29,18 @@
 		<h1>회원 관리</h1>
 
 		<div class="container1">
-			<table border="1">
-				<tr>
-					<th>이메일</th>
-					<th>이름</th>
-					<th>전화번호</th>
-					<th>나이</th>
-					<th>성별</th>
-					<th>가입 날짜</th>
-					<th>탈퇴 여부</th>
-				</tr>
+			<c:if test="${not empty mlist}">
+				<table border="1">
+					<tr>
+						<th>이메일</th>
+						<th>이름</th>
+						<th>전화번호</th>
+						<th>나이</th>
+						<th>성별</th>
+						<th>가입 날짜</th>
+						<th>탈퇴 여부</th>
+					</tr>
 
-				<c:if test="${not empty mlist}">
 					<c:forEach var="member" items="${mlist }" varStatus="loop">
 						<tr onclick="openMemberDetails('${member.memail}')">
 							<td>${member.memail }</td>
@@ -54,14 +54,9 @@
 							<td>${member.mdrop }</td>
 						</tr>
 					</c:forEach>
-				</c:if>
-
-				<c:if test="${empty mlist }">
-					<h1>가입된 회원이 없습니다.</h1>
-				</c:if>
-			</table>
+				</table>
 		</div>
-
+		
 		<ul class="center" align="center">
 			<c:if test="${startPage > 10}">
 				<li><a href="masterMemberList.do?page=${startPage +1}">Previous</a></li>
@@ -77,15 +72,20 @@
 		</ul>
 
 		<div class="search">
-			<form action="masterMemberSearch.do" method="post">
+			<form action="masterMemberSearch.do" method="post" onsubmit="return checkSearchForm()">
 				<select class="search" name="searchtype">
-					<option value="">검색 유형 선택</option>
 					<option value="memail">이메일</option>
 					<option value="mname">이름</option>
-				</select> <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요." maxlength="10" class="text-input">
+				</select> <input type="text" id="keyword" name="keyword"
+					placeholder="검색어를 입력하세요." maxlength="10" class="text-input">
 				<input type="submit" value="검색">
 			</form>
 		</div>
+		</c:if>
+
+		<c:if test="${empty mlist }">
+			<h1>가입된 회원이 없습니다.</h1>
+		</c:if>
 	</div>
 </body>
 </html>
