@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 추가 -->
-<title>Insert title here</title>
+<title>사이즈큼</title>
 </head>
 <body>
 

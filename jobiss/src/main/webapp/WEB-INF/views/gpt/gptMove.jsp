@@ -15,7 +15,7 @@
 			history.go(-1);
 		</script>
 
-	</c:if>
+	</c:if> 
 	<!-- GPT의 답변이 없는경우 -->
 	<c:if test="${result.resultType eq 'resultNull' }">
 		<script>

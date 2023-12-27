@@ -16,8 +16,7 @@ public class Review {
 	private String rconfirm;
 	private String rdrop;
 	
-	private int startRow;
-	private int endRow;
+
 	
 	public int getRid() {
 		return rid;
@@ -67,17 +66,6 @@ public class Review {
 	public void setRdrop(String rdrop) {
 		this.rdrop = rdrop;
 	}
-	public int getStartRow() {
-		return startRow;
-	}
-	public void setStartRow(int startRow) {
-		this.startRow = startRow;
-	}
-	public int getEndRow() {
-		return endRow;
-	}
-	public void setEndRow(int endRow) {
-		this.endRow = endRow;
-	}
+
 }
 

@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,58 +22,54 @@
             width: 800px;
             margin: 40px auto;
         }
+.layout {
+	width: 800px;
+	margin: 40px auto;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+table {
+	width: 100%;
+	border-collapse: collapse;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	overflow: hidden;
+}
 
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+th, td {
+	padding: 12px 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+th {
+	background-color: #f2f2f2;
+}
 
-        tbody tr:hover {
-            background-color: #f9f9f9;
-        }
+tbody tr:hover {
+	background-color: #f9f9f9;
+}
 
-        tbody td:first-child {
-            font-weight: bold;
-        }
+tbody td:first-child {
+	font-weight: bold;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+nav ul {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
 
-        nav ul li { 
-            margin-right: 5px;
-        }
+nav ul li {
+	margin-right: 5px;
+}
 
-        .add-review-button {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-            margin-top: 10px;
-        }
-
-        .add-review-button button {
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+.add-review-button {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
 
         }
         

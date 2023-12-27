@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ReviewReplyDao">
+
+
+	<insert id="insert" parameterType="reviewreply">
+		INSERT
+		INTO reviewreply
+		VALUES
+		(null, #{rid}, #{memail}, #{rrcontent}, now(), default)
+	</insert>
+
+	<select id="getList" parameterType="int" resultType="reviewreply">
+		SELECT *
+		FROM reviewreply
+		WHERE rrdrop = 'N'
+		ORDER BY rrid DESC
+		LIMIT #{start}, 5
+
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from reviewreply WHERE rrdrop = 'N'
+	</select>
+
+	<select id="getBoard" parameterType="int" resultType="reviewreply">
+		select *
+		from reviewreply where rid= #{rid}
+	</select>
+
+	<update id="update" parameterType="reviewreply">
+		UPDATE reviewreply
+		rrcontent = #{rrcontent},
+		WHERE rrid = #{rrid}
+	</update>
+
+	<update id="delete" parameterType="int">
+		update reviewreply set rrdrop='Y' 
+		where rrid=#{rrid}
+	</update>
+
+
+</mapper>

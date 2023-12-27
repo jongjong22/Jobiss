@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,15 +94,47 @@ public class MemberController {
 	// 회원정보 수정
 	@RequestMapping("memberupdate.do")
 	public String memberupdate(Model model, Member member, HttpSession session) {
-		
+
 		int result = 0;
-		
+
 		result = service.updatemember(member);
-		
+
 		model.addAttribute("result", result);
-//		String gender = member.getMgender();
-//		System.out.println("gender : " + gender);
+
 		return "member/mypage/memberupdate";
+	}
+
+	// 마이페이지(회원 탈퇴) 이동
+	@RequestMapping("memberdeleteform.do")
+	public String memberdeleteform(Model model, Member member, HttpSession session) {
+		member = (Member) session.getAttribute("member");
+
+		model.addAttribute("member", member);
+
+		System.out.println("member: " + member.getMemail());
+
+		return "member/mypage/memberdeleteform";
+	}
+
+	// 마이페이지(회원 탈퇴)
+	@RequestMapping("memberdelete.do")
+	public String memberdelete(Model model, Member member, HttpSession session, String mpw) {
+
+		member = (Member) session.getAttribute("member");
+
+		if (member != null && member.getMpw().equals(mpw)) {
+
+			int result = service.deletemember(member);
+			session.invalidate();
+
+			model.addAttribute("result", result);
+			System.out.println("result :" + result);
+
+			return "member/mypage/memberdelete";
+		} else {
+			model.addAttribute("msg", "이메일 또는 비밀번호가 유효하지 않습니다");
+			return "member/mypage/memberdelete";
+		}
 	}
 
 	// 마이페이지 이동
@@ -111,19 +147,89 @@ public class MemberController {
 
 		System.out.println("memail: " + memail);
 
+		model.addAttribute("memail", memail);
 		return "member/mypage/mypage";
 	}
 
 	// 마이페이지 리뷰 이동
 	@RequestMapping("myreview.do")
-	public String myreview(Model model, HttpSession session, Review review) {
+	public String myreview(Model model, HttpSession session, Review review,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+
+		Member member = (Member) session.getAttribute("member");
+
+		String memail = member.getMemail();
+
+		int limit = 10;
+
+		int listcount = service.reviewcount();
+
+		int start = (page - 1) * 10;
+
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("memail", memail);
+
+		List<Review> reviewlist = service.selectreview(map);
+
+		System.out.println("합격증명:" + review.getRsuccess());
+		System.out.println("리스트:" + reviewlist);
+
+		int pageCount = (int) Math.ceil((double) listcount / limit);
+
+		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+		int endPage = startPage + 10; // 끝 페이지
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("memail", memail);
+		model.addAttribute("reviewlist", reviewlist);
 
 		return "member/mypage/myreview";
 	}
 
 	// 마이페이지 Qna 이동
 	@RequestMapping("myqna.do")
-	public String myqna(Model model, HttpSession session, QnA qna) {
+	public String myqna(Model model, HttpSession session, QnA qna,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
+
+		Member member = (Member) session.getAttribute("member");
+
+		String memail = member.getMemail();
+
+		int limit = 10;
+
+		int qlistcount = service.qnacount();
+
+		int start = (page - 1) * 10;
+
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("memail", memail);
+		
+		List<QnA> qnalist = service.qnaselect(map);
+		
+		int pageCount = (int) Math.ceil((double) qlistcount / limit);
+
+		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+		int endPage = startPage + 10; // 끝 페이지
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("listcount", qlistcount);
+		model.addAttribute("memail", memail);
+		model.addAttribute("qnalist", qnalist);
 
 		return "member/mypage/myqna";
 	}

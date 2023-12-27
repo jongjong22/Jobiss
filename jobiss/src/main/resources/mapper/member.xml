@@ -5,19 +5,72 @@
 
 	<!-- 회원가입 -->
 	<insert id="logininsert" parameterType="member">
-		insert into member values(#{memail},#{mpw},#{mname},#{mphone},#{mage},#{mgender},#{maddress},#{mcareer},
+		insert into member
+		values(#{memail},#{mpw},#{mname},#{mphone},#{mage},#{mgender},#{maddress},#{mcareer},
 		#{meducation},#{mmajor},#{mcertification},#{mlang},#{mdb},sysdate(),default)
 	</insert>
-	
+
 	<!-- 로그인 -->
-	<select id="dbselectone" resultType="member" >
-		select * from member where memail = #{memail} and mdrop = 'N'
+	<select id="dbselectone" resultType="member">
+		select * from
+		member where
+		memail = #{memail} and mdrop = 'N'
+	</select>
+
+	<!-- 회원수정 -->
+	<update id="updatemember" parameterType="member">
+		update member set
+		memail=#{memail},
+		mpw=#{mpw},
+		mname=#{mname},
+		mphone=#{mphone},
+		mage=#{mage},
+		mgender=#{mgender},
+		maddress=#{maddress},
+		mcareer=#{mcareer},
+		meducation=#{meducation},
+		mmajor=#{mmajor},
+		mcertification=#{mcertification},
+		mlang=#{mlang},
+		mdb=#{mdb},
+		mreg=sysdate(),
+		mdrop= default
+		where memail=#{memail}
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<update id="deletemember" parameterType="member">
+		update member set mdrop
+		= 'Y' where memail = #{memail}
+	</update>
+
+	<!-- memail 리뷰 가져오기 -->
+	<select id="selectreview" resultType="review" parameterType="map">
+		SELECT *
+		FROM review
+		WHERE memail = #{memail} AND rdrop = 'N'
+		ORDER BY rreg DESC
+		LIMIT #{start}, 10;
 	</select>
 	
-	<!-- 회원수정 -->
-<!-- 	<update id="updatemember" parameterType="member"> -->
-<!-- 		update member set memail=#{memail}, mpw = #{mpw},mname=#{mname},mphone = #{mphone}, mage= #{mage}, mgender=#{mgender},maddress=#{maddress},mcareer=#{mcareer},meducation=#{meducation}, -->
-<!-- 		mmajor=#{mmajor},mcertification=#{mcertification),mlang=#{mlang},mdb=#{mdb},sysdate(),default where memail=#{memail} -->
-<!-- 	</update> -->
+	<!-- 리뷰 갯수 -->
+	<select id="reviewcount" resultType="int">
+		select count(*) from review
+		where rconfirm = 'N' and rdrop = 'N'
+	</select>
 	
+	<!-- memail qna 가져오기 -->
+	<select id="qnaselect" resultType="qna" parameterType="map">
+		select * from qna where memail = #{memail} and qdrop = 'N'
+		ORDER BY qreg DESC
+		LIMIT #{start}, 10;
+	</select>
+	
+	<!-- qna 갯수 -->
+	<select id="qnacount" resultType="int">
+		select count(*) from qna
+		where qdrop = 'N'
+	</select>
+
+
 </mapper>

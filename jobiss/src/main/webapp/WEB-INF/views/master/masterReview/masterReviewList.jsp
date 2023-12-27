@@ -29,18 +29,20 @@
 		<h1>후기 글 관리</h1>
 
 		<div class="container1">
-			<table border="1">
-				<tr>
-					<th>이메일</th>
-					<th>제목</th>
-					<th>인증 여부</th>
-					<th>삭제 여부</th>
-					<th>요청 날짜</th>
-				</tr>
+			<c:if test="${not empty rlist}">
+				<table border="1">
+					<tr>
+						<th>글 번호</th>
+						<th>이메일</th>
+						<th>제목</th>
+						<th>인증 여부</th>
+						<th>삭제 여부</th>
+						<th>요청 날짜</th>
+					</tr>
 
-				<c:if test="${not empty rlist}">
 					<c:forEach var="review" items="${rlist }" varStatus="loop">
 						<tr onClick="openReview('${review.rid}')">
+							<td>${review.rid }</td>
 							<td>${review.memail }</td>
 							<td>${review.rtitle }</td>
 							<td>${review.rconfirm }</td>
@@ -50,12 +52,7 @@
 							<td>${date }</td>
 						</tr>
 					</c:forEach>
-				</c:if>
-
-				<c:if test="${empty rlist }">
-					<h1>작성된 글이 없습니다.</h1>
-				</c:if>
-			</table>
+				</table>
 		</div>
 
 		<ul class="center" align="center">
@@ -73,16 +70,21 @@
 		</ul>
 
 		<div class="search">
-			<form action="masterSearchReview.do" method="post">
+			<form action="masterSearchReview.do" method="post" onsubmit="return checkSearchForm()">
 				<select class="search" name="searchtype">
-					<option value="">검색 유형 선택</option>
 					<option value="memail">이메일</option>
 					<option value="rtitle">제목</option>
 					<option value="rcontent">내용</option>
-				</select> <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요." maxlength="10" class="text-input">
+				</select> <input type="text" id="keyword" name="keyword"
+					placeholder="검색어를 입력하세요." maxlength="10" class="text-input">
 				<input type="submit" value="검색">
 			</form>
 		</div>
+		</c:if>
+		
+		<c:if test="${empty rlist }">
+			<h1>작성된 글이 없습니다.</h1>
+		</c:if>
 	</div>
 </body>
 </html>

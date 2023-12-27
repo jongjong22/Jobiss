@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 public class QnA {
 	private int qid;
 	private String memail;
-	private String qtilte;
+	private String qtitle;
 	private Timestamp qreg;
 	private String qcontent;
 	private String qdrop;
@@ -25,11 +25,11 @@ public class QnA {
 	public void setMemail(String memail) {
 		this.memail = memail;
 	}
-	public String getQtilte() {
-		return qtilte;
+	public String getQtitle() {
+		return qtitle;
 	}
-	public void setQtilte(String qtilte) {
-		this.qtilte = qtilte;
+	public void setQtitle(String qtitle) {
+		this.qtitle = qtitle;
 	}
 	public Timestamp getQreg() {
 		return qreg;
@@ -49,6 +49,8 @@ public class QnA {
 	public void setQdrop(String qdrop) {
 		this.qdrop = qdrop;
 	}
+	
+	
 
 	
 

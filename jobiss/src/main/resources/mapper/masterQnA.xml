@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MasterQnADao">
+
+	<select id="getCount" resultType="int">
+		select count(*) from qna
+	</select>
+	
+	<select id="qnaList" parameterType="int" resultType="qna">
+		select * from qna
+		order by qdrop asc, qreg desc
+		LIMIT #{start}, 10
+	</select>
+	
+	<select id="qna" parameterType="String" resultType="qna">
+		select * from qna where qid = #{qid}
+	</select>
+	
+	<!-- QnA 글 삭제하기 -->
+	<update id="masterQnADelete" parameterType="String">
+	 	update qna set qdrop = 'Y' where qid = #{qid}
+	</update>
+</mapper>

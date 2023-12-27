@@ -14,12 +14,12 @@
         <ul>
             <li><a href="main.do">홈</a></li>
             <li><a href="mypage.do">내가 쓴 자기소개서</a></li>
-            <li><a href="myreview.do">내가 쓴 리뷰</a></li>
+            <li><a href="myreview.do?&&memail="${review.memail}"">내가 쓴 리뷰</a></li>
             <li><a href="myqna.do">내가 쓴 QnA</a></li>
             <li><a href="myfeedback.do">내가 쓴 FEEDBACK</a></li>
             <li><a href="mycommunity.do">내가 쓴 커뮤니티</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
-            <li><a href="#">회원탈퇴</a></li>
+            <li><a href="memberdeleteform.do">회원탈퇴</a></li>
         </ul>
     </nav>
 
