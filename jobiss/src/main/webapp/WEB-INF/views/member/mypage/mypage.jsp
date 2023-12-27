@@ -14,13 +14,13 @@
 	<nav>
         <ul>
             <li><a href="main.do">홈</a></li>
-            <li><a href="mypage.do">내가 쓴 자기소개서</a></li>
-            <li><a href="myreview.do">내가 쓴 리뷰</a></li>
-            <li><a href="myqna.do">내가 쓴 QnA</a></li>
-            <li><a href="myfeedback.do">내가 쓴 FEEDBACK</a></li>
-            <li><a href="mycommunity.do">내가 쓴 커뮤니티</a></li>
+            <li><a href="mypage.do?&&memail=${member.memail }">내가 쓴 자기소개서</a></li>
+            <li><a href="myreview.do?&&memail=${member.memail }">내가 쓴 리뷰</a></li>
+            <li><a href="myqna.do?&&memail=${member.memail }">내가 쓴 QnA</a></li>
+            <li><a href="myfeedback.do?&&memail=${member.memail }">내가 쓴 FEEDBACK</a></li>
+            <li><a href="mycommunity.do?&&memail=${member.memail }">내가 쓴 커뮤니티</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
-            <li><a href="#">회원탈퇴</a></li>
+            <li><a href="memberdeleteform.do">회원탈퇴</a></li>
             <!-- 추가적인 메뉴 항목을 필요에 따라 추가할 수 있습니다. -->
         </ul>
     </nav>
