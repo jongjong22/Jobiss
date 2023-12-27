@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
  <link rel="stylesheet" type="text/css" href="css/mypage.css">
 <title>마이페이지</title>
 </head>
@@ -14,7 +15,7 @@
         <ul>
             <li><a href="main.do">홈</a></li>
             <li><a href="mypage.do">내가 쓴 자기소개서</a></li>
-            <li><a href="myreview.do?&&memail="${review.memail}"">내가 쓴 리뷰</a></li>
+            <li><a href="myreview.do">내가 쓴 리뷰</a></li>
             <li><a href="myqna.do">내가 쓴 QnA</a></li>
             <li><a href="myfeedback.do">내가 쓴 FEEDBACK</a></li>
             <li><a href="mycommunity.do">내가 쓴 커뮤니티</a></li>
@@ -23,15 +24,22 @@
         </ul>
     </nav>
 
-	<div class="mypage_small">
-		<table border="1" align="center">
-		<h1 align="center">내가 쓴 FEEDBACK</h1>
-		<tr>
-			<th>이메일</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>작성날짜</th>
-		</tr>
+		<form method="post" action="memberdelete.do">
+			<table border=1 width="500" align="center">
+				<caption>회원 탈퇴</caption>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" id="mpw" name="mpw" required
+						placeholder="비밀번호를 입력하세요."></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button type="submit">탈퇴</button>
+						<button type="reset">취소</button>
+					</td>
+				</tr>
+				</table>
+				
 		
 </body>
 </html>

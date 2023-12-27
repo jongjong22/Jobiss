@@ -45,7 +45,7 @@
 				<li><a href="myfeedback.do">내가 쓴 FEEDBACK</a></li>
 				<li><a href="mycommunity.do">내가 쓴 커뮤니티</a></li>
 				<li><a href="memberupdate.do">회원정보수정</a></li>
-				<li><a href="#">회원탈퇴</a></li>
+				<li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
 		</nav>
 		<form method="post" action="memberupdate.do">
