@@ -9,10 +9,9 @@ public class GptGrow {
 
 	private int gptgid; // PK
 	private int gid; // FK (GPT PK)
+	private String memail;
 	private String gptgcontent;
-	private String gptganswer;
-	private Timestamp gptgquestionreg;
-	private Timestamp gptganswerreg;
+	private Timestamp gptgreg;
 
 	public int getGptgid() {
 		return gptgid;
@@ -30,6 +29,14 @@ public class GptGrow {
 		this.gid = gid;
 	}
 
+	public String getMemail() {
+		return memail;
+	}
+
+	public void setMemail(String memail) {
+		this.memail = memail;
+	}
+
 	public String getGptgcontent() {
 		return gptgcontent;
 	}
@@ -38,28 +45,12 @@ public class GptGrow {
 		this.gptgcontent = gptgcontent;
 	}
 
-	public String getGptganswer() {
-		return gptganswer;
+	public Timestamp getGptgreg() {
+		return gptgreg;
 	}
 
-	public void setGptganswer(String gptganswer) {
-		this.gptganswer = gptganswer;
-	}
-
-	public Timestamp getGptgquestionreg() {
-		return gptgquestionreg;
-	}
-
-	public void setGptgquestionreg(Timestamp gptgquestionreg) {
-		this.gptgquestionreg = gptgquestionreg;
-	}
-
-	public Timestamp getGptganswerreg() {
-		return gptganswerreg;
-	}
-
-	public void setGptganswerreg(Timestamp gptganswerreg) {
-		this.gptganswerreg = gptganswerreg;
+	public void setGptgreg(Timestamp gptgreg) {
+		this.gptgreg = gptgreg;
 	}
 
 }

@@ -15,10 +15,11 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.GptDao;
 import com.example.demo.model.GPT;
 import com.example.demo.model.GptGrow;
+import com.example.demo.model.ReadCount;
 
 @Service
 public class GptService {
-	private static final String api_key = "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"; // api키 하루단위 초기화됨.
+	private static final String api_key = "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"; // api키 하루단위 초기화됨.
 
 	@Autowired
 	private GptDao dao;
@@ -52,6 +53,18 @@ public class GptService {
 		return dao.updateGptReg(gid);
 	}
 
+	public int insertReadCount(ReadCount readCount) {
+		return dao.insertReadCount(readCount);
+	}
+
+	public ReadCount selectReadCountTop() {
+		return dao.selectReadCountTop();
+	}
+
+	public int updateReadCount(ReadCount readCount) {
+		return dao.updateReadCount(readCount);
+	}
+
 	// 답변 시간을 비교
 	public boolean TimeOver(Timestamp newTime, Timestamp oldTime) {
 		Long subtract = (newTime.getTime() - oldTime.getTime()) / 1000;
@@ -66,14 +79,14 @@ public class GptService {
 
 	// GPT 질의응답
 	public Map<String, Object> request(JSONObject json) {
-		System.out.println("서비스 : request");
+		System.out.println("\n ***** Service_gptRequest ***** \n");
 		// 절대조건
 		final String keyword = json.getString("keyword"); // 유저입력 메시지
 		final String resumeType = json.getString("resumeType"); // 질문유형
-		final String systemContent = "You are the interviewer."; // GPT 대전제
+		final String systemContent = "You are the interviewer. and Think step by step, "; // GPT 대전제
 		final String startConetnet = " 이력서를 수정할꺼야 내용은"; // 시작점
-		
-		//final String endConetnet = " 에 대한 내용을 수정하고 답변을 한글로 해줘. "; // 끝점
+
+//		 final String endConetnet = " 에 대한 내용을 수정하고 답변을 한글로 해줘. "; // 끝점
 		final String endConetnet = " 이것에 대한 내용을 수정하고 답변을 한글로 해줘. 답변을 20자 이내로 해줘 "; // 끝점
 
 		Map<String, Object> result = new HashMap<String, Object>(); // 리턴객체 (서비스에서 리턴을 하지않기위해)
@@ -146,7 +159,46 @@ public class GptService {
 			result.put("resumeType", resumeType);
 		}
 		;
-		System.out.println("Service_gptRequest 끝");
+		System.out.println("\n ***** Service_gptRequest 끝 ***** \n");
+		return result;
+	}
+
+	// 컨설팅 선택시 readCount 증가
+	public int readCountPlus(ReadCount readCount, String resumeType) {
+
+		int greadcount = readCount.getGreadcount(); // 성장과정 조회수
+		int creadcount = readCount.getCreadcount(); // 성격장단점 조회수
+		int mreadcount = readCount.getMreadcount(); // 입사동기 조회수
+		int preadcount = readCount.getPreadcount(); // 입사후 포부 조회수
+		int result = 0;
+		switch (resumeType) {
+		case "g":
+			greadcount += 1;
+			readCount.setGreadcount(greadcount);
+			System.out.println("readCount : g");
+			break;
+		case "c":
+			creadcount += 1;
+			readCount.setGreadcount(creadcount);
+			System.out.println("readCount : c");
+			break;
+		case "m":
+			mreadcount += 1;
+			readCount.setGreadcount(mreadcount);
+			System.out.println("readCount : m");
+			break;
+		case "p":
+			preadcount += 1;
+			readCount.setGreadcount(preadcount);
+			System.out.println("readCount : p");
+			break;
+		}
+		result = updateReadCount(readCount);
+		if (result > 0)
+			System.out.println("readCount 업데이트 성공");
+		else if (result == 0)
+			System.out.println("readCount 업데이트 실패");
+
 		return result;
 	}
 

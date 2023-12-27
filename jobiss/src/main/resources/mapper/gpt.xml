@@ -6,34 +6,37 @@
 	<!-- GPT 입력 -->
 	<insert id="insertGpt" parameterType="gpt">
 		insert into gpt
-		values(null, #{memail}, sysdate(), sysdate() )
+		values(null, #{memail}, sysdate() )
 	</insert>
 
 	<!-- GPT 최신글 출력 -->
 	<select id="selectGptTop" resultType="gpt"
 		parameterType="String">
-		select * from gpt where mEmail = 'master' order by
-		gquestionreg desc limit 1
+		select * from gpt where memail = #{memail} order by
+		gptreg desc limit 1
 	</select>
 
 	<!-- GPT 시간 초기화 -->
 	<update id="updateGptReg" parameterType="int">
-		update gpt set ganswerreg = sysdate() where gid = #{gid}
+		update gpt set gptreg =
+		sysdate() where gid = #{gid}
 	</update>
 
 	<!-- GptGrow 입력 -->
 	<insert id="insertGptGrow" parameterType="gptgrow">
 		insert into gptgrow
-		values(null, #{gid}, #{gptgcontent}, #{gptganswer}, sysdate(),
-		sysdate() )
+		values(null, #{gid}, #{memail}, #{gptgcontent}, sysdate() )
 	</insert>
+
+
 
 	<!-- GptGrow 중복입력 -->
 	<update id="updateGrow" parameterType="gptgrow">
 		update gptgrow set
-		gid=#{gid},
-		gptgcontent = #{gptgcontent},gptganswer = #{gptganswer},
-		gptgquestionreg = sysdate(), gptganswerreg = sysdate()
+		gid=#{gid}, memail = #{memail},
+		gptgcontent = #{gptgcontent},
+		gptgreg =
+		sysdate()
 		where gid =
 		#{gid}
 	</update>
@@ -42,7 +45,7 @@
 	<select id="selectGptGrowTop" resultType="gptgrow"
 		parameterType="int">
 		select * from gptgrow where gid = #{gid} order by
-		gptgquestionreg desc limit 1
+		gptgreg desc limit 1
 	</select>
 
 	<!-- GptGrow 글갯수 출력 -->
@@ -51,6 +54,30 @@
 		gptgrow
 	</select>
 
+
+	<!-- readCount 최신글 출력 -->
+	<select id="selectReadCountTop" resultType="readcount">
+		select * from
+		readcount ORDER
+		BY greadcount
+		LIMIT 1
+	</select>
+
+	<!-- readCountInsert -->
+	<insert id="insertReadCount">
+		insert into readcount
+		values(default, default,
+		default, default)
+	</insert>
+
+
+	<!-- readCountPlus -->
+	<update id="updateReadCount" parameterType="readcount">
+		update readcount
+		SET
+		greadcount = #{greadcount}, creadcount = #{creadcount},
+		mreadcount = #{mreadcount}, preadcount = #{preadcount}
+	</update>
 
 
 
