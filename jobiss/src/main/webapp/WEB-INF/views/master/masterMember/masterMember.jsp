@@ -34,7 +34,6 @@
 					<th>데이터베이스</th>
 					<th>가입 날짜</th>
 					<th>삭제 여부</th>
-					<th>삭제 버튼</th>
 				</tr>
 
 				<tr>
@@ -54,12 +53,10 @@
 						var="date" />
 					<td>${date }</td>
 					<td>${member.mdrop }</td>
-					<td>
-						<button onClick="masterMemberDelete('${member.memail}')">회원
-							삭제</button>
-					</td>
 				</tr>
 			</table>
+						<button class="button-style" onClick="masterMemberDelete('${member.memail}')">회원
+							삭제</button>
 		</div>
 	</div>
 </body>

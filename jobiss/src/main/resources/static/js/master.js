@@ -94,6 +94,43 @@ function masterReviewDelete(rid) {
 	}
 }
 
+/*  masterQnAList.jsp  */
+
+function openQnADetails(qid) {
+	location.href = 'masterQnA.do?qid=' + qid;
+}
 
 
+function masterQnADelete(qid) {
+	var qnadeleteConfirm = confirm('정말 삭제 하시겠습니까?');
+	
+	if(qnadeleteConfirm){
+		$.ajax({
+			type : 'POST',
+			url : 'masterQnADelete.do',
+			data : { qid : qid },
+			success : function(result){
+				if(result === 'Y'){
+					alert('삭제가 완료되었습니다.');
+					location.href = 'masterQnAList.do';
+				}else{
+					alert('삭제에 실패했습니다.');
+				}
+			},
+			error : function(error){
+				console.error('Error',error);
+			}
+		});
+	}
+}
 
+/* common */
+function checkSearchForm() {
+	 var keywordValue = document.getElementById('keyword').value;
+
+      if (keywordValue === '') {
+        alert('검색어를 입력하세요.');
+        return false;
+      }
+      return true;
+}
