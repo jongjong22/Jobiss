@@ -5,7 +5,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+	
     <title>리뷰게시판 목록</title>
+	
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,9 +74,13 @@
             cursor: pointer;
 
         }
+        
     </style>
+    
 </head>
-<body>
+
+<body class="home">
+	<%@ include file="header.jsp" %>
     <div class="layout">
         <table>
             <thead>
@@ -123,5 +129,6 @@
             </ul>
         </nav>
     </div>
+ <%@ include file="footer.jsp" %>
 </body>
 </html>
