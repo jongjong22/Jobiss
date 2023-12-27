@@ -31,38 +31,38 @@
 <link rel="stylesheet" href="css/gpt.css">
 
 <style>
-    h1{
-    	font-family: "Segoe Print";
-    	font-weight: "500";
-    	margin-top: "20px";
-    }
-    
-	.qna{
+h1 {
+	font-family: "Segoe Print";
+	font-weight: "500";
+	margin-top: "20px";
+}
+
+.qna {
 	margin-top: 10px;
 	margin-left: 250px;
 	font-family: "Segoe Print";
-	}
-	
-	#footer {
+}
+
+#footer {
 	margin-top: 100px;
-	}
-	
-	.info {
+}
+
+.info {
 	overflow: hidden;
 	float: right;
 	margin-top: -40px;
-	}
-	
-	.info>.info01>li {
-		display: block;
-		float: left;
-		padding-right: 10px
-	}
-	
-	.info>.info01>li>a {
-		font-size: 15px;
-		color: black;
-	}
+}
+
+.info>.info01>li {
+	display: block;
+	float: left;
+	padding-right: 10px
+}
+
+.info>.info01>li>a {
+	font-size: 15px;
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -135,9 +135,17 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#loading').hide();
-		});
 
+			$('#loading').hide();
+			// 메인값 없을경우 예외처리
+			var msg = '';
+			if (msg !== null && msg !== '') {
+				msg = `${msg_main}`;
+				console.log('msg : ' + msg);
+				alert(msg);
+			}
+
+		});
 		function gptRequest(resumeType, keyword) {
 			console.log('keyword = ' + keyword);
 			console.log('resumeType = ' + resumeType);
@@ -160,9 +168,9 @@
 								var resultContent = response.resultContent;
 
 								console.log(response);
-							
 
-								if ((resultContent === null) || (resultContent === undefined)) {
+								if ((resultContent === null)
+										|| (resultContent === undefined)) {
 									alert(response.msg);
 									return false;
 								}
@@ -188,7 +196,7 @@
 			onsubmit();
 		}
 	</script>
-	
+
 	<footer id="footer">
 		<div class="container">
 			<div class="row">
