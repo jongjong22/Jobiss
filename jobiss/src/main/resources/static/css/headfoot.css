@@ -109,24 +109,7 @@ body {
 
 
 *****************************************************************************************/
-.nav-side {
-  font-size: 24px;
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin-top: -0.37em;
-}
-.nav-side > li > a {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: #f392b4;
-}
-.nav-side > li > a:hover {
-  color: #bd1550;
-  background: none;
-}
-.nav-side > li.active > a {
-  color: #bd1550;
-}
+
 /*********************************************************************
 
 
@@ -218,9 +201,8 @@ a:hover {
 
 **********************************************************************/
 #head {
-  background-size: cover;
-  color: #7C7C7C;
-  padding: 30px 0 35px 0;
+  
+  padding: 10px 0 10px 0;
 }
 #head img.img-circle {
   display: block;
@@ -788,4 +770,3 @@ footer.entry-meta .meta-in {
     max-width: 1080px;
   }
 }
-
