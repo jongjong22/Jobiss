@@ -45,7 +45,7 @@ public class ReviewController {
 
 
 		// session에서 "member"를 가져옴. 
-		Member id = (Member)session.getAttribute("member");
+		Member member = (Member)session.getAttribute("member");
 		
 		// 첨부파일명
 		String filename = mf.getOriginalFilename();
@@ -78,10 +78,11 @@ public class ReviewController {
 
 		int result = 0; 
 		
-		if(size > 1000000) {
+		if(size > 10000000) {
 			result = 1;
 			
 			model.addAttribute("result", result);
+			
 			return "review/sizeResult";
 			
 		}else if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".gif")
@@ -102,7 +103,7 @@ public class ReviewController {
 				
 		
 		review.setRsuccess(newfilename);
-		review.setMemail("member");
+		review.setMemail(member.getMemail());
 		
 		int tmp = service.insert(review);
 
@@ -113,7 +114,7 @@ public class ReviewController {
 			
 		}
 		
-		System.out.println(path);
+		
 		return "review/reviewInsertResult";
 
 	}
