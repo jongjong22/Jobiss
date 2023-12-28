@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,19 +30,36 @@ public class GptController {
 	private GptService gs;
 
 	@RequestMapping("/gptMain")
-	public String gptMain(GptGrow grow, Model model, HttpSession session, Map<String, Object> mainList) {
-		// memail = (String) session.getAttribute("mEMail");
-		System.out.println("\n ***** gptMain ***** \n");
+	public String gptMain(String mainMsg, Model model, HttpSession session) {
+		System.out.println("\n ***** gptMain 시작 ***** \n");
+		//  memail = (String) session.getAttribute("mEMail");
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
+		GptGrow grow = new GptGrow();
+		GptCharacter character = new GptCharacter();
 		int gid = 0;
+		System.out.println("grow : " + grow.getGid());
+		System.out.println("character : " + character.getGid());
+		// 처음작성이 아닐때 : 부모글번호 초기화, 하위 4개 dto초기화
 		if (gptTop != null) {
 			gid = gptTop.getGid();
 			grow = gs.selectGptGrowTop(gid);
+			character = gs.selectGptCharacterTop(gid);
+
 		}
 
-		if (grow != null) {
-			model.addAttribute("grow", mainList.get("grow"));
-		}
+		if (grow == null)
+			grow = new GptGrow();
+		if (character == null)
+			character = new GptCharacter();
+		if (mainMsg == null)
+			mainMsg = "";
+		System.out.println("grow : " + grow.getGid());
+		System.out.println("character : " + character.getGid());
+		System.out.println("mainMsg : " + mainMsg);
+		model.addAttribute("grow", grow);
+		model.addAttribute("character", character);
+		System.out.println("\n ***** gptMain 끝 ***** \n");
+		
 		return "gpt/gptMain";
 	}
 
@@ -71,8 +87,6 @@ public class GptController {
 		GptCharacter gptCharacterTop;
 		GptMotive gptMotiveTop;
 		GptPlan gptPlanTop;
-
-		Map<String, Object> mainList = new HashMap<String, Object>();
 
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
 		int gid = 0;
@@ -143,9 +157,9 @@ public class GptController {
 					System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
 
 					if (iResult == 1) // insert true
-						mainList.put("grow", grow);
+						model.addAttribute("grow", grow);
 					else // insert false
-						mainList.put("msg", "등록 실패.");
+						model.addAttribute("msg", "등록 실패.");
 				} else if (gptGrowTop != null) { // 둘째 선택이라면.
 					grow.setGid(gid);
 					grow.setMemail(memail);
@@ -158,10 +172,10 @@ public class GptController {
 					System.out.println("업데이트 후 시간 : " + gs.selectGptTop(memail).getGptreg());
 
 					if (iResult == 1) // update true
-						mainList.put("grow", grow);
+						model.addAttribute("grow", grow);
 
 					else // update false
-						mainList.put("msg", "등록 실패.");
+						model.addAttribute("msg", "등록 실패.");
 
 				}
 
@@ -202,11 +216,11 @@ public class GptController {
 			}
 		} else {
 			System.out.println("값이 없음.");
-			mainList.put("msg", "등록 실패.");
-			model.addAttribute("mainList", mainList);
+			model.addAttribute("mainMsg", "값이 없음");
 			return "redirect:/gptMain";
 		}
-		model.addAttribute("mainList", mainList);
+		String s = "oo";
+		model.addAttribute("s", s);
 		System.out.println("\n ***** Controller_gptSelect끝 ***** \n");
 		return "redirect:/gptMain";
 	}
