@@ -57,7 +57,7 @@ h1 {
 		function deletereview(rid) {
 		
 			var confirmDelete = confirm("진짜 삭제하시겠습니까?");
-		    console.log("confirmDelete : " + confirmDelete);
+		    console.log("confirmDelete :" + confirmDelete);
 
 			if (confirmDelete) {
 				$.ajax({
@@ -81,18 +81,49 @@ h1 {
 				});
 			}
 		}
+		
+		function deletereviewreply(rrid,rid) {
+			
+			var confirmDelete1 = confirm("진짜 삭제하시겠습니까?");
+		    console.log("confirmDelete1 : " + confirmDelete1);
+
+			if (confirmDelete) {
+				$.ajax({
+					type : "POST",
+					url : "replyDelete.do",
+					data : {
+						"rrid" : rrid
+					},
+					success : function(response) {
+						if (response === "Y") {
+							alert("글 삭제가 되었습니다.");
+							location.href = "reviewDetails.do?rid=" +rid;
+						} else {
+							alert("삭제에 실패했습니다.");
+						}
+					},
+					error : function() {
+						alert("관리자에게 문의해주세요.");
+					}
+
+				});
+			}
+		}
+		
 	</script>
+
+
+
 
 	<div class="container">
 		<h1>리뷰 상세 페이지</h1>
 
 		<div class="review-content">
-			<form action="reviewUpdateForm.do" method="post">
-				<h2>제목</h2>
-				<p>${review.rtitle}</p>
+			<h2>제목</h2>
+			<p>${review.rtitle}</p>
 
-				<h2>내용</h2>
-				<p>${review.rcontent}</p>
+			<h2>내용</h2>
+			<p>${review.rcontent}</p>
 		</div>
 
 		<div class="action-buttons">
@@ -103,81 +134,56 @@ h1 {
 				<input type="button" onclick="deletereview(${review.rid})"
 					value="글 삭제">
 			</c:if>
-
 		</div>
+
+
+
+		
+		<div class="review-content">
+			<!-- 댓글 내용 -->
+			<c:if test="${not empty Rlist}">
+				<table border = "1" align = "center">
+					<tr>
+						<th>내용</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>수정 버튼</th>
+						<th>삭제 버튼</th>
+					</tr>
+					<c:forEach var="reviewreply" items="${Rlist}" varStatus="loop">
+						<tr>
+							<td>${reviewreply.rrcontent }</td>
+							<td>${reviewreply.memail }</td>
+							<fmt:formatDate value="${reviewreply.rrreg}"
+								pattern="yyyy년 MM월 dd일" var="date" />
+							<td>${date}</td>
+							<c:if test="${member.memail eq reviewreply.memail }">
+							<td><input type="button"
+									onclick="location.href='replyUpdate.do?rrid=${reviewreply.rrid}'"
+									value="댓글 수정"></td>
+							<td><input type="button"
+									onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+		</div>
+		
+		
+
+		<!-- 댓글 작성 폼 -->
+
+		<form action="replyWrite.do" method="post" class="view-reply">
+			<input type="hidden" name="memail" value="${sessionScope.member.memail }"> 
+			<input type="hidden" name="rid" value="${review.rid }">
+			
+			<textarea name="rrcontent" rows="6" cols="50" style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
+			<br> 
+			<input type="submit" value="댓글 작성">
 		</form>
 
-
-
-
-
-
-		<h2 align="center">댓글</h2>
-		<div class="view-reply">
-			<!-- 댓글 내용 -->
-			<c:if test="${not empty list}">
-				<tr>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-				<c:forEach var="reviewreply" items="${list}" varStatus="loop">
-					<tr>
-						<td>${reviewreply.rrcontent }</td>
-						<td>${reviewreply.memail }</td>
-						<fmt:formatDate value="${reviewreply.rrreg}"
-							pattern="yyyy년 MM월 dd일" var="date" />
-						<td>${date}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-
-			<!--  페이징 처리 -->
-			<c:if test="${listcount > 0}">
-				<nav aria-label="Page navigation example"
-					style="text-align: center;">
-					<ul>
-						<c:if test="${startPage > 10}">
-							<a href="replyList.do?page=${startPage + 1}">이전</a>
-						</c:if>
-						<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-							<a href="replyList.do?page=${pageNum}">${pageNum}</a>
-						</c:forEach>
-						<c:if test="${endPage < pageCount}">
-							<a href="replyList.do?page=${endPage + 1}">다음</a>
-						</c:if>
-					</ul>
-				</nav>
-			</c:if>
-
-
-
-			<!-- 댓글 작성 폼 -->
-			<form action="replyWrite.do" method="post" class="view-reply">
-			<input type="hidden" value="${member.memail }">
-			<input type="hidden" value="${review.rid }">
-			
-				<textarea name="rrcontent" rows="6" cols="50"
-					style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
-				<br> <input type="submit" value="댓글 작성">
-			</form>
-
-			<div class="action-buttons">
-				<c:if test="${member.memail eq reviewreply.memail }">
-
-					<input type="button"
-						onclick="location.href='replyUpdate.do?rid=${reviewreply.rrid}'"
-						value="댓글 수정">
-
-					<input type="button"
-						onclick="deletereviewreply(${reviewreply.rrid})" value="댓글 삭제">
-				</c:if>
-			</div>
-		</div>
-
-
-
-
 	</div>
+
 </body>
 </html>

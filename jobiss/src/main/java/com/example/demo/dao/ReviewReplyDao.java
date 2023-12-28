@@ -17,11 +17,13 @@ public interface ReviewReplyDao {
 
 	int getCount();
 
-	List<Review> getList(int start);
+	List<ReviewReply> RgetList(int rid);
 
 	int update(ReviewReply reviewreply);
 
-	int delete(int rid);
+	int delete(int rrid);
+
+	ReviewReply getBoard(int rrid);
 
 
 }

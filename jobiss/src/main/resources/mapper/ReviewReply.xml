@@ -11,13 +11,11 @@
 		(null, #{rid}, #{memail}, #{rrcontent}, now(), default)
 	</insert>
 
-	<select id="getList" parameterType="int" resultType="reviewreply">
+	<select id="RgetList" parameterType="int" resultType="reviewreply" >
 		SELECT *
 		FROM reviewreply
-		WHERE rrdrop = 'N'
-		ORDER BY rrid DESC
-		LIMIT #{start}, 5
-
+		WHERE rrdrop = 'N' and rid = #{rid}
+		ORDER BY rrreg desc
 	</select>
 
 	<select id="getCount" resultType="int">
@@ -26,11 +24,11 @@
 
 	<select id="getBoard" parameterType="int" resultType="reviewreply">
 		select *
-		from reviewreply where rid= #{rid}
+		from reviewreply where rrid= #{rrid}
 	</select>
 
 	<update id="update" parameterType="reviewreply">
-		UPDATE reviewreply
+		UPDATE reviewreply set
 		rrcontent = #{rrcontent},
 		WHERE rrid = #{rrid}
 	</update>
