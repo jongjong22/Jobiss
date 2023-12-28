@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/mypage.css">
+<link rel="stylesheet" type="text/css" href="css/myqna.css">
 <title>마이페이지</title>
 <style>
 .page>a {
@@ -48,7 +50,9 @@
 						<td>${qna.memail }</td>
 						<td>${qna.qtitle }</td>
 						<td>${qna.qcontent }</td>
-						<td>${qna.qreg }</td>
+						<fmt:formatDate value="${qna.qreg}"
+                                pattern="yyyy년 MM월 dd일" var="date" />
+                            <td>${date}</td>
 
 					</tr>
 				</c:forEach>
