@@ -17,60 +17,71 @@
             margin: 0;
             padding: 0;
         }
+        
+        .title{
+        	font-family: "맑은고딕"
+        }
 
         .layout {
             width: 800px;
             margin: 40px auto;
         }
-.layout {
-	width: 800px;
-	margin: 40px auto;
-}
+        
+		.layout {
+			width: 800px;
+			margin: 40px auto;
+		}
+		
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			overflow: hidden;
+		}
+		
+		th, td {
+			padding: 12px 15px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+		
+		th {
+			background-color: #f2f2f2;
+		}
+		
+		tbody tr:hover {
+			background-color: #f9f9f9;
+		}
+		
+		tbody td:first-child {
+			font-weight: bold;
+		}
+		
+		nav ul {
+			list-style: none;
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+		}
+		
+		nav ul li {
+			margin-right: 5px;
+		}
+		
+		.add-review-button {
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
-	overflow: hidden;
-}
-
-th, td {
-	padding: 12px 15px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-	background-color: #f9f9f9;
-}
-
-tbody td:first-child {
-	font-weight: bold;
-}
-
-nav ul {
-	list-style: none;
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-nav ul li {
-	margin-right: 5px;
-}
-
-.add-review-button {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 10px;
-	margin-top: 10px;
-}
-
+        .add-review-button > button{
+        	border-radius: 10px;
+        	border: 1 solid black;
+        	background-color: transparent;
+        	padding: 5px 10px 5px 10px;
+        	
         }
         
     </style>
@@ -82,7 +93,7 @@ nav ul li {
     <div class="layout">
         <table>
             <thead>
-                <h1 align="center">후기 게시판</h1>
+                <h1 class = "title" align="center">REVIEW</h1>
             </thead>
             <tbody>
                 <c:if test="${not empty list}">
@@ -111,7 +122,6 @@ nav ul li {
         </table>
         <div class="add-review-button">
             <button onclick="location.href='reviewWriteForm.do'">글작성</button>
-            <button onclick="location.href='main.do'">Home</button>
         </div>
         <nav aria-label="Page navigation example">
             <ul>
