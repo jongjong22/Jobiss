@@ -5,127 +5,97 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/community.css">
 
 <title>커뮤니티 폼</title>
 
-<style>
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: flex-end; /* 요소들을 아래쪽으로 정렬합니다 */
-	
-}
-
-.box {
-	width: 200px;
-	height: 150px;
-	background-color: white;
-	border: 2px solid black;
-	margin: 5px;
-	font-size: 16px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	border-radius: 15px; /* 박스의 모서리를 둥글게 만듦 */
-	margin-right: 50px;
-}
-
-.box:last-child {
-  margin-right: 0;
-}
-
-.box-content {
-	text-align: center;
-	font-weight: bold; /* 텍스트를 굵게 설정 */
-}
-
-.category-tag {
-	background-color: #f2f2f2;
-	border: 1px solid #ddd;
-	padding: 2px 5px;
-	border-radius: 8px; /* 모서리를 둥글게 만듦 */
-	font-size: 15px;
-	margin-bottom: 8px;
-	margin-top: 15px;
-}
-
-.author {
-	margin-top: auto; /* 아래쪽 여백을 최대로 늘려 고정시킵니다 */
-	margin-right: 30px; /* 왼쪽으로 이동시킴 */
-}
-
-a {
-	color: #000;
-	text-decoration: none; /* 링크 밑줄 제거 */
-}
-
-.back{
-	margin-top: -20px;
-	width: 100%;
-	height: 150px;
-	background-color: #333232;
-	position: relative;
-}
-
-.box1 {
-    position: absolute; 
-    top: 280px; 
-    width: 100%; 
-  }
-
-
-.content{
-	color: white;
-	font-size: 20px;
-	font-weight: bold;
-	font-family: "맑은고딕";
-	
-}
-
- .spacer {
-    height: 500px; 
-  }
-
-
-	
-</style>
 </head>
 
-<body class = "home">
-	<%@ include file="header.jsp" %>
-	
-	<div class="back">
-		
-	</div>
-	
+<body class="home">
+	<%@ include file="header.jsp"%>
+
+	<div class="back"></div>
+
 	<div class="box1">
-	<p class="content" align="center">인기글</p>
-	<div class="container">
-		<div class="box">
-			<div class="category-tag">커리어</div>
-			<a href="#"><div class="box-content">실수 줄이는 팁</div></a>
-			<div class="author">작성자: 홍길동</div>
-			<!-- 작성자 정보를 출력하는 요소 -->
-		</div>
-		<div class="box">
-			<div class="category-tag">취업</div>
-			<a href="#"><div class="box-content">다음 카페 모임</div></a>
-			<div class="author">작성자: 아무개</div>
-			<!-- 작성자 정보를 출력하는 요소 -->
-		</div>
-		<div class="box">
-			<div class="category-tag">토론</div>
-			<a href="#"><div class="box-content">자유 토론</div></a>
-			<div class="author">작성자: 누구게</div>
-			<!-- 작성자 정보를 출력하는 요소 -->
+		<p class="content" align="center">Weekly Best</p>
+		<div class="container">
+			<div class="box">
+				<div class="category-tag">커리어</div>
+				<a href="#"><div class="box-content">실수 줄이는 팁</div></a>
+				<div class="author">작성자: 홍길동</div>
+				<!-- 작성자 정보를 출력하는 요소 -->
+			</div>
+			<div class="box">
+				<div class="category-tag">취업</div>
+				<a href="#"><div class="box-content">다음 카페 모임</div></a>
+				<div class="author">작성자: 아무개</div>
+				<!-- 작성자 정보를 출력하는 요소 -->
+			</div>
+			<div class="box">
+				<div class="category-tag">토론</div>
+				<a href="#"><div class="box-content">자유 토론</div></a>
+				<div class="author">작성자: 누구게</div>
+				<!-- 작성자 정보를 출력하는 요소 -->
+			</div>
 		</div>
 	</div>
-	</div><!-- box1 -->
-	
+	<!-- box1 -->
+
 	<div class="spacer"></div>
 	
-	<%@ include file="footer.jsp" %>
+	<div class="layout">
+        <table>
+            <!-- <thead>
+                <h1 align="center">커뮤니티</h1>
+            </thead> -->
+            <tbody>
+               <%--  <c:if test="${not empty list}"> --%>
+                <tr>
+                	<th>조회수</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>이미지</th>
+                </tr>
+                    <%-- <c:forEach var="review" items="${list}" varStatus="loop"> --%>
+                        <tr>
+                        	<td>조회수</td>
+                        	<td><a href="reviewDetails.do">제목</a></td>
+                            <td>내용</td>
+                            <td>작성자</td>
+                            <%-- <fmt:formatDate value="${review.rreg}"
+                                pattern="yyyy년 MM월 dd일" var="date" /> --%>
+                            <td>작성일</td>
+                            <td>이미지</td>
+                        </tr>
+                    <%-- </c:forEach> --%>
+              <%--   </c:if> --%>
+                
+                <%-- <c:if test="${empty list}">
+                	<h1 style="text-align: center; margin-top: 150px; color:red;">작성된 글이 없습니다.</h1>
+                </c:if> --%>
+            </tbody>
+        </table>
+        <div class="add-review-button">
+            <button onclick="location.href='communityWriteForm.do'">글작성</button>
+            <button onclick="location.href='main.do'">Home</button>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul>
+                <c:if test="${startPage > 10 }">
+                    <li><a href="reviewList.do?page=${startPage+1 }">이전</a></li>
+                </c:if>
+                <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+                    <li><a href="reviewList.do?page=${pageNum}">${pageNum }</a></li>
+                </c:forEach>
+                <c:if test="${endPage < pageCount}">
+                    <li><a href="reviewList.do?page=${endPage + 1}">다음</a></li>
+                </c:if>
+            </ul>
+        </nav>
+    </div>
+
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
