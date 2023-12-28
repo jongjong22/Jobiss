@@ -14,53 +14,73 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.GptDao;
 import com.example.demo.model.GPT;
+import com.example.demo.model.GptCharacter;
 import com.example.demo.model.GptGrow;
 import com.example.demo.model.ReadCount;
 
 @Service
 public class GptService {
-	private static final String api_key = "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"; // api키 하루단위 초기화됨.
+	private static final String api_key = "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"; // api키 하루단위 초기화됨.
 
 	@Autowired
 	private GptDao dao;
 
-	public int countGptGrow() {
-		return dao.countGptGrow();
-	}
-
-	public int insertGptGrow(GptGrow grow) {
-		return dao.insertGptGrow(grow);
-	}
-
-	// GPT 선택
-	public int updateGrow(GptGrow grow) {
-		return dao.updateGrow(grow);
-	}
-
-	public GptGrow selectGptGrowTop(int gid) {
-		return dao.selectGptGrowTop(gid);
-	}
-
-	public GPT selectGptTop(String mEmail) {
-		return dao.selectGptTop(mEmail);
-	}
-
+	// 부모 insert
 	public int insertGpt(GPT gpt) {
 		return dao.insertGpt(gpt);
 	}
 
+	// 부모 최신글
+	public GPT selectGptTop(String mEmail) {
+		return dao.selectGptTop(mEmail);
+	}
+
+	// 부모 시간 최신화
 	public int updateGptReg(int gid) {
 		return dao.updateGptReg(gid);
 	}
 
+	// 성장과정 insert
+	public int insertGptGrow(GptGrow grow) {
+		return dao.insertGptGrow(grow);
+	}
+
+	// 성장과정 최신글
+	public GptGrow selectGptGrowTop(int gid) {
+		return dao.selectGptGrowTop(gid);
+	}
+
+	// 성장과정 최신화
+	public int updateGrow(GptGrow grow) {
+		return dao.updateGrow(grow);
+	}
+
+	// 성격장단점 insert
+	public int insertGptCharacter(Character character) {
+		return dao.insertGptCharacter(character);
+	}
+
+	// 성격장단점 최신글
+	public GptCharacter selectGptCharacterTop(int gid) {
+		return dao.selectGptCharacterTop(gid);
+	}
+
+	// 성격장단점 최신화
+	public int updateCharacter(Character character) {
+		return dao.updateCharacter(character);
+	}
+
+	// 조회수 insert
 	public int insertReadCount(ReadCount readCount) {
 		return dao.insertReadCount(readCount);
 	}
 
+	// 조회수 최신글
 	public ReadCount selectReadCountTop() {
 		return dao.selectReadCountTop();
 	}
 
+	// 조회수 최신화
 	public int updateReadCount(ReadCount readCount) {
 		return dao.updateReadCount(readCount);
 	}
