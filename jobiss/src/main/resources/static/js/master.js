@@ -124,6 +124,31 @@ function masterQnADelete(qid) {
 	}
 }
 
+/* masterFeedbackList.jsp */
+function openFeedback(fid){
+	location.href = 'masterFeedback.do?fid=' + fid;
+}
+
+/* masterFeedback.jsp */
+function masterFeedbackDelete(fid){
+	$.ajax({
+		type : 'POST',
+		url : 'masterFeedbackDelete.do',
+		data : { fid : fid },
+		success : function(result){
+			if(result === 'Y'){
+				alert('삭제가 완료되었습니다.');
+				location.href = 'masterFeedbackList.do';
+			}else{
+				alert('삭제에 실패하였습니다.');
+			}
+		},
+		error : function(error) {
+			console.error('Error',error);
+		}
+	});
+}
+
 /* common */
 function checkSearchForm() {
 	 var keywordValue = document.getElementById('keyword').value;

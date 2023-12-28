@@ -7,12 +7,14 @@
 		select count(*) from qna
 	</select>
 	
+	<!-- QnA 리스트 구해오기 -->
 	<select id="qnaList" parameterType="int" resultType="qna">
 		select * from qna
 		order by qdrop asc, qreg desc
 		LIMIT #{start}, 10
 	</select>
 	
+	<!-- QnA 상세 정보 구해오기 -->
 	<select id="qna" parameterType="String" resultType="qna">
 		select * from qna where qid = #{qid}
 	</select>
@@ -21,4 +23,42 @@
 	<update id="masterQnADelete" parameterType="String">
 	 	update qna set qdrop = 'Y' where qid = #{qid}
 	</update>
+	
+	<!-- QnA 검색 목록 갯수 구해오기 -->
+	<select id="sgetCount" parameterType="Map" resultType="int">
+		select count(*) from qna where
+		<choose>
+			<when test="searchtype == 'memail'">
+				memail like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'qtitle'">
+				qtitle like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'qcontent'">
+				qcontent like '%' #{keyword} '%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- QnA 검색 목록 구해오기 -->
+	<select id="sqnaList" parameterType="Map" resultType="qna">
+		select * from qna where
+		<choose>
+			<when test="searchtype == 'memail'">
+				memail like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'qtitle'">
+				qtitle like '%' #{keyword} '%'
+			</when>
+
+			<when test="searchtype == 'qcontent'">
+				qcontent like '%' #{keyword} '%'
+			</when>
+		</choose>
+		order by qdrop asc, qreg desc
+		LIMIT #{start}, 10
+	</select>	
 </mapper>
