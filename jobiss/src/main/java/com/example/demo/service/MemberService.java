@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.model.Community;
+import com.example.demo.model.FeedBack;
 import com.example.demo.model.Member;
 import com.example.demo.model.QnA;
 import com.example.demo.model.Review;
@@ -51,9 +53,28 @@ public class MemberService {
 		return dao.qnaselect(map);
 	}
 	
-	// qna 갯수
+	// qna 페이징
 	public int qnacount() {
 		return dao.qnacount();
+	}
+	
+	// fb 페이징
+	public int fbcount() {
+		return dao.fbcount();
+	}
+	
+	// fb 가져오기
+	public List<FeedBack> fbselect(Map map) {
+		return dao.fbselect(map);
+	}
+	
+	// 커뮤니티 페이징
+	public int ccount() {
+		return dao.ccount();
+	}
+
+	public List<Community> cselect(Map map) {
+		return dao.cselect(map);
 	}
 
 

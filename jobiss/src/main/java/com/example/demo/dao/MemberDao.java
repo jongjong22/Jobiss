@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.Community;
+import com.example.demo.model.FeedBack;
 import com.example.demo.model.Member;
 import com.example.demo.model.QnA;
 import com.example.demo.model.Review;
@@ -35,6 +37,18 @@ public interface MemberDao {
 	
 	// qna 페이징
 	int qnacount();
+	
+	// fb 페이징
+	int fbcount();
+	
+	// fb 가져오기 
+	List<FeedBack> fbselect(Map map);
+	
+	// 커뮤니티 페이징
+	int ccount();
+	
+	// 커뮤니티 가져오기 
+	List<Community> cselect(Map map);
 	
 	
 
