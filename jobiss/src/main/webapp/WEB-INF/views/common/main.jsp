@@ -121,6 +121,7 @@
 				<div class="navbar-collapse collapse">
 
 					<ul class="nav navbar-nav">
+						<li><a href="main.do">HOME</a></li>
 						<li><a href="#">Q&A</a></li>
 						<li><a href="reviewList.do">REVIEW</a></li>
 						<li><a href="#">FEEDBACK</a></li>

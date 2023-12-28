@@ -8,16 +8,16 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="./js/board.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
+       	 body {
+	        font-family: Arial, sans-serif;
+	        background-color: rgba(0, 0, 0, 0.7); 
+	        margin: 0;
+	        padding: 0;
+	    }
 
         .layout {
-            width: 500px;
-            margin: 40px auto 0;
+            width: 800px;
+            margin: 120px auto 0;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -50,6 +50,11 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-left: 90px;
+        }
+        
+        .form-actions{
+        	margin-left: 190px;
         }
 
         .layout input[type="submit"] {
@@ -69,12 +74,21 @@
         .layout input[type="reset"]:hover {
             background-color: #d32f2f;
         }
+        
+        p{
+		  	margin-top: -3px;
+		  	margin-bottom: -3px;
+		  	font-size: 35px;
+		  	font-family: Alice, Georgia, serif;
+		  	text-align: center;
+		  }
     </style>
 </head>
 
 <body>
     <div class="layout">
         <form action="reviewWrite.do" method="post" enctype="multipart/form-data">
+        	<p>WRITE</p>
             <input name="rtitle" id="rtitle" type="text" placeholder="글 제목">
             <textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
           	<input type="file" id="rsuccess1" name="rsuccess1">	
