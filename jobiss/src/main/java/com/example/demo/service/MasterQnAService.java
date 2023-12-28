@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,15 @@ public class MasterQnAService {
 	// QnA 글 삭제 하기
 	public int masterQnADelete(String qid) {
 		return dao.masterQnADelete(qid);
+	}
+	
+	// QnA 검색 목록 갯수 구해오기
+	public int sgetCount(Map<String, Object> map) {
+		return dao.sgetCount(map);
+	}
+	
+	// QnA 검색 목록 구해오기
+	public List<QnA> sqnaList(Map<String, Object> map) {
+		return dao.sqnaList(map);
 	}
 }

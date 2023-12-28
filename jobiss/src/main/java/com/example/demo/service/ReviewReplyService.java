@@ -23,21 +23,23 @@ public class ReviewReplyService {
 		return dao.getCount();
 	}
 
-	public List<Review> getList(int start) {
-		return dao.getList(start);
-	}
-
-	public Review getBoard(int rid) {
-		
-		return dao.getBoard;
-	}
 
 	public int update(ReviewReply reviewreply) {
 		return dao.update(reviewreply);
 	}
 
-	public int delete(int rid) {
+	public int delete(int rrid) {
 		
-		return dao.delete(rid);
+		return dao.delete(rrid);
+	}
+
+	public List<ReviewReply> RgetList(int rid) {
+	
+		return dao.RgetList(rid);
+	}
+
+	public ReviewReply getBoard(int rrid) {
+	
+		return dao.getBoard(rrid);
 	}
 }

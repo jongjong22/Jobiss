@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
@@ -20,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Member;
 import com.example.demo.model.Review;
+import com.example.demo.model.ReviewReply;
+import com.example.demo.service.ReviewReplyService;
 import com.example.demo.service.ReviewService;
 
 
@@ -28,7 +29,10 @@ public class ReviewController {
 
 	@Autowired
 	public ReviewService service; 
-
+	
+	@Autowired
+	private ReviewReplyService rs;
+	
 	// 글작성 폼으로 이동 
 	@RequestMapping("reviewWriteForm.do")
 	public String reviewform() {
@@ -118,7 +122,8 @@ public class ReviewController {
 		return "review/reviewInsertResult";
 
 	}
-
+	
+	// 리뷰 리스트, 댓글 리스트 불러오기
 	@RequestMapping("reviewList.do")
 	public String reviewList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 	    int limit = 10; // 한 페이지에 출력할 데이터 개수
@@ -129,9 +134,7 @@ public class ReviewController {
 	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
 
 	    List<Review> resultList = service.getList(start);
-
-		System.out.println(resultList);
-		
+	    
 	    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
 	    int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
@@ -140,8 +143,9 @@ public class ReviewController {
 	        endPage = pageCount;
 	    }
 
+	    
 
-
+	 
 	    model.addAttribute("list", resultList);
 	    model.addAttribute("startPage", startPage);
 	    model.addAttribute("endPage", endPage);
@@ -157,11 +161,28 @@ public class ReviewController {
 	// 리뷰게시판 상세페이지로 이동
 	@RequestMapping("reviewDetails.do")
 	public String reviewDetails(int rid, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		int limit = 10; // 한 페이지에 출력할 데이터 개수
 
+	    int listcount = service.getCount(); // 전체 데이터 개수
+
+	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
+
+	    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
+
+	    int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+	    int endPage = startPage + 10; // 끝 페이지 
+	    if (endPage > pageCount) {
+	        endPage = pageCount;
+	    }
+		
 		Review review = service.getBoard(rid);
 		
 		String content = review.getRcontent().replace("\n", "<br>");
 		
+		List<ReviewReply> Rlist = rs.RgetList(rid);
+		
+		model.addAttribute("Rlist", Rlist);
 		model.addAttribute("review",review);
 		model.addAttribute("rid",rid);
 		model.addAttribute("content",content);

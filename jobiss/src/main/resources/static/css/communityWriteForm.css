@@ -1,0 +1,181 @@
+html {
+	font-size: 100%;
+}
+
+body {
+	font-size: 15px;
+	font-size: 0.9375rem;
+	font-family: "Open sans", Helvetica, Arial, sans-serif;
+	color: #666666;
+	padding: 0;
+}
+
+.topspace {
+	margin-top: 40px;
+}
+
+/* .card-header h1 {
+	fint-size: 30px;
+	font-weight: 600;
+}
+
+.card-write {
+	padding: 20px;
+}
+
+.card-write input, textarea{
+	margin-left: 10px;
+	padding: 10px;
+	border: 1px solid #999;
+	border-radius: 10px;
+	box-shadow: 3px 3px 10px #e6e6e6;
+}
+
+.card-write .myinfo input[type="text"]{
+	width: 25%;
+	margin-right: 50px;
+}
+
+.card-write .myinfo input[type="password"]{
+	width: 31%;
+}
+
+.card-write .myinfo input[type="text"]{
+	margin-top: 20px;
+	margin-botton: 20px;
+	width: 85.5%;
+}
+
+.card-write .msg textarea {
+	min-width: 85.5%;
+	max-width: 85.5%;
+	min-height: 200px;
+	max-height: 200px;
+	box-shadow: insert 3px 3px 10px #e6e6e6;
+	
+	vertical-align: top;
+}
+
+.card-write input[type="file"]{
+	border: none;
+	box-shadow: none;
+	padding: 10px;
+	margin-left: 40px;
+}
+
+.btn-w {
+	position: absolute;
+	right: 0;
+	botton: 0;
+	margin: 10px 10px 20px 10px;
+	padding: 10px;
+}
+
+.btn-w a {
+	background-color: tomato;
+	padding: 10px;
+	color: #fff;
+	border-radius: 10px;
+}
+ */
+
+/* communityWriteForm.css에 추가할 CSS */
+
+/* communityWriteForm.css */
+
+/* 전반적인 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+.card-header1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.card-header1 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.myinfo input[type="text"],
+.myinfo input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.title-w input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.msg textarea {
+    width: calc(100% - 22px);
+    padding: 8px;
+    margin-bottom: 10px;
+    height: 150px;
+}
+
+.btn-w {
+    text-align: center;
+}
+
+.btn-w a {
+    width: 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.btn-w a:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

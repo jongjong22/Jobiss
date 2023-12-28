@@ -66,11 +66,34 @@
 		LIMIT #{start}, 10;
 	</select>
 	
-	<!-- qna 갯수 -->
+	<!-- qna 페이징 -->
 	<select id="qnacount" resultType="int">
 		select count(*) from qna
 		where qdrop = 'N'
 	</select>
-
+	
+	<!-- feedback 페이징 -->
+	<select id="fbcount" resultType="int">
+		select count(*) from feedback where fdrop = 'N'
+	</select>
+	
+	<!-- memail feedback 가져오기 -->
+	<select id="fbselect" resultType="feedback" parameterType="map">
+		select * from feedback where memail = #{memail} and fdrop = 'N'
+		order by freg desc 
+		limit #{start}, 10;
+	</select>
+	
+	<!-- 커뮤니티 페이징 -->
+	<select id="ccount" resultType="int">
+		select count(*) from community where cdrop = 'N'
+	</select>
+	
+	<!-- 커뮤니티 가져오기  -->
+	<select id="cselect" resultType="community" parameterType="map">
+		select * from community where memail = #{memail} and cdrop = 'N'
+		order by creg desc 
+		limit #{start}, 10;
+	</select>
 
 </mapper>

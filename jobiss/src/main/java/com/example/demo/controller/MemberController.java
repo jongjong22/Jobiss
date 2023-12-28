@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.model.Community;
+import com.example.demo.model.FeedBack;
 import com.example.demo.model.Member;
 import com.example.demo.model.QnA;
 import com.example.demo.model.Review;
@@ -94,8 +96,10 @@ public class MemberController {
 	// 회원정보 수정
 	@RequestMapping("memberupdate.do")
 	public String memberupdate(Model model, Member member, HttpSession session) {
+		
 
 		int result = 0;
+		
 
 		result = service.updatemember(member);
 
@@ -236,16 +240,84 @@ public class MemberController {
 
 	// 마이페이지 피드백 이동
 	@RequestMapping("myfeedback.do")
-	public String myfeedback(Model model, HttpSession session) {
+	public String myfeedback(Model model, HttpSession session,
+							@RequestParam(value = "page", defaultValue = "1") int page) {
+		
+		Member member = (Member) session.getAttribute("member");
 
+		String memail = member.getMemail();
+
+		int limit = 10;
+		
+		int flistcount = service.fbcount();
+
+		int start = (page - 1) * 10;
+
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("memail", memail);
+		
+		List<FeedBack> fblist = service.fbselect(map);
+		
+		
+		int pageCount = (int) Math.ceil((double) flistcount / limit);
+
+		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+		int endPage = startPage + 10; // 끝 페이지
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("flistcount", flistcount);
+		model.addAttribute("memail", memail);
+		model.addAttribute("fblist", fblist);
+		
+		
 		return "member/mypage/myfeedback";
 
 	}
 
 	// 마이페이지 커뮤니티 이동
 	@RequestMapping("mycommunity.do")
-	public String mycommunity(Model model, HttpSession session) {
+	public String mycommunity(Model model, HttpSession session,
+								@RequestParam(value = "page", defaultValue = "1") int page) {
 
+		Member member = (Member) session.getAttribute("member");
+
+		String memail = member.getMemail();
+
+		int limit = 10;
+		
+		int clistcount = service.ccount();
+		
+		int start = (page - 1) * 10;
+		
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("memail", memail);
+		
+		List<Community> clist = service.cselect(map);
+		
+		int pageCount = (int) Math.ceil((double) clistcount / limit);
+
+		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+		int endPage = startPage + 10; // 끝 페이지
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("clistcount", clistcount);
+		model.addAttribute("memail", memail);
+		model.addAttribute("clist", clist);
+		
 		return "member/mypage/mycommunity";
 	}
 }

@@ -6,16 +6,16 @@
 <html lang="en">
 
 <body>
-	<c:if test="${insertResult == 1 }">
+	<c:if test="${updateResult == 1 }">
 		<script type="text/javascript">
-			alert("댓글작성 성공!");
+			alert("댓글수정 성공!");
 			location.href = "reviewDetails.do?rid="+${rid};
 		</script>
 	</c:if>
 
-	<c:if test="${insertResult != 1 }">
+	<c:if test="${updateResult != 1 }">
 		<script type="text/javascript">
-			alert("댓글 작성 실패");
+			alert("댓글 수정 실패");
 			history.go(-1);
 		</script>
 	</c:if>

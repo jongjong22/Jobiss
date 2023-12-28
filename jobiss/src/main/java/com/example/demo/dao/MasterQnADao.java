@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,5 +22,11 @@ public interface MasterQnADao {
 	
 	// QnA 글 삭제하기
 	int masterQnADelete(String qid);
+	
+	// QnA 검색 목록 갯수 구해오기
+	int sgetCount(Map<String, Object> map);
+	
+	// QnA 검색 목록 구해오기
+	List<QnA> sqnaList(Map<String, Object> map);
 
 }
