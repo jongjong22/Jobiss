@@ -10,12 +10,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="css/masterMemberList.css">
 <script src="./js/master.js"></script>
-<title>QnA 관리</title>
+<title>피드백 관리</title>
 </head>
 <body>
 
 	<div class="Big_container">
-		<h1>QnA 상세 정보</h1>
+		<h1>피드백 상세 정보</h1>
 
 		<div class="container_detailmember">
 			<table border="1">
@@ -25,21 +25,21 @@
 					<th>제목</th>
 					<th>내용</th>
 					<th>삭제 여부</th>
-					<th>작성 날짜</th>
+					<th>요청 날짜</th>
 				</tr>
 
 				<tr>
-					<td>${qna.qid }</td>
-					<td>${qna.memail }</td>
-					<td>${qna.qtitle }</td>
-					<td>${qna.qcontent }</td>
-					<td>${qna.qdrop }</td>
-					<fmt:formatDate value="${qna.qreg }" pattern="YYYY년 MM월 dd일"
+					<td>${feedback.fid }</td>
+					<td>${feedback.memail }</td>
+					<td>${feedback.ftitle }</td>
+					<td>${feedback.fcontent }</td>
+					<td>${feedback.fdrop }</td>
+					<fmt:formatDate value="${feedback.freg }" pattern="YYYY년 MM월 dd일"
 						var="date" />
 					<td>${date }</td>
 				</tr>
 			</table>
-				<button class="button-style" onClick="masterQnADelete('${qna.qid}')">글 삭제</button>
+				<button class="button-style" onClick="masterFeedbackDelete('${feedback.fid}')">후기삭제</button>
 		</div>
 	</div>
 </body>
