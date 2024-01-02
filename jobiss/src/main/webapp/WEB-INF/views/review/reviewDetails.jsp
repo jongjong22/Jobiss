@@ -11,22 +11,32 @@
 
 <title>리뷰 게시판 상세페이지</title>
 <style>
-body {
+/* body {
 	font-family: Arial, sans-serif;
 	background-color: #f7f7f7;
 	margin: 0;
 	padding: 0;
-	line-height: 1.6;
-}
+	/* line-height: 1.6; */
+/* } */ 
 
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+		    
 .container {
-	width: 800px;
-	margin: 40px auto;
+	width: 600px;
 }
 
-h1 {
-	text-align: center;
-	color: #333;
+
+.reviewtitle{
+	color: black !important;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 'MICEGothic Bold';
+
 }
 
 .review-content {
@@ -35,6 +45,9 @@ h1 {
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	margin-bottom: 30px;
+	width: 600px !important;
+	margin-left: 225px;
+	font-family: 'MICEGothic Bold';
 }
 
 .review-content h2 {
@@ -44,9 +57,29 @@ h1 {
 
 .view-reply {
 	/* 이 부분에 박스의 너비와 높이를 조정하는 스타일을 추가하세요 */
-	width: 100%; /* 예시로 너비를 100%로 설정 */
-	height: 400px; /* 예시로 높이를 400px로 설정 */
+	width: 600px !important; /* 예시로 너비를 100%로 설정 */
+	height: 125px; /* 예시로 높이를 400px로 설정 */
 	/* 필요에 따라 다른 속성도 조정할 수 있습니다 */
+	margin-left: 225px;
+	font-family: 'MICEGothic Bold';
+}
+
+textarea{
+	border-radius: 10px;
+	border: 2px solid #808080;
+	background-color: #fff;
+}
+
+
+.review-reply{
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 30px;
+	width: 600px !important;
+	margin-left: 225px;
+	font-family: 'MICEGothic Bold';
 }
 </style>
 </head>
@@ -113,16 +146,12 @@ h1 {
 	</script>
 
 
-
+	<%@ include file="header.jsp"%>
 
 	<div class="container">
-		<h1>리뷰 상세 페이지</h1>
 
-		<div class="review-content">
-			<h2>제목</h2>
-			<p>${review.rtitle}</p>
-
-			<h2>내용</h2>
+		<div class="review-content">		
+			<h2 class="reviewtitle">${review.rtitle}</h2>
 			<p>${review.rcontent}</p>
 		</div>
 
@@ -136,10 +165,22 @@ h1 {
 			</c:if>
 		</div>
 
+				<!-- 댓글 작성 폼 -->
 
+		<form action="replyWrite.do" method="post" class="view-reply">
+			<input type="hidden" name="memail" value="${sessionScope.member.memail }"> 
+			<input type="hidden" name="rid" value="${review.rid }">
+			
+			<div style="position: relative;">
+		        <textarea name="rrcontent" rows="3" cols="50" style="resize: none; width: 100%;"></textarea>
+		        <input class="summit" type="submit" value="등록" 
+		        	style="position: absolute; bottom: 10px; right: 10px; background-color: #808080;
+		        			border: none; border-radius: 5px; color: white;">
+		    </div>
+		</form>
 
 		
-		<div class="review-content">
+		<div class="review-reply">
 			<!-- 댓글 내용 -->
 			<c:if test="${not empty Rlist}">
 				<table border = "1" align = "center">
@@ -170,20 +211,10 @@ h1 {
 			</c:if>
 		</div>
 		
-		
-
-		<!-- 댓글 작성 폼 -->
-
-		<form action="replyWrite.do" method="post" class="view-reply">
-			<input type="hidden" name="memail" value="${sessionScope.member.memail }"> 
-			<input type="hidden" name="rid" value="${review.rid }">
-			
-			<textarea name="rrcontent" rows="6" cols="50" style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
-			<br> 
-			<input type="submit" value="댓글 작성">
-		</form>
 
 	</div>
+	
+	<%@ include file="footer.jsp"%>
 
 </body>
 </html>
