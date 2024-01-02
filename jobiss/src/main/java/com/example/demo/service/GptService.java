@@ -6,25 +6,38 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.GptDao;
 import com.example.demo.model.GPT;
 import com.example.demo.model.GptCharacter;
 import com.example.demo.model.GptGrow;
+import com.example.demo.model.GptMotive;
+import com.example.demo.model.GptPlan;
 import com.example.demo.model.ReadCount;
 
 @Service
 public class GptService {
-	private static final String api_key = "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"; // api키 하루단위 초기화됨.
+
+	@Value("${openai.model}")
+	private String model;
+
+	@Value("${openai.url}")
+	private String url;
+	
+	@Value("${openai.api_key}")
+	private String api_key;
 
 	@Autowired
 	private GptDao dao;
 
+	/*** GPT 부모글 ***/
 	// 부모 insert
 	public int insertGpt(GPT gpt) {
 		return dao.insertGpt(gpt);
@@ -35,19 +48,30 @@ public class GptService {
 		return dao.selectGptTop(mEmail);
 	}
 
+	// 부모 전체글
+	public List<GPT> selectGptList(String mEmail) {
+		return dao.selectGptList(mEmail);
+	}
+
 	// 부모 시간 최신화
 	public int updateGptReg(int gid) {
 		return dao.updateGptReg(gid);
 	}
 
+	/*** 성장과정 ***/
 	// 성장과정 insert
 	public int insertGptGrow(GptGrow grow) {
 		return dao.insertGptGrow(grow);
 	}
 
+	// 성장과정 gid기준 전체글
+	public List<GptGrow> selectGptGrowGid(int gid) {
+		return dao.selectGptGrowGid(gid);
+	}
+
 	// 성장과정 최신글
-	public GptGrow selectGptGrowTop(int gid) {
-		return dao.selectGptGrowTop(gid);
+	public GptGrow selectGptGrowTop(String memail) {
+		return dao.selectGptGrowTop(memail);
 	}
 
 	// 성장과정 최신화
@@ -55,21 +79,70 @@ public class GptService {
 		return dao.updateGrow(grow);
 	}
 
+	/*** 성격장단점 ***/
 	// 성격장단점 insert
-	public int insertGptCharacter(Character character) {
+	public int insertGptCharacter(GptCharacter character) {
 		return dao.insertGptCharacter(character);
 	}
 
+	// 성격장단점 gid기준 전체글
+	public List<GptCharacter> selectGptCharacterGid(int gid) {
+		return dao.selectGptCharacterGid(gid);
+	}
+
 	// 성격장단점 최신글
-	public GptCharacter selectGptCharacterTop(int gid) {
-		return dao.selectGptCharacterTop(gid);
+	public GptCharacter selectGptCharacterTop(String memail) {
+		return dao.selectGptCharacterTop(memail);
 	}
 
 	// 성격장단점 최신화
-	public int updateCharacter(Character character) {
+	public int updateCharacter(GptCharacter character) {
 		return dao.updateCharacter(character);
 	}
 
+	/*** 지원동기 ***/
+	// 지원동기 insert
+	public int insertGptMotive(GptMotive motive) {
+		return dao.insertGptMotive(motive);
+	}
+
+	// 지원동기 gid기준 전체글
+	public List<GptMotive> selectGptMotiveGid(int gid) {
+		return dao.selectGptMotiveGid(gid);
+	}
+
+	// 지원동기 최신글
+	public GptMotive selectGptMotiveTop(String memail) {
+		return dao.selectGptMotiveTop(memail);
+	}
+
+	// 지원동기 최신화
+	public int updateMotive(GptMotive motive) {
+		return dao.updateMotive(motive);
+	}
+
+	/*** 입사후포부 ***/
+	// 입사후포부 insert
+	public int insertGptPlan(GptPlan plan) {
+		return dao.insertGptPlan(plan);
+	}
+
+	// 성장과정 gid기준 전체글
+	public List<GptPlan> selectGptPlanGid(int gid) {
+		return dao.selectGptPlanGid(gid);
+	}
+
+	// 입사후포부 최신글
+	public GptPlan selectGptPlanTop(String memail) {
+		return dao.selectGptPlanTop(memail);
+	}
+
+	// 입사후포부 최신화
+	public int updatePlan(GptPlan plan) {
+		return dao.updatePlan(plan);
+	}
+
+	/*** 조회수 ***/
 	// 조회수 insert
 	public int insertReadCount(ReadCount readCount) {
 		return dao.insertReadCount(readCount);
@@ -100,29 +173,53 @@ public class GptService {
 	// GPT 질의응답
 	public Map<String, Object> request(JSONObject json) {
 		System.out.println("\n ***** Service_gptRequest ***** \n");
+
+		Map<String, Object> result = new HashMap<String, Object>(); // 리턴객체 (서비스에서 리턴을 하지않기위해)
+
 		// 절대조건
 		final String keyword = json.getString("keyword"); // 유저입력 메시지
 		final String resumeType = json.getString("resumeType"); // 질문유형
-		final String systemContent = "You are the interviewer. and Think step by step, "; // GPT 대전제
+		final String lengthType = json.getString("lengthType"); // 질문유형
+
+		final String systemContent = " you are a job seeker  " + "Let me suggest three conditions. 1=short"
+				+ "2=Only as many characters as given" + "3=long and detailed"
+				+ "Please answer according to the conditions above. and Think step by step Answer in Korean"; // GPT 대전제
+
 		final String startConetnet = " 이력서를 수정할꺼야 내용은"; // 시작점
-
-//		 final String endConetnet = " 에 대한 내용을 수정하고 답변을 한글로 해줘. "; // 끝점
-		final String endConetnet = " 이것에 대한 내용을 수정하고 답변을 한글로 해줘. 답변을 20자 이내로 해줘 "; // 끝점
-
-		Map<String, Object> result = new HashMap<String, Object>(); // 리턴객체 (서비스에서 리턴을 하지않기위해)
+		String endConetnet = ""; // 끝점
 		String userContent = ""; // 최종질문
 		String resultContent = ""; // 최종답변
 
-		if ((keyword.length() > 0) && (resumeType.length() > 0)) {
-			if (resumeType.equals("g")) { // 성장과정을 선택한경우
-				userContent = startConetnet + " 성장과정에 관한 내용이야" + endConetnet;
-			} else if (resumeType.equals("c")) { // 성격의 장단점을 선택한 경우
-				userContent = startConetnet + " 성격의 장단점에 관한 내용이야" + endConetnet;
-			} else if (resumeType.equals("p")) { // 직무역량을 선택한 경우
-				userContent = startConetnet + " 직무역량에 관한 내용이야" + endConetnet;
-			} else if (resumeType.equals("m")) { // 입사지원 동기를 선택한 경우
-				userContent = startConetnet + " 입사 지원동기에 관한 내용이야" + endConetnet;
+		System.out.println("resumeType : " + resumeType);
+		System.out.println("lengthType : " + lengthType);
+		if (lengthType.length() > 0) {
+			switch (lengthType) {
+			case "short":
+				endConetnet += "1=short 에 대한 부족한 부분을 3가지만 지적해줘. 어디가 부족하다거나 어디를 어떻게 고쳐야 한다거나 그런식으로. 내용은 쌍따옴표 안에있어 내 질문은 대답하지마 ";
+				break;
+			case "medium":
+				endConetnet += "2=midium 에 대한 내용을 수정해서 150자 내외로 대답해줘. 부족하다면 채워서 넣어줘. 내용을 쌍따옴표로 묶어준 부분만 수정해줘 ";
+				break;
+			case "long":
+				endConetnet += "3=long 에 대한 내용을 수정해서 200자 내외로 대답해줘. 부족하다면 채워서 넣어줘. 내용을 쌍따옴표로 묶어준 부분만 수정해줘  ";
+				break;
+			case "test":
+				endConetnet += " 20자 이내로만 대답해.";
+				break;
 			}
+
+		}
+		if ((keyword.length() > 0) && (resumeType.length() > 0 && lengthType.length() > 0)) {
+			if (resumeType.equals("g")) { // 성장과정을 선택한경우
+				userContent = startConetnet + " 성장과정에 관한 내용이야 : \"" + keyword + "\"" + endConetnet;
+			} else if (resumeType.equals("c")) { // 성격의 장단점을 선택한 경우
+				userContent = startConetnet + " 성격의 장단점에 관한 내용이야 : \"" + keyword + "\"" + endConetnet;
+			} else if (resumeType.equals("p")) { // 직무역량을 선택한 경우
+				userContent = startConetnet + " 직무역량에 관한 내용이야 : \"" + keyword + "\"" + endConetnet;
+			} else if (resumeType.equals("m")) { // 입사지원 동기를 선택한 경우
+				userContent = startConetnet + " 입사 지원동기에 관한 내용이야 : \"" + keyword + "\"" + endConetnet;
+			}
+			System.out.println("GPT 모델링 : " + systemContent);
 			System.out.println("최종 질문 : " + userContent);
 
 			// GPT 모델링과정
@@ -138,18 +235,19 @@ public class GptService {
 			JSONObject[] messageArray = { messages, userMessage };
 
 			JSONObject data = new JSONObject();
-			data.put("model", "gpt-3.5-turbo");
+			data.put("model", model);
 			data.put("temperature", 0.5);
 			data.put("n", 1);
 			data.put("messages", messageArray);
 
 			HttpClient client = HttpClient.newHttpClient();
-			HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/chat/completions"))
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url))
 					.header("Authorization", "Bearer " + api_key).header("Content-Type", "application/json")
 					.POST(HttpRequest.BodyPublishers.ofString(data.toString())).build();
 
 			try {
 				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+				System.out.println("서비스-직려로하 : " + response.body());
 				JSONObject jsonResponse = new JSONObject(response.body());
 				resultContent = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message")
 						.getString("content");
