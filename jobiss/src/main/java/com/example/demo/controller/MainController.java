@@ -19,10 +19,4 @@ public class MainController {
 		return "common/main";
 	}
 
-
-	@RequestMapping("community.do")
-	public String community() {
-		
-		return "community/communityForm";
-	}
 }

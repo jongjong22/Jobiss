@@ -3,4 +3,13 @@
 
 <mapper namespace="com.example.demo.dao.CommunityDao">
 
+	<!-- 커뮤니티 게시글 인서트 -->
+	<insert id="communityInsert" parameterType="community">
+		insert into community values(null,#{memail},#{ctitle},#{ccontent},#{cimage},0,now(),default)
+	</insert>
+	
+	<!-- 커뮤니티 게시글 전체 구하기 -->
+	<select id="selectCommunityList" resultType="community">
+	    select * from community
+	</select>
 </mapper>
