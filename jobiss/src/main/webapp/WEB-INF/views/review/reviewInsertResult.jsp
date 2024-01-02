@@ -9,7 +9,7 @@
 	<c:if test="${insertResult == 1 }">
 		<script type="text/javascript">
 			alert("글작성 성공!");
-			location.href = "reviewList.do?page=1";
+			location.href = "reviewList.do";
 		</script>
 	</c:if>
 

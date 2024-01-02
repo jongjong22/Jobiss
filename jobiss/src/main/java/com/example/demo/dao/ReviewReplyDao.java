@@ -19,7 +19,6 @@ public interface ReviewReplyDao {
 
 	List<ReviewReply> RgetList(int rid);
 
-	int update(ReviewReply reviewreply);
 
 	int delete(int rrid);
 

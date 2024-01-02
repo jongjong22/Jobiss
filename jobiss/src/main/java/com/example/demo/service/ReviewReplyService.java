@@ -24,10 +24,6 @@ public class ReviewReplyService {
 	}
 
 
-	public int update(ReviewReply reviewreply) {
-		return dao.update(reviewreply);
-	}
-
 	public int delete(int rrid) {
 		
 		return dao.delete(rrid);

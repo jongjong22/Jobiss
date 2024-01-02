@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>리뷰 작성 게시판</title>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="./js/board.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
     <style>
-       	 body {
+		 body {
 	        font-family: Arial, sans-serif;
-	        background-color: rgba(0, 0, 0, 0.7); 
 	        margin: 0;
 	        padding: 0;
-	    }
+	    } 
 
         .layout {
             width: 800px;
@@ -42,7 +43,7 @@
         }
 
         .layout input[type="submit"],
-        .layout input[type="reset"] {
+        .layout input[type="button"] {
             margin-top: 20px;
             padding: 10px 20px;
             border: none;
@@ -66,39 +67,51 @@
             background-color: #45a049;
         }
 
-        .layout input[type="reset"] {
+        .layout input[type="button"] {
             background-color: #f44336;
             color: #fff;
         }
 
-        .layout input[type="reset"]:hover {
+        .layout input[type="button"]:hover {
             background-color: #d32f2f;
         }
         
+/*         
         p{
 		  	margin-top: -3px;
 		  	margin-bottom: -3px;
 		  	font-size: 35px;
 		  	font-family: Alice, Georgia, serif;
 		  	text-align: center;
-		  }
+		  } */
     </style>
 </head>
 
 <body>
+
+<%@ include file="header.jsp"%>
+
     <div class="layout">
         <form action="reviewWrite.do" method="post" enctype="multipart/form-data">
-        	<p>WRITE</p>
             <input name="rtitle" id="rtitle" type="text" placeholder="글 제목">
             <textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
           	<input type="file" id="rsuccess1" name="rsuccess1">	
             <div class="form-actions">
                 <input type="submit" value="등록">
-                <input type="reset" value="취소">
+                <input type="button" onclick="goBack()" value="취소">
+
+				<script>
+					function goBack() {
+						history.go(-1);
+					}
+				</script>
+
             </div>
         </form>
      
      
     </div>
+    
+<%@ include file="footer.jsp"%>
 </body>
 </html>

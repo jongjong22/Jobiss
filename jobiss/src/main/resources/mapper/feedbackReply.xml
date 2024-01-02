@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.FeedbackReplyDao">
+
+
+	<insert id="insert" parameterType="feedbackreply">
+		INSERT
+		INTO feedbackreply
+		VALUES
+		(null, #{fid}, #{memail}, #{frcontent}, now(), default)
+	</insert>
+
+	<select id="FgetList" parameterType="int"
+		resultType="feedbackreply">
+		SELECT *
+		FROM feedbackreply
+		WHERE frdrop = 'N'
+		and fid =
+		#{fid}
+		ORDER BY frreg desc
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from
+		feedbackreply WHERE frdrop = 'N'
+	</select>
+
+	<select id="getBoard" parameterType="int"
+		resultType="feedbackreply">
+		select *
+		from feedbackreply where frid= #{frid}
+	</select>
+
+
+	<update id="delete" parameterType="int">
+		update feedbackreply set
+		frdrop='Y'
+		where frid=#{frid}
+	</update>
+</mapper>

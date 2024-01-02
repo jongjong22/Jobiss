@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,59 +43,55 @@
 	<!-- box1 -->
 
 	<div class="spacer"></div>
-	
+
 	<div class="layout">
-        <table>
-            <!-- <thead>
+		<table>
+			<!-- <thead>
                 <h1 align="center">커뮤니티</h1>
             </thead> -->
-            <tbody>
-               <%--  <c:if test="${not empty list}"> --%>
-                <tr>
-                	<th>조회수</th>
-                    <th>제목</th>
-                    <th>내용</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>이미지</th>
-                </tr>
-                    <%-- <c:forEach var="review" items="${list}" varStatus="loop"> --%>
-                        <tr>
-                        	<td>조회수</td>
-                        	<td><a href="reviewDetails.do">제목</a></td>
-                            <td>내용</td>
-                            <td>작성자</td>
-                            <%-- <fmt:formatDate value="${review.rreg}"
-                                pattern="yyyy년 MM월 dd일" var="date" /> --%>
-                            <td>작성일</td>
-                            <td>이미지</td>
-                        </tr>
-                    <%-- </c:forEach> --%>
-              <%--   </c:if> --%>
-                
-                <%-- <c:if test="${empty list}">
+			<tbody>
+				<%--  <c:if test="${not empty list}"> --%>
+				<tr>
+					<th>조회수</th>
+					<th>제목</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+				<c:forEach var="community" items="${communityList}" varStatus="loop">
+					<tr>
+						<td>${community.creadcount }</td>
+						<td><a href="reviewDetails.do">${community.ctitle }</a></td>
+						<td>${community.ccontent }</td>
+						<td>${community.memail }</td>
+						<td>${community.creg }</td>
+					</tr>
+				</c:forEach>
+				<%--   </c:if> --%>
+
+				<%-- <c:if test="${empty list}">
                 	<h1 style="text-align: center; margin-top: 150px; color:red;">작성된 글이 없습니다.</h1>
                 </c:if> --%>
-            </tbody>
-        </table>
-        <div class="add-review-button">
-            <button onclick="location.href='communityWriteForm.do'">글작성</button>
-            <button onclick="location.href='main.do'">Home</button>
-        </div>
-        <nav aria-label="Page navigation example">
-            <ul>
-                <c:if test="${startPage > 10 }">
-                    <li><a href="reviewList.do?page=${startPage+1 }">이전</a></li>
-                </c:if>
-                <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-                    <li><a href="reviewList.do?page=${pageNum}">${pageNum }</a></li>
-                </c:forEach>
-                <c:if test="${endPage < pageCount}">
-                    <li><a href="reviewList.do?page=${endPage + 1}">다음</a></li>
-                </c:if>
-            </ul>
-        </nav>
-    </div>
+			</tbody>
+		</table>
+		<div class="add-review-button">
+			<button onclick="location.href='communityWriteForm.do'">글작성</button>
+			<button onclick="location.href='main.do'">Home</button>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul>
+				<c:if test="${startPage > 10 }">
+					<li><a href="reviewList.do?page=${startPage+1 }">이전</a></li>
+				</c:if>
+				<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+					<li><a href="reviewList.do?page=${pageNum}">${pageNum }</a></li>
+				</c:forEach>
+				<c:if test="${endPage < pageCount}">
+					<li><a href="reviewList.do?page=${endPage + 1}">다음</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
 
 	<%@ include file="footer.jsp"%>
 </body>

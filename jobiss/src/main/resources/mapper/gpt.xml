@@ -16,6 +16,12 @@
 		gptreg desc limit 1
 	</select>
 
+	<!-- 부모 전체글 -->
+	<select id="selectGptList" resultType="gpt"
+		parameterType="String">
+		select * from gpt where memail = #{memail}
+	</select>
+
 	<!-- 부모 시간 최신화 -->
 	<update id="updateGptReg" parameterType="int">
 		update gpt set gptreg =
@@ -28,10 +34,16 @@
 		values(null, #{gid}, #{memail}, #{gptgcontent}, sysdate() )
 	</insert>
 
+	<!-- 성장과정 특정글 -->
+	<select id="selectGptGrowGid" resultType="gptgrow"
+		parameterType="int">
+		select * from gptgrow where gid=#{gid}
+	</select>
+
 	<!-- 성장과정 최신글 -->
 	<select id="selectGptGrowTop" resultType="gptgrow"
-		parameterType="int">
-		select * from gptgrow where gid = #{gid} order by
+		parameterType="String">
+		select * from gptgrow where memail = #{memail} order by
 		gptgreg desc limit 1
 	</select>
 
@@ -48,23 +60,100 @@
 
 	<!-- 성격장단점 insert -->
 	<insert id="insertGptCharacter" parameterType="gptcharacter">
-		insert into gptcharacter
-		values(null, #{gid}, #{memail}, #{gptccontent}, sysdate() )
+		insert into
+		gptcharacter
+		values(null, #{gid}, #{memail}, #{gptccontent}, sysdate()
+		)
 	</insert>
+
+	<!-- 성격장단점 특정글 -->
+	<select id="selectGptCharacterGid" resultType="gptcharacter"
+		parameterType="int">
+		select * from gptcharacter where gid = #{gid}
+	</select>
 
 	<!-- 성격장단점 최신글 -->
 	<select id="selectGptCharacterTop" resultType="gptcharacter"
-		parameterType="int">
-		select * from gptcharacter where gid = #{gid} order by
+		parameterType="String">
+		select * from gptcharacter where memail = #{memail}
+		order by
 		gptcreg desc limit 1
 	</select>
 
 	<!-- 성격장단점 최신화 -->
 	<update id="updateCharacter" parameterType="gptcharacter">
-		update gptcharacter set
+		update gptcharacter
+		set
 		gid=#{gid}, memail = #{memail},
 		gptccontent = #{gptccontent},
 		gptcreg =
+		sysdate()
+		where gid =
+		#{gid}
+	</update>
+
+	<!-- 지원동기 insert -->
+	<insert id="insertGptMotive" parameterType="gptmotive">
+		insert into
+		gptmotive
+		values(null, #{gid}, #{memail}, #{gptmcontent}, sysdate()
+		)
+	</insert>
+
+	<!-- 지원동기 특정글 -->
+	<select id="selectGptMotiveGid" resultType="gptmotive"
+		parameterType="int">
+		select * from gptmotive where gid = #{gid}
+	</select>
+
+	<!-- 지원동기 최신글 -->
+	<select id="selectGptMotiveTop" resultType="gptmotive"
+		parameterType="String">
+		select * from gptmotive where memail = #{memail} order
+		by
+		gptmreg desc limit 1
+	</select>
+
+	<!-- 지원동기 최신화 -->
+	<update id="updateMotive" parameterType="gptmotive">
+		update gptmotive
+		set
+		gid=#{gid}, memail = #{memail},
+		gptmcontent = #{gptmcontent},
+		gptmreg =
+		sysdate()
+		where gid =
+		#{gid}
+	</update>
+
+	<!-- 입사후포부 insert -->
+	<insert id="insertGptPlan" parameterType="gptplan">
+		insert into
+		gptplan
+		values(null, #{gid}, #{memail}, #{gptpcontent}, sysdate()
+		)
+	</insert>
+
+	<!-- 입사후포부 특정글 -->
+	<select id="selectGptPlanGid" resultType="gptplan"
+		parameterType="int">
+		select * from gptplan where gid= #{gid}
+	</select>
+
+	<!-- 입사후포부 최신글 -->
+	<select id="selectGptPlanTop" resultType="gptplan"
+		parameterType="String">
+		select * from gptplan where memail = #{memail} order by
+		gptpreg desc limit 1
+	</select>
+
+	<!-- 입사후포부 최신화 -->
+	<update id="updatePlan" parameterType="gptplan">
+		update gptplan
+		set
+		gid=#{gid}, memail = #{memail},
+		gptpcontent = #{gptpcontent},
+		gptpreg =
 		sysdate()
 		where gid =
 		#{gid}

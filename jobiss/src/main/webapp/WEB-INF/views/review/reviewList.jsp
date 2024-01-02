@@ -11,44 +11,58 @@
     <title>리뷰게시판 목록</title>
 	
     <style>
+		@font-face {
+		    font-family: 'MICEGothic Bold';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+		    font-weight: 700;
+		    font-style: normal;
+		}
+    
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
+            font-family: 'MICEGothic Bold';
         }
+        
         
         .title{
-        	font-family: "맑은고딕"
+        	font-family: 'MICEGothic Bold';
         }
 
-        .layout {
-            width: 800px;
-            margin: 40px auto;
-        }
+
         
 		.layout {
-			width: 800px;
-			margin: 40px auto;
+		    width: 800px;
+		    margin: 40px auto;
+		    text-align: center; /* Center-align the content within the layout */
+		    font-family: 'MICEGothic Bold';
 		}
 		
 		table {
-			width: 100%;
-			border-collapse: collapse;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			border-radius: 8px;
-			overflow: hidden;
+		    margin: 40px auto; /* Center-align the table within the layout */
+		    width: 800px;
 		}
-		
+				
 		th, td {
+			
 			padding: 12px 15px;
-			text-align: left;
 			border-bottom: 1px solid #ddd;
+			text-align: center;
 		}
 		
 		th {
-			background-color: #f2f2f2;
+			background-color: #fff;
+			text-align: center !important;
+			font-size: 20px;
 		}
+		
+		td{
+			font-size: 15px;
+		}
+		
+
 		
 		tbody tr:hover {
 			background-color: #f9f9f9;
@@ -90,6 +104,7 @@
 
 <body class="home">
 	<%@ include file="header.jsp" %>
+	
     <div class="layout">
         <table>
             <thead>

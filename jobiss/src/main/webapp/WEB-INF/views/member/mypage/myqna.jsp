@@ -9,6 +9,13 @@
 <link rel="stylesheet" type="text/css" href="css/myqna.css">
 <title>마이페이지</title>
 <style>
+	@font-face {
+		font-family: 'MICEGothic Bold';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+		font-weight: 700;
+		font-style: normal;
+	}
+	
 .page>a {
 	color: black;
 }
@@ -16,19 +23,24 @@
 .page>a:hover {
 	background-color: transparent;
 }
+
+ a{
+   	font-size: 15px;
+   }
+   
 </style>
 </head>
 <body>
-	<div class="mypage_big">
+	<div class="mypage_big" style="font-family: 'MICEGothic Bold';">
 		<h1>마이페이지</h1>
 		<nav>
 			<ul>
-				<li><a href="main.do">홈</a></li>
-            <li><a href="mypage.do?&&memail=${member.memail }">내가 쓴 자기소개서</a></li>
-            <li><a href="myreview.do?&&memail=${member.memail }">내가 쓴 리뷰</a></li>
-            <li><a href="myqna.do?&&memail=${member.memail }">내가 쓴 QnA</a></li>
-            <li><a href="myfeedback.do?&&memail=${member.memail }">내가 쓴 FEEDBACK</a></li>
-            <li><a href="mycommunity.do?&&memail=${member.memail }">내가 쓴 커뮤니티</a></li>
+				<li><a href="main.do">HOME</a></li>
+            <li><a href="mypage.do?&&memail=${member.memail }">MY 자기소개서</a></li>
+            <li><a href="myreview.do?&&memail=${member.memail }">MY 리뷰</a></li>
+            <li><a href="myqna.do?&&memail=${member.memail }">MY QnA</a></li>
+            <li><a href="myfeedback.do?&&memail=${member.memail }">MY FEEDBACK</a></li>
+            <li><a href="mycommunity.do?&&memail=${member.memail }">MY 커뮤니티</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
             <li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
