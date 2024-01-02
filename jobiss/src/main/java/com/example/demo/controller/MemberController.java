@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Community;
 import com.example.demo.model.FeedBack;
+import com.example.demo.model.GptCharacter;
+import com.example.demo.model.GptGrow;
+import com.example.demo.model.GptMotive;
+import com.example.demo.model.GptPlan;
 import com.example.demo.model.Member;
+import com.example.demo.model.PersonalStatement;
 import com.example.demo.model.QnA;
 import com.example.demo.model.Review;
 import com.example.demo.service.MemberService;
@@ -141,17 +146,48 @@ public class MemberController {
 		}
 	}
 
-	// 마이페이지 이동
+	// 마이페이지 이동( 자기소개서)
 	@RequestMapping("mypage.do")
-	public String mypage(Model model, HttpSession session) {
+	public String mypage(Model model, HttpSession session,GptGrow gg,GptMotive gm,
+							GptPlan gp,PersonalStatement ps,GptCharacter gc) {
 
 		Member member = (Member) session.getAttribute("member");
 
 		String memail = member.getMemail();
 
 		System.out.println("memail: " + memail);
-
+		
+		// 이력서 select
+		ps = service.psselect(memail);
+		
+		// 성장과정 최근 글 2개 
+		List<GptGrow> gglist = service.ggselect(memail);
+		
+		// 성격장단점 최근 글 2개
+		List<GptCharacter> gclist = service.gcselect(memail);
+		
+		// 지원동기 최근 글 2개
+		List<GptMotive> gmlist = service.gmselect(memail);
+		
+		// 입사후포부 최근 글 2개
+		List<GptPlan> gplist = service.gpselect(memail);
+		
+		System.out.println("gglist 최신글:" + gglist);
+		System.out.println("gclist 최신글:" + gclist);
+		System.out.println("gmlist 최신글:" + gmlist);
+		System.out.println("gplist 최신글:" + gplist);
+		
+		
+		
+		
 		model.addAttribute("memail", memail);
+		model.addAttribute("ps", ps);		
+		model.addAttribute("gglist", gglist);
+		model.addAttribute("gclist", gclist);
+		model.addAttribute("gmlist", gmlist);
+		model.addAttribute("gplist", gplist);
+		
+		
 		return "member/mypage/mypage";
 	}
 

@@ -93,7 +93,31 @@
 	<select id="cselect" resultType="community" parameterType="map">
 		select * from community where memail = #{memail} and cdrop = 'N'
 		order by creg desc 
-		limit #{start}, 10;
+		limit #{start}, 10
 	</select>
-
+	
+	<!-- 이력서 select(memail)  -->
+	<select id="psselect" resultType="personalstatement">
+		select * from personalstatement where memail = #{memail}
+	</select>	
+	
+	<!-- 성장과정 select(memail) 최근 글 -->
+	<select id="ggselect" resultType="gptgrow" parameterType="list">
+		select * from gptgrow where memail = #{memail} order by gptgid desc limit 2
+	</select>
+	
+	<!-- 성격장단점 select(memail) 최근 글 -->
+	<select id="gcselect" resultType="gptcharacter" parameterType="list">
+		select * from gptcharacter where memail = #{memail} order by gptcid desc limit 2
+	</select>
+	
+	<!-- 지원동기 select(memail) 최근 글  -->
+	<select id="gmselect" resultType="gptmotive" parameterType="list">
+		select * from gptmotive where memail = #{memail} order by gptmid desc limit 2
+	</select>
+	
+	<!-- 입사후포부 select(memail) 최근 글 -->
+	<select id="gpselect" resultType="gptplan" parameterType="list">
+		select * from gptplan where memail = #{memail} order by gptpid desc limit 2
+	</select>
 </mapper>

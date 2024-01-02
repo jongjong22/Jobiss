@@ -7,7 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.Community;
 import com.example.demo.model.FeedBack;
+import com.example.demo.model.GptCharacter;
+import com.example.demo.model.GptGrow;
+import com.example.demo.model.GptMotive;
+import com.example.demo.model.GptPlan;
 import com.example.demo.model.Member;
+import com.example.demo.model.PersonalStatement;
 import com.example.demo.model.QnA;
 import com.example.demo.model.Review;
 
@@ -49,6 +54,21 @@ public interface MemberDao {
 	
 	// 커뮤니티 가져오기 
 	List<Community> cselect(Map map);
+	
+	//  이력서 select
+	PersonalStatement psselect(String memail);
+	
+	//  성장과정 최근 글 select
+	List<GptGrow> ggselect(String memail);
+	
+	//  성격장단점 최근 글 select 
+	List<GptCharacter> gcselect(String memail);
+	
+	// 지원동기 최근 글 select
+	List<GptMotive> gmselect(String memail);
+	
+	// 입사후포부 최근 글 select
+	List<GptPlan> gpselect(String memail);
 	
 	
 
