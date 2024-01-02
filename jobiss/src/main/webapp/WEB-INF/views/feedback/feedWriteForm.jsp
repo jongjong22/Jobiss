@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>리뷰 작성 게시판</title>
+    <title>피드백 작성 게시판</title>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="./js/board.js"></script>
     <style>
@@ -87,14 +87,13 @@
 
 <body>
     <div class="layout">
-        <form action="reviewWrite.do" method="post" enctype="multipart/form-data">
+        <form action="FeedWrite.do" method="post">
         	<p>WRITE</p>
-            <input name="rtitle" id="rtitle" type="text" placeholder="글 제목">
-            <textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
-          	<input type="file" id="rsuccess1" name="rsuccess1">	
+            <input name="ftitle" id="ftitle" type="text" placeholder="글 제목">
+            <textarea name="fcontent" id="fcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
             <div class="form-actions">
                 <input type="submit" value="등록">
-                <input type="button" onclick="goBack()" value="취소">
+            	<input type="button" onclick="goBack()" value="취소">
 
 				<script>
 					function goBack() {

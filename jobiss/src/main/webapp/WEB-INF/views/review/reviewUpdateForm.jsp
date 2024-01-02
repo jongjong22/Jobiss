@@ -41,7 +41,7 @@ body {
 	font-size: 14px;
 }
 
-.layout input[type="submit"], .layout input[type="reset"] {
+.layout input[type="submit"], .layout input[type="button"] {
 	margin-top: 20px;
 	padding: 10px 20px;
 	border: none;
@@ -60,12 +60,12 @@ body {
 	background-color: #45a049;
 }
 
-.layout input[type="reset"] {
+.layout input[type="button"] {
 	background-color: #f44336;
 	color: #fff;
 }
 
-.layout input[type="reset"]:hover {
+.layout input[type="button"]:hover {
 	background-color: #d32f2f;
 }
 </style>
@@ -82,11 +82,15 @@ body {
 			
 			<textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용" >${review.rcontent}</textarea>
 				
-			<input type="file" id="rsuccess" name="rsuccess">
-			
 			<div class="form-actions">
 				<input type="submit" value="수정">
-				<input type="reset" value="취소">
+					<input type="button" onclick="goBack()" value="취소">
+
+				<script>
+					function goBack() {
+						history.go(-1);
+					}
+				</script>
 			</div>
 		</form>
 	</div>

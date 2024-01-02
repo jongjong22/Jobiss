@@ -9,7 +9,7 @@
 	<c:if test="${updateResult == 1 }">
 		<script type="text/javascript">
 			alert("글수정 성공!");
-			location.href = "reviewList.do?page=1";
+			location.href = "reviewDetails.do?rid="+${review.rid};
 		</script>
 	</c:if>
 

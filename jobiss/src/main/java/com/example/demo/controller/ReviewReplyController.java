@@ -39,37 +39,6 @@ public class ReviewReplyController {
 
 
 
-	// 댓글 수정
-	@RequestMapping("replyUpdate.do")
-	public String replyUpdate(ReviewReply reviewreply, int rrid, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session, Model model) {
-
-
-		int updateResult = 0;
-		
-		ReviewReply db = service.getBoard(reviewreply.getRrid());
-		
-		Member member = (Member) session.getAttribute("member"); // session에서 member가져와서 member변수에 넣어줌 ~
-		
-		String id = member.getMemail(); // 멤버에 있는 이메일 가져옴 !
-
-		String emailFromDB = db.getMemail(); // db에 있는 이메일 가져옴
-
-		if(id.equals(emailFromDB)) {
-		    updateResult = service.update(reviewreply);
-		} else {
-		    updateResult = -1;
-		}
-
-		
-		model.addAttribute("page",page);
-		model.addAttribute("updateResult",updateResult);
-		model.addAttribute("reviewply",reviewreply);
-		
-		
-		return "review/reviewDetails";
-
-	}
-
 	// 댓글 삭제
 	@RequestMapping("replyDelete.do")
 	@ResponseBody

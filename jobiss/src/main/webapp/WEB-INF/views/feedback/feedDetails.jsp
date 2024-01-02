@@ -55,7 +55,7 @@ h1 {
 	<%@ include file="header.jsp" %>
 	
 	<script>
-		function deletereview(rid) {
+		function deletefeedback(fid) {
 		
 			var confirmDelete = confirm("진짜 삭제하시겠습니까?");
 		    console.log("confirmDelete :" + confirmDelete);
@@ -63,14 +63,14 @@ h1 {
 			if (confirmDelete) {
 				$.ajax({
 					type : "POST",
-					url : "reviewDelete.do",
+					url : "FeedbackDelete.do",
 					data : {
-						"rid" : rid
+						"fid" : fid
 					},
 					success : function(response) {
 						if (response === "Y") {
 							alert("글 삭제가 되었습니다.");
-							location.href = "reviewList.do";
+							location.href = "FeedbackList.do";
 						} else {
 							alert("삭제에 실패했습니다.");
 						}
@@ -83,22 +83,21 @@ h1 {
 			}
 		}
 		
-		function deletereviewreply(rrid,rid) {
+		function deletefeedbackreply(frid,fid) {
 			
-			var confirmDelete1 = confirm("진짜 삭제하시겠습니까?");
-		    console.log("confirmDelete1 : " + confirmDelete1);
+			var confirmDelete2 = confirm("진짜 삭제하시겠습니까?");
 
-			if (confirmDelete1) {
+			if (confirmDelete2) {
 				$.ajax({
 					type : "POST",
-					url : "replyDelete.do",
+					url : "feedReplyDelete.do",
 					data : {
-						"rrid" : rrid
+						"frid" : frid
 					},
 					success : function(response) {
 						if (response === "Y") {
 							alert("글 삭제가 되었습니다.");
-							location.href = "reviewDetails.do?rid=" +rid;
+							location.href = "FeedDetails.do?fid="+fid;
 						} else {
 							alert("삭제에 실패했습니다.");
 						}
@@ -117,22 +116,22 @@ h1 {
 
 
 	<div class="container">
-		<h1>리뷰 상세 페이지</h1>
+		<h1>피드백 상세 페이지</h1>
 
 		<div class="review-content">
 			<h2>제목</h2>
-			<p>${review.rtitle}</p>
+			<p>${feedback.ftitle}</p>
 
 			<h2>내용</h2>
-			<p>${review.rcontent}</p>
+			<p>${feedback.fcontent}</p>
 		</div>
 
 		<div class="action-buttons">
-			<c:if test="${member.memail eq review.memail }">
+			<c:if test="${member.memail eq feedback.memail }">
 				<input type="button"
-					onclick="location.href='reviewUpdateForm.do?rid=${review.rid}'"
+					onclick="location.href='FeedUpdateForm.do?fid=${feedback.fid}'"
 					value="글 수정">
-				<input type="button" onclick="deletereview(${review.rid})"
+				<input type="button" onclick="deletefeedback(${feedback.fid})"
 					value="글 삭제">
 			</c:if>
 		</div>
@@ -142,7 +141,7 @@ h1 {
 		
 		<div class="review-content">
 			<!-- 댓글 내용 -->
-			<c:if test="${not empty Rlist}">
+			<c:if test="${not empty Flist}">
 				<table border = "1" align = "center">
 					<tr>
 						<th>내용</th>
@@ -150,40 +149,40 @@ h1 {
 						<th>작성일</th>
 						<th>삭제 버튼</th>
 					</tr>
-					<c:forEach var="reviewreply" items="${Rlist}" varStatus="loop">
+					<c:forEach var="feedbackreply" items="${Flist}" varStatus="loop">
 						<tr>
-							<c:if test="${member.memail ne reviewreply.memail }">
-							<td>${reviewreply.rrcontent }</td>
+							<c:if test="${member.memail ne feedbackreply.memail }">
+							<td>${feedbackreply.frcontent }</td>
 							</c:if>
-							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="text" value="${reviewreply.rrcontent}"></td>
+							<c:if test="${member.memail eq feedbackreply.memail }">
+							<td><input type="text" value="${feedbackreply.frcontent}"></td>
 							</c:if>
-							<td>${reviewreply.memail }</td>
-							<fmt:formatDate value="${reviewreply.rrreg}"
-								pattern="yyyy년 MM월 dd일" var="date" />
+							<td>${feedbackreply.memail }</td>
+							<fmt:formatDate value="${feedbackreply.frreg}"
+								pattern="yyyy년 MM월 dd일" var="date" /> 
 							<td>${date}</td>
-							<c:if test="${member.memail eq reviewreply.memail }">
+							<c:if test="${member.memail eq feedbackreply.memail }">
 							<td><input type="button"
-									onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
+									onclick="deletefeedbackreply(${feedbackreply.frid}, ${feedback.fid})" value="댓글 삭제"></td>
 							</c:if>
-						</tr>
+						</tr> 
 					</c:forEach>
-				</table>
+ 				</table> 
 			</c:if>
-		</div>
+		</div> 
 		
 		
 
-		<!-- 댓글 작성 폼 -->
+ 		<!-- 댓글 작성 폼 --> 
 
-		<form action="replyWrite.do" method="post" class="view-reply">
+ 		<form action="feedReplyWrite.do" method="post" class="view-reply"> 
 			<input type="hidden" name="memail" value="${sessionScope.member.memail }"> 
-			<input type="hidden" name="rid" value="${review.rid }">
+			<input type="hidden" name="fid" value="${feedback.fid }">
 			
-			<textarea name="rrcontent" rows="6" cols="50" style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
-			<br> 
-			<input type="submit" value="댓글 작성">
-		</form>
+			<textarea name="frcontent" rows="6" cols="50" style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea> 
+			<br>  
+ 			<input type="submit" value="댓글 작성"> 
+		</form> 
 
 	</div>
 
