@@ -6,14 +6,14 @@
 <html lang="en">
 
 <body>
-	<c:if test="${insertResult == 1 }">
+	<c:if test="${FeedInsertResult == 1 }">
 		<script type="text/javascript">
 			alert("글작성 성공!");
-			location.href = "reviewList.do";
+			location.href = "FeedbackList.do";
 		</script>
 	</c:if>
 
-	<c:if test="${insertResult != 1 }">
+	<c:if test="${FeedInsertResult != 1 }">
 		<script type="text/javascript">
 			alert("글 작성 실패");
 			history.go(-1);

@@ -8,14 +8,14 @@
 <body>
 	<c:if test="${insertResult == 1 }">
 		<script type="text/javascript">
-			alert("글작성 성공!");
-			location.href = "reviewList.do";
+			alert("댓글작성 성공!");
+			location.href = "FeedDetails.do?fid="+${fid};
 		</script>
 	</c:if>
 
 	<c:if test="${insertResult != 1 }">
 		<script type="text/javascript">
-			alert("글 작성 실패");
+			alert("댓글 작성 실패");
 			history.go(-1);
 		</script>
 	</c:if>

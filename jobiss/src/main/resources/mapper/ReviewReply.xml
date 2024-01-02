@@ -27,11 +27,6 @@
 		from reviewreply where rrid= #{rrid}
 	</select>
 
-	<update id="update" parameterType="reviewreply">
-		UPDATE reviewreply set
-		rrcontent = #{rrcontent},
-		WHERE rrid = #{rrid}
-	</update>
 
 	<update id="delete" parameterType="int">
 		update reviewreply set rrdrop='Y' 

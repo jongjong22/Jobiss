@@ -85,7 +85,8 @@ textarea{
 </head>
 <body>
 
-
+	<%@ include file="header.jsp" %>
+	
 	<script>
 		function deletereview(rid) {
 		
@@ -120,7 +121,7 @@ textarea{
 			var confirmDelete1 = confirm("진짜 삭제하시겠습니까?");
 		    console.log("confirmDelete1 : " + confirmDelete1);
 
-			if (confirmDelete) {
+			if (confirmDelete1) {
 				$.ajax({
 					type : "POST",
 					url : "replyDelete.do",
@@ -188,20 +189,21 @@ textarea{
 						<th>내용</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>수정 버튼</th>
 						<th>삭제 버튼</th>
 					</tr>
 					<c:forEach var="reviewreply" items="${Rlist}" varStatus="loop">
 						<tr>
+							<c:if test="${member.memail ne reviewreply.memail }">
 							<td>${reviewreply.rrcontent }</td>
+							</c:if>
+							<c:if test="${member.memail eq reviewreply.memail }">
+							<td><input type="text" value="${reviewreply.rrcontent}"></td>
+							</c:if>
 							<td>${reviewreply.memail }</td>
 							<fmt:formatDate value="${reviewreply.rrreg}"
 								pattern="yyyy년 MM월 dd일" var="date" />
 							<td>${date}</td>
 							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="button"
-									onclick="location.href='replyUpdate.do?rrid=${reviewreply.rrid}'"
-									value="댓글 수정"></td>
 							<td><input type="button"
 									onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
 							</c:if>

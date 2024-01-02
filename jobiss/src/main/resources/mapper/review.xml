@@ -34,8 +34,7 @@
 	<update id="update" parameterType="review">
 		UPDATE review
 		SET rtitle = #{rtitle},
-		rcontent = #{rcontent},
-		rsuccess = #{rsuccess}
+		rcontent = #{rcontent}
 		WHERE rid = #{rid}
 	</update>
 
