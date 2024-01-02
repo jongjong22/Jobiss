@@ -1,0 +1,57 @@
+.container_main {
+	max-width: 80%;
+	padding: 20px;
+	background-color: #ffefef;
+	font-size: 30px;
+	margin: 0 auto; /* 수평 가운데 정렬 */
+}
+
+.table_qRequest, .table_cRequest {
+	margin-bottom: 60px;
+	padding: 30px;
+	background-color: #f5f0e1; /* 부드러운 파스텔톤 배경 */
+	border-radius: 15px;
+	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	align-items: center;
+}
+
+th, td {
+	font-size: 30px;
+	margin-bottom: 20px;
+	color: #333;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+	font-style: italic;
+	text-align: center;
+}
+
+/* 텍스트 에어리어 스타일 */
+textarea {
+	width: calc(100% - 20px); /* 전체 너비에서 padding 값 제외 */
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: vertical; /* 수직 리사이즈만 가능하도록 설정 */
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+/* 버튼 스타일 */
+button {
+	padding: 8px 16px;
+	border: none;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #0056b3;
+}

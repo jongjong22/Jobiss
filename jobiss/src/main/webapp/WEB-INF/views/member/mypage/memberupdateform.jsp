@@ -11,7 +11,19 @@
 
 <title>회원수정</title>
 
-
+<style>
+	@font-face {
+		font-family: 'MICEGothic Bold';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+		font-weight: 700;
+		font-style: normal;
+	}
+	
+	a{
+   	font-size: 15px;
+   	}
+   	
+</style>
 
 
 <script>
@@ -34,16 +46,16 @@
 <body>
 	<input type="hidden" id="dbgender" value="${member.mgender }">
 
-	<div class="mypage_big">
+	<div class="mypage_big" style="font-family: 'MICEGothic Bold';">
 		<h1>마이페이지</h1>
 		<nav>
 			<ul>
-				<li><a href="main.do">홈</a></li>
-				<li><a href="mypage.do">내가 쓴 자기소개서</a></li>
-				<li><a href="myreview.do">내가 쓴 리뷰</a></li>
-				<li><a href="myqna.do">내가 쓴 QnA</a></li>
-				<li><a href="myfeedback.do">내가 쓴 FEEDBACK</a></li>
-				<li><a href="mycommunity.do">내가 쓴 커뮤니티</a></li>
+				<li><a href="main.do">HOME</a></li>
+				<li><a href="mypage.do">MY 자기소개서</a></li>
+				<li><a href="myreview.do">MY 리뷰</a></li>
+				<li><a href="myqna.do">MY QnA</a></li>
+				<li><a href="myfeedback.do">MY FEEDBACK</a></li>
+				<li><a href="mycommunity.do">MY 커뮤니티</a></li>
 				<li><a href="memberupdate.do">회원정보수정</a></li>
 				<li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>

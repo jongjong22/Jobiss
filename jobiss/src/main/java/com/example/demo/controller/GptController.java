@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,55 +21,129 @@ import com.example.demo.model.GptCharacter;
 import com.example.demo.model.GptGrow;
 import com.example.demo.model.GptMotive;
 import com.example.demo.model.GptPlan;
+import com.example.demo.model.Member;
 import com.example.demo.model.ReadCount;
 import com.example.demo.service.GptService;
 
 @Controller
 public class GptController {
-	private final static String memail = "master";
+	private static String memail;
 
 	@Autowired
 	private GptService gs;
 
+	// 로딩시 session 동시 초기화
+	public static void loading(HttpSession session) {
+		System.out.println("\n ***** gptLoading 시작 ***** \n");
+		Member member = (Member) session.getAttribute("member");
+
+		System.out.println("로딩 전 memail : " + memail);
+		if (member != null)
+			memail = member.getMemail();
+
+		else
+			memail = "master";
+		System.out.println("로딩 !null 변경 : " + memail);
+		System.out.println("로딩 null 변경 : " + memail);
+		System.out.println("\n ***** gptLoading 끝 ***** \n");
+
+	}
+
 	@RequestMapping("/gptMain")
 	public String gptMain(String mainMsg, Model model, HttpSession session) {
 		System.out.println("\n ***** gptMain 시작 ***** \n");
-		//  memail = (String) session.getAttribute("mEMail");
+		loading(session);
+
+		List<GPT> gptList = new ArrayList<GPT>();
+		List<Integer> gidList = new ArrayList<Integer>();
+
+		System.out.println("memail : " + memail);
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
+
 		GptGrow grow = new GptGrow();
 		GptCharacter character = new GptCharacter();
+		GptMotive motive = new GptMotive();
+		GptPlan plan = new GptPlan();
+
+		gptList = gs.selectGptList(memail);
+		int i = 0;
+		for (GPT gpt : gptList) {
+			gidList.add(gpt.getGid());
+		}
+		;
+		System.out.println("gid갯수 : " + gidList.size());
+
 		int gid = 0;
 		System.out.println("grow : " + grow.getGid());
 		System.out.println("character : " + character.getGid());
 		// 처음작성이 아닐때 : 부모글번호 초기화, 하위 4개 dto초기화
 		if (gptTop != null) {
 			gid = gptTop.getGid();
-			grow = gs.selectGptGrowTop(gid);
-			character = gs.selectGptCharacterTop(gid);
-
+			grow = gs.selectGptGrowTop(memail);
+			character = gs.selectGptCharacterTop(memail);
+			motive = gs.selectGptMotiveTop(memail);
+			plan = gs.selectGptPlanTop(memail);
 		}
 
 		if (grow == null)
 			grow = new GptGrow();
 		if (character == null)
 			character = new GptCharacter();
+		if (motive == null)
+			motive = new GptMotive();
+		if (plan == null)
+			plan = new GptPlan();
 		if (mainMsg == null)
 			mainMsg = "";
 		System.out.println("grow : " + grow.getGid());
 		System.out.println("character : " + character.getGid());
+		System.out.println("motive : " + motive.getGid());
+		System.out.println("plan : " + plan.getGid());
 		System.out.println("mainMsg : " + mainMsg);
+		System.out.println("gid갯수 : " + gidList.size());
+
 		model.addAttribute("grow", grow);
 		model.addAttribute("character", character);
+		model.addAttribute("motive", motive);
+		model.addAttribute("plan", plan);
+		model.addAttribute("mainMsg", mainMsg);
+		model.addAttribute("gidList", gidList);
 		System.out.println("\n ***** gptMain 끝 ***** \n");
-		
+
 		return "gpt/gptMain";
+	}
+
+	@RequestMapping("/gptHistory")
+	public String gptHistory(int gid, HttpSession session, Model model) {
+		System.out.println("\n ***** gptHistory ***** \n ");
+		loading(session);
+		System.out.println("gid : " + gid);
+
+		List<GptGrow> growList = gs.selectGptGrowGid(gid);
+		List<GptCharacter> characterList = gs.selectGptCharacterGid(gid);
+		List<GptMotive> motiveList = gs.selectGptMotiveGid(gid);
+		List<GptPlan> planList = gs.selectGptPlanGid(gid);
+
+		System.out.println("growList갯수 : " + growList.size());
+		System.out.println("characterList갯수 : " + characterList.size());
+		System.out.println("motiveList갯수 : " + motiveList.size());
+		System.out.println("planList갯수 : " + planList.size());
+
+		model.addAttribute("growList", growList);
+		model.addAttribute("characterList", characterList);
+		model.addAttribute("motiveList", motiveList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("gid", "" + gid);
+
+		System.out.println("\n ***** Controller_gptHistory ***** 끝\n");
+		return "gpt/gptHistory";
 	}
 
 	@ResponseBody
 	@RequestMapping("/gptRequest")
 	public Map<String, Object> gptRequest(@RequestBody String jString, HttpSession session) {
 		System.out.println("\n ***** gptRequest ***** \n ");
-		// mEmail = (String) session.getAttribute("mEMail");
+		loading(session);
 		System.out.println("mEmail : " + memail);
 
 		JSONObject json = new JSONObject(jString);
@@ -81,8 +157,12 @@ public class GptController {
 	public String gptSelect(String resumeType, GptGrow grow, GptCharacter character, GptMotive motive, GptPlan plan,
 			Model model, HttpSession session, HttpServletRequest request) {
 		System.out.println("\n ***** gptSelect ***** \n ");
+		System.out.println("mEmail : " + memail);
 		System.out.println("resumeType : " + resumeType);
 		System.out.println("getGptgcontent : " + grow.getGptgcontent());
+		System.out.println("getGptgcontent : " + character.getGptccontent());
+		System.out.println("getGptgcontent : " + motive.getGptmcontent());
+		System.out.println("getGptgcontent : " + plan.getGptpcontent());
 		GptGrow gptGrowTop;
 		GptCharacter gptCharacterTop;
 		GptMotive gptMotiveTop;
@@ -94,7 +174,6 @@ public class GptController {
 
 		Timestamp oldTime, newTime = new Timestamp(System.currentTimeMillis());
 		System.out.println("gid : " + gid);
-		// String mEmail = (String) session.getAttribute("mEMail");
 		System.out.println("mEmail : " + memail);
 
 		// resumeType의 값이있고, 종류상관없이 Content가 있을경우.
@@ -134,10 +213,10 @@ public class GptController {
 
 		}
 		System.out.println("gid 스위치 : " + gid);
-		gptGrowTop = gs.selectGptGrowTop(gid);
-//		gptCharacterTop = gs.selectGptCharacterTop(gid);
-//		gptMotiveTop = gs.selectGptMotiveTop(gid);
-//		gptPlanTop = gs.selectGptPlanTop(gid);
+		gptGrowTop = gs.selectGptGrowTop(memail);
+		gptCharacterTop = gs.selectGptCharacterTop(memail);
+		gptMotiveTop = gs.selectGptMotiveTop(memail);
+		gptPlanTop = gs.selectGptPlanTop(memail);
 
 		// gptTop의 값이있고, 종류상관없이 Content가 있을경우.
 		if ((gptTop != null)
@@ -145,73 +224,82 @@ public class GptController {
 						|| motive.getGptmcontent() != null || plan.getGptpcontent() != null))) {
 
 			switch (resumeType) {
-			case "g":
+			case "g": {
 				System.out.println("스위치_grow");
-				if (gptGrowTop == null) { // 첫 선택이라면.
-					grow.setGid(gid);
-					grow.setMemail(memail);
-					iResult = gs.insertGptGrow(grow); // 첫 선택이라면 insert 수행
-					System.out.println("result : " + iResult);
-					System.out.println("첫질문 gid : " + gptTop.getGid());
-					gs.updateGptReg(gid);
-					System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
+				grow.setMemail(memail);
+				grow.setGid(gid);
+				System.out.println("인서트 전 gid : " + grow.getGid());
+				iResult = gs.insertGptGrow(grow);
+				System.out.println("인서트 후 gid : " + gs.selectGptGrowTop(memail).getGid());
+				System.out.println("insert : " + iResult);
+				System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
+				gs.updateGptReg(gid);
 
-					if (iResult == 1) // insert true
-						model.addAttribute("grow", grow);
-					else // insert false
-						model.addAttribute("msg", "등록 실패.");
-				} else if (gptGrowTop != null) { // 둘째 선택이라면.
-					grow.setGid(gid);
-					grow.setMemail(memail);
-					iResult = gs.updateGrow(grow); // 둘째 선택이라면 update 수행
-					System.out.println("result : " + iResult);
+				if (iResult == 1) // insert true
+					model.addAttribute("grow", grow);
+				else // insert false
+					model.addAttribute("msg", "등록 실패.");
 
-					System.out.println("둘째질문 gid : " + gptTop.getGid());
-					System.out.println("업데이트 전 시간 : " + gptTop.getGptreg());
-					gs.updateGptReg(gid);
-					System.out.println("업데이트 후 시간 : " + gs.selectGptTop(memail).getGptreg());
+				// grow의 끝
+				break;
+			}
+			case "c": {
+				System.out.println("스위치_character");
+				character.setMemail(memail);
+				character.setGid(gid);
+				System.out.println("인서트 전 gid : " + gptTop.getGid());
+				iResult = gs.insertGptCharacter(character);
+				System.out.println("인서트 후 gid : " + gs.selectGptCharacterTop(memail).getGid());
+				System.out.println("result : " + iResult);
+				System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
+				gs.updateGptReg(gid);
 
-					if (iResult == 1) // update true
-						model.addAttribute("grow", grow);
+				if (iResult == 1) // insert true
+					model.addAttribute("character", character);
+				else // insert false
+					model.addAttribute("msg", "등록 실패.");
 
-					else // update false
-						model.addAttribute("msg", "등록 실패.");
+				// character의 끝
+				break;
+			}
+			case "m": {
+				System.out.println("스위치_motive");
+				motive.setMemail(memail);
+				motive.setGid(gid);
+				System.out.println("인서트 전 gid : " + gptTop.getGid());
+				iResult = gs.insertGptMotive(motive);
+				System.out.println("인서트 후 gid : " + gs.selectGptMotiveTop(memail).getGid());
+				System.out.println("result : " + iResult);
+				System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
+				gs.updateGptReg(gid);
 
-				}
+				if (iResult == 1) // insert true
+					model.addAttribute("motive", motive);
+				else // insert false
+					model.addAttribute("msg", "등록 실패.");
 
-				/*
-				 * case "c": System.out.println("스위치_Character"); if (gptCharacterTop == null) {
-				 * // 첫 선택이라면. iResult = gs.insertGptCharacter(character); // 첫 선택이라면 insert 수행
-				 * System.out.println("result : " + iResult); System.out.println("첫질문 gid : " +
-				 * gptTop.getGid()); gs.updateGptReg(gid); System.out.println("인설트 시간 : " +
-				 * gs.selectGptTop(memail).getGptreg());
-				 * 
-				 * character.setGid(gid); character.setMemail(memail);
-				 * 
-				 * if (iResult == 1) // insert true mainList.put("character", character); else
-				 * // insert false mainList.put("msg", "등록 실패.");
-				 * 
-				 * } else if (gptCharacterTop != null) { // 둘째 선택이라면. character.setGid(gid);
-				 * character.setMemail(memail); iResult = gs.updateCharacter(character); // 둘째
-				 * 선택이라면 update 수행 System.out.println("result : " + iResult);
-				 * 
-				 * System.out.println("둘째질문 gid : " + gptTop.getGid());
-				 * System.out.println("업데이트 전 시간 : " + gptTop.getGptreg());
-				 * gs.updateGptReg(gid); System.out.println("업데이트 후 시간 : " +
-				 * gs.selectGptTop(memail).getGptreg());
-				 * 
-				 * if (iResult == 1) // update true mainList.put("character", character);
-				 * 
-				 * else // update false mainList.put("msg", "등록 실패.");
-				 * 
-				 * }
-				 */
-				// readCount 처리문
-				ReadCount readCount = gs.selectReadCountTop();
-				if (readCount == null) // readCount가 있다면
-					gs.insertReadCount(readCount);
-				readCount = gs.selectReadCountTop();
-				gs.readCountPlus(readCount, resumeType);
+				// motive의 끝
+				break;
+			}
+			case "p": {
+				System.out.println("스위치_plan");
+				plan.setMemail(memail);
+				plan.setGid(gid);
+				System.out.println("인서트 전 gid : " + gptTop.getGid());
+				iResult = gs.insertGptPlan(plan);
+				System.out.println("인서트 후 gid : " + gs.selectGptPlanTop(memail).getGid());
+				System.out.println("result : " + iResult);
+				System.out.println("인설트 시간 : " + gs.selectGptTop(memail).getGptreg());
+				gs.updateGptReg(gid);
+
+				if (iResult == 1) // insert true
+					model.addAttribute("motive", motive);
+				else // insert false
+					model.addAttribute("msg", "등록 실패.");
+
+				// plan의 끝
+				break;
+			}
 
 			}
 		} else {
@@ -219,8 +307,13 @@ public class GptController {
 			model.addAttribute("mainMsg", "값이 없음");
 			return "redirect:/gptMain";
 		}
-		String s = "oo";
-		model.addAttribute("s", s);
+		// readCount 처리문
+		ReadCount readCount = gs.selectReadCountTop();
+		if (readCount == null) // readCount가 있다면
+			gs.insertReadCount(readCount);
+		readCount = gs.selectReadCountTop();
+		gs.readCountPlus(readCount, resumeType);
+
 		System.out.println("\n ***** Controller_gptSelect끝 ***** \n");
 		return "redirect:/gptMain";
 	}
