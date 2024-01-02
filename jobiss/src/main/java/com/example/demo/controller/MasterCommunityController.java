@@ -11,24 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.model.Community;
 import com.example.demo.model.FeedBack;
 import com.example.demo.model.QnA;
-import com.example.demo.service.MasterFeedbackService;
+import com.example.demo.service.MasterCommunityService;
 
 @Controller
-public class MasterFeedbackController {
-
-	@Autowired
-	private MasterFeedbackService service;
+public class MasterCommunityController {
 	
-	@RequestMapping("masterFeedbackList.do")
-	public String masterFeedbackList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	@Autowired
+	private MasterCommunityService service;
+	
+	@RequestMapping("masterCommunityList.do")
+	public String masterCommunityList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		int limit = 10; // 한 페이지에 출력할 데이터 개수
 
 		int listcount = service.getCount(); // 전체 데이터 개수
 
 		int start = (page - 1) * 10;
-		List<FeedBack> flist = service.flist(start); // 회원 목록 불러오기
+		List<Community> clist = service.clist(start); // 회원 목록 불러오기
 
 		int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
@@ -38,30 +39,30 @@ public class MasterFeedbackController {
 			endPage = pageCount;
 		}
 
-		model.addAttribute("flist", flist);
+		model.addAttribute("clist", clist);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("page", page);
-		return "master/masterFeedback/masterFeedbackList";
+		return "master/masterCommunity/masterCommunityList";
 	}
 	
-	@RequestMapping("masterFeedback.do")
-	public String masterFeedback(@RequestParam("fid") String fid, Model model) {
+	@RequestMapping("masterCommunity.do")
+	public String mastercommunity(@RequestParam("cid") String cid, Model model) {
 		
-		FeedBack feedback = service.feedback(fid);
+		Community community = service.community(cid);
 		
-		model.addAttribute("feedback", feedback);
+		model.addAttribute("community", community);
 		
-		return "master/masterFeedback/masterFeedback";
+		return "master/masterCommunity/masterCommunity";
 	}
 	
-	@RequestMapping("masterFeedbackDelete.do")
+	@RequestMapping("masterCommunityDelete.do")
 	@ResponseBody
-	public String masterFeedbackDelete(@RequestParam("fid")String fid) {
+	public String masterCommunityDelete(@RequestParam("cid")String cid) {
 		
-		int result = service.masterFeedbackDelete(fid);
+		int result = service.masterCommunityDelete(cid);
 		
 		if(result == 1) {
 			return "Y";
@@ -71,8 +72,8 @@ public class MasterFeedbackController {
 	}
 	
 	// Feedback 검색목록
-	@RequestMapping("masterSearchFeedback.do")
-	public String masterSearchFeedback (@RequestParam(value = "page", defaultValue = "1") int page, Model model,@RequestParam("searchtype")String searchtype, @RequestParam("keyword")String keyword) {
+	@RequestMapping("masterSearchCommunity.do")
+	public String masterSearchCommunity(@RequestParam(value = "page", defaultValue = "1") int page, Model model,@RequestParam("searchtype")String searchtype, @RequestParam("keyword")String keyword) {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("searchtype", searchtype);
@@ -84,7 +85,7 @@ public class MasterFeedbackController {
 		
 		int start = (page - 1) * 10;
 		map.put("start", start);
-		List<QnA> flist = service.sfList(map); // 회원 목록 불러오기
+		List<Community> clist = service.scList(map); // 회원 목록 불러오기
 
 		int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
@@ -94,14 +95,14 @@ public class MasterFeedbackController {
 			endPage = pageCount;
 		}
 
-		model.addAttribute("flist", flist);
+		model.addAttribute("clist", clist);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("page", page);
 		
-		return "master/masterFeedback/masterFeedbackList";
+		return "master/masterCommunity/masterCommunityList";
 	}
-
+	
 }
