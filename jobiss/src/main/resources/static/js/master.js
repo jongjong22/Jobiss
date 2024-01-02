@@ -131,6 +131,10 @@ function openFeedback(fid){
 
 /* masterFeedback.jsp */
 function masterFeedbackDelete(fid){
+	
+	var deleteConfirm = confirm('정말 삭제 하시겠습니까?');
+	
+	if(deleteConfirm){
 	$.ajax({
 		type : 'POST',
 		url : 'masterFeedbackDelete.do',
@@ -147,6 +151,37 @@ function masterFeedbackDelete(fid){
 			console.error('Error',error);
 		}
 	});
+	}
+}
+
+/* masterCommunityList.jsp */
+function openCommunity(cid){
+	location.href = 'masterCommunity.do?cid=' + cid;
+}
+
+/* masterCommunity.jsp */
+function masterCommunityDelete(cid) {
+	
+	var deleteConfirm = confirm('정말 삭제 하시겠습니까?');
+	
+	if(deleteConfirm){
+	$.ajax({
+		type : 'POST',
+		url : 'masterCommunityDelete.do',
+		data : { cid : cid },
+		success : function(result){
+			if(result === 'Y'){
+				alert('삭제가 완료되었습니다.');
+				location.href = 'masterCommunityList.do';
+			}else{
+				alert('삭제에 실패하였습니다.');
+			}
+		},
+		error : function(error) {
+			console.error('Error',error);
+		}
+	});
+	}
 }
 
 /* common */

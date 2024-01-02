@@ -10,12 +10,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="css/masterMemberList.css">
 <script src="./js/master.js"></script>
-<title>후기 관리</title>
+<title>커뮤니티 관리</title>
 </head>
 <body>
 
 	<div class="Big_container">
-		<h1>후기 상세 정보</h1>
+		<h1>커뮤니티 상세 정보</h1>
 
 		<div class="container_detailmember">
 			<table border="1">
@@ -24,29 +24,28 @@
 					<th>이메일</th>
 					<th>제목</th>
 					<th>내용</th>
-					<th>파일</th>
-					<th>인증 여부</th>
+					<th>이미지</th>
+					<th>조회수</th>
 					<th>삭제 여부</th>
 					<th>요청 날짜</th>
 				</tr>
 
 				<tr>
-					<td>${review.rid }</td>
-					<td>${review.memail }</td>
-					<td>${review.rtitle }</td>
-					<td>${review.rcontent }</td>
-					<td><img src="./images/${review.rsuccess }" width="50" height="50"
+					<td>${community.cid }</td>
+					<td>${community.memail }</td>
+					<td>${community.ctitle }</td>
+					<td>${community.ccontent }</td>
+					<td><img src="./images/${community.cimage }" width="50" height="50"
 										class="toggle-image">
 					</td>
-					<td>${review.rconfirm }</td>
-					<td>${review.rdrop }</td>
-					<fmt:formatDate value="${review.rreg }" pattern="YYYY년 MM월 dd일"
+					<td>${community.creadcount }</td>
+					<td>${community.cdrop }</td>
+					<fmt:formatDate value="${community.creg }" pattern="YYYY년 MM월 dd일"
 						var="date" />
 					<td>${date }</td>
 				</tr>
 			</table>
-				<button class="button-style" onClick="masterReviewDelete('${review.rid}')">후기삭제</button>
-				<button class="button-style" onClick="masterReviewConfirm('${review.rid}')">글 작성 수락</button>
+				<button class="button-style" onClick="masterCommunityDelete('${community.cid}')">커뮤니티 글 삭제</button>
 		</div>
 	</div>
 </body>
