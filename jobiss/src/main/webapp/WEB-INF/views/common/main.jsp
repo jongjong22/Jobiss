@@ -31,6 +31,14 @@
 
 <!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
 <style>
+
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
 .item img {
 	width: 100%; /* Make the images responsive within each slide */
 	height: auto;
@@ -171,7 +179,7 @@
 
 			<div class="row section recentworks topspace">
 
-				<h2 class="section-title">
+				<h2 class="section-title" style="font-family: 'MICEGothic Bold';">
 					<span>BEST 자기소개서</span>
 				</h2>
 
