@@ -114,7 +114,6 @@ public class ReviewController {
 		if (tmp == 1) {
 
 			model.addAttribute("insertResult", tmp);
-			model.addAttribute("page", page);
 			
 		}
 		
@@ -123,12 +122,11 @@ public class ReviewController {
 
 	}
 	
-	// 리뷰 리스트, 댓글 리스트 불러오기
+	// 리뷰 리스트
 	@RequestMapping("reviewList.do")
 	public String reviewList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 	    int limit = 10; // 한 페이지에 출력할 데이터 개수
 	    
-
 	    int listcount = service.getCount(); // 전체 데이터 개수
 
 	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
@@ -142,9 +140,6 @@ public class ReviewController {
 	    if (endPage > pageCount) {
 	        endPage = pageCount;
 	    }
-
-	    
-
 	 
 	    model.addAttribute("list", resultList);
 	    model.addAttribute("startPage", startPage);
@@ -152,7 +147,6 @@ public class ReviewController {
 	    model.addAttribute("pageCount", pageCount);
 	    model.addAttribute("listcount", listcount);
 	    model.addAttribute("page", page);
-	    
 
 	    return "review/reviewList";
 	}
@@ -160,21 +154,7 @@ public class ReviewController {
 
 	// 리뷰게시판 상세페이지로 이동
 	@RequestMapping("reviewDetails.do")
-	public String reviewDetails(int rid, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-		
-		int limit = 10; // 한 페이지에 출력할 데이터 개수
-
-	    int listcount = service.getCount(); // 전체 데이터 개수
-
-	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
-
-	    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
-
-	    int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
-	    int endPage = startPage + 10; // 끝 페이지 
-	    if (endPage > pageCount) {
-	        endPage = pageCount;
-	    }
+	public String reviewDetails(int rid, Model model) {
 		
 		Review review = service.getBoard(rid);
 		
@@ -186,30 +166,24 @@ public class ReviewController {
 		model.addAttribute("review",review);
 		model.addAttribute("rid",rid);
 		model.addAttribute("content",content);
-		model.addAttribute("page",page);
 		
 		return "review/reviewDetails";
 	}
 
 	// 수정폼으로 이동
 	@RequestMapping("reviewUpdateForm.do")
-	public String reviewUpdateForm(int rid, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	public String reviewUpdateForm(int rid, Model model) {
 		
 		Review review = service.getBoard(rid);
 		
-		model.addAttribute("page",page);
 		model.addAttribute("review",review);
-		model.addAttribute("rid",rid);
-		
-		
 		
 		return "review/reviewUpdateForm";
-
 	}
 
 	// 수정하기
 	@RequestMapping("reviewUpdate.do")
-	public String reviewUpdate(Review review, int rid, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session, Model model) {
+	public String reviewUpdate(Review review, int rid, HttpSession session, Model model) {
 
 		int updateResult = 0;
 		
@@ -227,11 +201,8 @@ public class ReviewController {
 		    updateResult = -1;
 		}
 
-		
-		model.addAttribute("page",page);
 		model.addAttribute("updateResult",updateResult);
 		model.addAttribute("review",review);
-		
 		
 		return "review/reviewUpdateResult";
 

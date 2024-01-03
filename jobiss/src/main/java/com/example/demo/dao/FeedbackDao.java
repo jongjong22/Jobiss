@@ -1,11 +1,12 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.FeedBack;
-import com.example.demo.model.Review;
+
 
 @Mapper
 public interface FeedbackDao {
@@ -18,7 +19,7 @@ public interface FeedbackDao {
 
 	FeedBack getBoard(int fid);
 
-	int update(FeedBack feedback);
+	int update(Map map);
 
 	int delete(int fid);
 

@@ -34,7 +34,7 @@
 		from feedback where fid = #{fid}
 	</select>
 
-	<update id="update" parameterType="feedback">
+	<update id="update" parameterType="Map">
 
 		UPDATE feedback
 		SET ftitle = #{ftitle},

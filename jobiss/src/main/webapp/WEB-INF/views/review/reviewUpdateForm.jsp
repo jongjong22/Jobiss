@@ -69,29 +69,26 @@ body {
 	background-color: #d32f2f;
 }
 </style>
+
+<script>
+	function goBack() {
+		history.go(-1);
+	}
+</script>
+
 </head>
 
 <body>
 	<div class="layout">
 		<form action="reviewUpdate.do" method="post">
-		<input type="hidden" value="${review.memail}" name="memail">
-		<input type="hidden" value="${page}" name="page">
-		<input type="hidden" value="${rid}" name="rid">
-		
+			<input type="hidden" value="${review.memail}" name="memail">
+			<input type="hidden" value="${review.rid}" name="rid">
+			 
 			<input name="rtitle" id="rtitle" type="text" placeholder="글 제목" value="${review.rtitle}">
-			
-			<textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용" >${review.rcontent}</textarea>
-				
-			<div class="form-actions">
-				<input type="submit" value="수정">
-					<input type="button" onclick="goBack()" value="취소">
+			<textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용">${review.rcontent}</textarea>
 
-				<script>
-					function goBack() {
-						history.go(-1);
-					}
-				</script>
-			</div>
+			<input type="submit" value="수정"> 
+			<input type="button" onclick="goBack()" value="취소">
 		</form>
 	</div>
 </body>

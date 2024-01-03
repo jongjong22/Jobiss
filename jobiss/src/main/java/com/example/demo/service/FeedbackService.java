@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,8 @@ public class FeedbackService {
 		return dao.getBoard(fid);
 	}
 
-	public int update(FeedBack feedback) {
-		
-		return dao.update(feedback);
+	public int update(Map map) {
+		return dao.update(map);
 	}
 
 	public int delete(int fid) {

@@ -11,13 +11,7 @@
 
 <title>리뷰 게시판 상세페이지</title>
 <style>
-/* body {
-	font-family: Arial, sans-serif;
-	background-color: #f7f7f7;
-	margin: 0;
-	padding: 0;
-	/* line-height: 1.6; */
-/* } */ 
+
 
 @font-face {
 	font-family: 'MICEGothic Bold';
@@ -147,13 +141,11 @@ textarea{
 	</script>
 
 
-	<%@ include file="header.jsp"%>
-
 	<div class="container">
 
 		<div class="review-content">		
 			<h2 class="reviewtitle">${review.rtitle}</h2>
-			<p>${review.rcontent}</p>
+			<p>${content}</p>
 		</div>
 
 		<div class="action-buttons">
@@ -193,20 +185,15 @@ textarea{
 					</tr>
 					<c:forEach var="reviewreply" items="${Rlist}" varStatus="loop">
 						<tr>
-							<c:if test="${member.memail ne reviewreply.memail }">
 							<td>${reviewreply.rrcontent }</td>
-							</c:if>
-							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="text" value="${reviewreply.rrcontent}"></td>
-							</c:if>
 							<td>${reviewreply.memail }</td>
-							<fmt:formatDate value="${reviewreply.rrreg}"
-								pattern="yyyy년 MM월 dd일" var="date" />
+							<fmt:formatDate value="${reviewreply.rrreg}" pattern="yyyy년 MM월 dd일" var="date" />
 							<td>${date}</td>
+							
 							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="button"
-									onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
+							<td><input type="button" onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
 							</c:if>
+							
 						</tr>
 					</c:forEach>
 				</table>

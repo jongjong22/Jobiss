@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,7 +37,7 @@ public class FeedbackController {
 	}
 
 	@RequestMapping("FeedWrite.do")
-	public String FeedWrite(FeedBack feedback, String page, Model model, HttpSession session) {
+	public String FeedWrite(FeedBack feedback, Model model, HttpSession session) {
 
 		Member member = (Member) session.getAttribute("member");
 
@@ -44,10 +46,7 @@ public class FeedbackController {
 		int FeedInsertResult = service.insert(feedback);
 
 		if (FeedInsertResult == 1) {
-
 			model.addAttribute("FeedInsertResult", FeedInsertResult);
-			model.addAttribute("page", page);
-
 		}
 
 		return "feedback/feedInsertResult";
@@ -84,22 +83,8 @@ public class FeedbackController {
 
 	
 	@RequestMapping("FeedDetails.do")
-	public String FeedDetails(int fid, @RequestParam(value = "page", defaultValue = "1") int page, Model model ) {
+	public String FeedDetails(int fid, Model model ) {
 		
-			int limit = 10; // 한 페이지에 출력할 데이터 개수
-
-		    int listcount = service.getCount(); // 전체 데이터 개수
-
-		    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
-
-		    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
-
-		    int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
-		    int endPage = startPage + 10; // 끝 페이지 
-		    if (endPage > pageCount) {
-		        endPage = pageCount;
-		    }
-			
 			FeedBack feedback = service.getBoard(fid);
 			
 			String content = feedback.getFcontent().replace("\n", "<br>");
@@ -110,80 +95,54 @@ public class FeedbackController {
 			model.addAttribute("feedback",feedback);
 			model.addAttribute("fid",fid);
 			model.addAttribute("content",content);
-			model.addAttribute("page",page);
-			
 		
 		return "feedback/feedDetails";
 	}
 	
 
 	@RequestMapping("FeedUpdateForm.do")
-	public String FeedUpdateForm(int fid, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-
+	public String FeedUpdateForm(int fid, Model model) {
 			
 			FeedBack feedback = service.getBoard(fid);
 			
-			model.addAttribute("page",page);
-			model.addAttribute("feedback",feedback);
-			model.addAttribute("fid",fid);
+			String content = feedback.getFcontent().replace("\n", "<br>");
 			
-		
+			model.addAttribute("feedback",feedback);
+			model.addAttribute("content",content);
+			
 		return "feedback/feedUpdateForm";
 	}
 	
 	@RequestMapping("FeedUpdate.do")
-	public String FeedUpdate(FeedBack feedback, int fid, @RequestParam(value = "page", defaultValue = "1") int page, HttpSession session, Model model) {
+	@ResponseBody
+	public String FeedUpdate(String ftitle, String fcontent, int fid, Model model) {
 
-			int updateResult = 0;
+			Map map = new HashMap();
+			map.put("ftitle", ftitle);
+			map.put("fcontent", fcontent);
+			map.put("fid", fid);
 			
-			FeedBack db = service.getBoard(feedback.getFid());
+			int result = service.update(map);
 			
-			Member member = (Member) session.getAttribute("member"); // session에서 member가져와서 member변수에 넣어줌 ~
-			
-			String id = member.getMemail(); // 멤버에 있는 이메일 가져옴 !
-
-			String emailFromDB = db.getMemail(); // db에 있는 이메일 가져옴
-
-			if(id.equals(emailFromDB)) {
-			    updateResult = service.update(feedback);
-			} else {
-			    updateResult = -1;
+			if(result == 1) {
+				return "Y";
+			}else {
+				return "N";
 			}
-
-			
-			model.addAttribute("page",page);
-			model.addAttribute("updateResult",updateResult);
-			model.addAttribute("feedback",feedback);
-			
-		
-		return "feedback/feedUpdateResult";
 	}
 	
 
 	@RequestMapping(value="FeedbackDelete.do" ,method=RequestMethod.POST)
 	@ResponseBody
-	public String FeedbackDelete(HttpSession session, int fid) {
+	public String FeedbackDelete(int fid) {
 
-		int deleteResult = 0;
-		
-		FeedBack db = service.getBoard(fid);
-		
-		Member member = (Member)session.getAttribute("member");
-		
-		String id = member.getMemail();
-		
-		String emailFromDB = db.getMemail();
-		
-		if(id.equals(emailFromDB)) {
-			deleteResult = service.delete(fid);
-		}
+     	int deleteResult = service.delete(fid);
 		
 	    if(deleteResult == 1) {
 	    	return "Y";
 	    }else {
 	    	return "N";
 	    }
-		
-
 	}
+	
 }
