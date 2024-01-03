@@ -30,7 +30,7 @@ public class GptService {
 
 	@Value("${openai.url}")
 	private String url;
-	
+
 	@Value("${openai.api_key}")
 	private String api_key;
 
@@ -41,6 +41,11 @@ public class GptService {
 	// 부모 insert
 	public int insertGpt(GPT gpt) {
 		return dao.insertGpt(gpt);
+	}
+
+	// 부모 특정글
+	public GPT selectGptGid(int gid) {
+		return dao.selectGptGid(gid);
 	}
 
 	// 부모 최신글
@@ -247,7 +252,6 @@ public class GptService {
 
 			try {
 				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-				System.out.println("서비스-직려로하 : " + response.body());
 				JSONObject jsonResponse = new JSONObject(response.body());
 				resultContent = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message")
 						.getString("content");

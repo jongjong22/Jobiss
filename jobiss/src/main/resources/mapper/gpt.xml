@@ -9,6 +9,12 @@
 		values(null, #{memail}, sysdate() )
 	</insert>
 
+	<!-- 부모 특정글 -->
+	<select id="selectGptGid" resultType="gpt" parameterType="int">
+		select
+		* from gpt where gid = #{gid}
+	</select>
+
 	<!-- 부모 최신글 -->
 	<select id="selectGptTop" resultType="gpt"
 		parameterType="String">

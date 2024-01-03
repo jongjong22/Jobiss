@@ -21,6 +21,9 @@ public interface GptDao {
 	// 부모 최신글
 	GPT selectGptTop(String mEmail);
 
+	// 부모 특정글
+	GPT selectGptGid(int gid);
+
 	// 부모 전체글
 	List<GPT> selectGptList(String mEmail);
 
