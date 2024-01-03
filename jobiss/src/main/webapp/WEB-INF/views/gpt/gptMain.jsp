@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,45 +11,75 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Custom styles -->
 <link rel="stylesheet" href="css/gpt.css">
-<style>
-</style>
+
 </head>
 <body>
-	<img src="">
+
+
+	<%@ include file="header.jsp"%>
+
+
+
+
+	<br>
+
+
+
+	<div class="history_main">
+		<h4>이전이력</h4>
+		<c:choose>
+			<c:when test="${not empty gptList}">
+				<table border="1">
+					<tr>
+						<th>세션번호</th>
+						<th>대화날짜</th>
+						<th>아이디</th>
+					</tr>
+					<tr>
+						<td><select id="gid" name="gid" size="5"
+							onchange="selectGidChange(this)">
+								<c:forEach items="${gptList}" var="gpt">
+									<option value="${gpt.gid}">${gpt.gid}</option>
+								</c:forEach>
+						</select></td>
+						<td><select id="gid" name="gid" size="5"
+							onchange="selectGidChange(this)">
+								<c:forEach items="${gptList}" var="gpt">
+									<option value="${gpt.gid}">${gpt.gptreg}</option>
+								</c:forEach>
+						</select></td>
+						<c:if test="${member.memail eq null}">
+							<td>master</td>
+						</c:if>
+						<c:if test="${member.memail ne null}">
+							<td>${member.memail }</td>
+						</c:if>
+						<td></td>
+					</tr>
+				</table>
+			</c:when>
+			<c:when test="${empty gptList}">
+	값이 없습니다.
+			</c:when>
+		</c:choose>
+	</div>
+	<script>
+		function selectGidChange(select) {
+			var select = select.value;
+			location.href = 'gptHistory?gid=' + select;
+		}
+	</script>
 	<h1>chatGPT API</h1>
 	<h2>수정할 항목을 선택하세요!!!</h2>
-	<table>
-		<tr>
-			<th>gid</th>
-			<th>memail</th>
-			<th>선택</th>
-		</tr>
-		<c:if test="${gidList ne null }">
-			<c:forEach items="${gidList }" var="gid">
-				<tr>
-					<td>${gid }</td>
-					<c:if test="${member.memail eq null}">
-						<td>master</td>
-					</c:if>
-					<c:if test="${member.memail ne null}">
-						<td>${member.memail }</td>
-					</c:if>
-					<td><button type="button"
-							onclick="location.href='gptHistory?gid=${gid}' ">이전이력</button></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-	</table>
-
 	<div class="container_main">
 		<table class="table_qRequest">
 			<tr>
 				<th>&nbsp; &lt;성장과정 : grow&gt;</th>
 			</tr>
 			<tr>
-				<td><textarea rows="10" cols="100" id="gRequest"
-						class="contetn_request" name="gRequest"
-						placeholder="기존 입력값이 들어갈 예정임.">${grow.gptgcontent }</textarea></td>
+				<td><textarea rows="10" cols="95" id="gRequest"
+						class="content_request" name="gRequest"
+						placeholder="컨설팅 받을 이력서 내용을 입력하세요.">${grow.gptgcontent }</textarea></td>
 				<td id="gRequestButton">
 					<button type="button" class="button_request short"
 						onclick="gptRequest('g', $('#gRequest').val(), 'short');">3가지
@@ -74,9 +105,9 @@
 				<th>&lt;성격의 장단점 및 특기 : character&gt;</th>
 			</tr>
 			<tr>
-				<td><textarea rows="10" cols="100" id="cRequest"
-						class="contetn_request" name="cRequest"
-						placeholder="기존 입력값이 들어갈 예정임.">${character.gptccontent }</textarea></td>
+				<td><textarea rows="10" cols="95" id="cRequest"
+						class="content_request" name="cRequest"
+						placeholder="컨설팅 받을 이력서 내용을 입력하세요.">${character.gptccontent }</textarea></td>
 				<td id="cRequestButton">
 					<button type="button" class="button_request short"
 						onclick="gptRequest('c', $('#cRequest').val(), 'short');">3가지
@@ -102,9 +133,9 @@
 				<th>&lt;입사동기 : motive&gt;</th>
 			</tr>
 			<tr>
-				<td><textarea rows="10" cols="100" id="mRequest"
-						class="contetn_request" name="mRequest"
-						placeholder="기존 입력값이 들어갈 예정임.">${motive.gptmcontent }</textarea></td>
+				<td><textarea rows="10" cols="95" id="mRequest"
+						class="content_request" name="mRequest"
+						placeholder="컨설팅 받을 이력서 내용을 입력하세요.">${motive.gptmcontent }</textarea></td>
 				<td id="mRequestButton">
 					<button type="button" class="button_request short"
 						onclick="gptRequest('m', $('#mRequest').val(), 'short');">3가지
@@ -130,9 +161,9 @@
 				<th>&lt;입사후 포부 : plan&gt;</th>
 			</tr>
 			<tr>
-				<td><textarea rows="10" cols="100" id="pRequest"
-						class="contetn_request" name="pRequest"
-						placeholder="기존 입력값이 들어갈 예정임.">${plan.gptpcontent }</textarea></td>
+				<td><textarea rows="10" cols="95" id="pRequest"
+						class="content_request" name="pRequest"
+						placeholder="컨설팅 받을 이력서 내용을 입력하세요.">${plan.gptpcontent }</textarea></td>
 				<td id="pRequestButton">
 					<button type="button" class="button_request short"
 						onclick="gptRequest('p', $('#pRequest').val(), 'short');">3가지
@@ -221,7 +252,7 @@
 										+ '</tr>'
 										+ '<tr>'
 										+ '<th>수정안 - &nbsp;</th>'
-										+ '<td><textarea rows="10" cols="100" class="contetn_response" placeholder="기존 입력값이 들어갈 예정임.">'
+										+ '<td><textarea rows="10" cols="95" class="content_response" placeholder="컨설팅 받을 이력서 내용을 입력하세요.">'
 										+ resultContent
 										+ '</textarea></td>'
 										+ '<td><button type="submit" id="selectRequest" name="selectRequest" class="button_select" value="' + resumeType + '">선택</button></td>'

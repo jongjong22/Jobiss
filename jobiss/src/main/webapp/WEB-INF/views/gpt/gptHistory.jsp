@@ -11,30 +11,42 @@
 
 <body>
 
+	<%@ include file="header.jsp"%>
+
 	<c:choose>
-		<c:when test="${member.memail eq null}">
+		<c:when test="${request.member.memail eq null}">
 			<h3>null초기값 : master</h3>
 		</c:when>
 
-		<c:when test="${member.memail ne null}">
+		<c:when test="${request.member.memail ne null}">
 			<h3>ID : ${member.memail }</h3>
 		</c:when>
 	</c:choose>
-	<c:if test="${not empty gid} ">
-	${gid }
-		</c:if>
-	<c:if test="${gid ne null} ">
-	${gid }
-		</c:if>
-	${gid }
+
+	<c:choose>
+		<c:when test="${empty gid }">
+			<h3>이전이력이 없습니다.</h3>
+		</c:when>
+
+		<c:when test="${!empty gid }">
+			<h3>gID : ${gid }</h3>
+		</c:when>
+	</c:choose>
+
+
+
+
+
+
+
 	<div class="container_main">
 		<h1>성장과정</h1>
 		<table border="1">
 			<tr>
-				<th>지원번호</th>
+				<th>No</th>
 				<th>내용</th>
 				<th>질문일</th>
-				<th>작업</th>
+				<th>선택</th>
 			</tr>
 			<c:choose>
 				<c:when test="${ not empty growList}">
@@ -43,7 +55,7 @@
 							<td>${g.gptgid }</td>
 							<td><textarea rows="4" cols="50">${g.gptgcontent }</textarea></td>
 							<td>${g.gptgreg }</td>
-							<td><button>작업</button></td>
+							<td><button>선택</button></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -57,10 +69,10 @@
 		<h1>성격 장단점</h1>
 		<table border="1">
 			<tr>
-				<th>지원번호</th>
+				<th>No</th>
 				<th>내용</th>
 				<th>질문일</th>
-				<th>작업</th>
+				<th>선택</th>
 			</tr>
 			<c:choose>
 				<c:when test="${ not empty characterList}">
@@ -70,7 +82,7 @@
 							<td>${c.gptcid }</td>
 							<td><textarea rows="4" cols="50">${c.gptccontent }</textarea></td>
 							<td>${c.gptcreg }</td>
-							<td><button>작업</button></td>
+							<td><button>선택</button></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -81,13 +93,14 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
+
 		<h1>지원동기</h1>
 		<table border="1">
 			<tr>
-				<th>지원번호</th>
+				<th>No</th>
 				<th>내용</th>
 				<th>질문일</th>
-				<th>작업</th>
+				<th>선택</th>
 			</tr>
 			<c:choose>
 				<c:when test="${ not empty motiveList}">
@@ -96,7 +109,7 @@
 							<td>${m.gptmid }</td>
 							<td><textarea rows="4" cols="50">${m.gptmcontent }</textarea></td>
 							<td>${m.gptmreg }</td>
-							<td><button>작업</button></td>
+							<td><button>선택</button></td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -110,10 +123,10 @@
 		<h1>입사포부</h1>
 		<table border="1">
 			<tr>
-				<th>지원번호</th>
+				<th>No</th>
 				<th>내용</th>
 				<th>질문일</th>
-				<th>작업</th>
+				<th>선택</th>
 			</tr>
 			<c:choose>
 				<c:when test="${not empty planList}">
@@ -122,7 +135,7 @@
 							<td>${p.gptpid}</td>
 							<td><textarea rows="4" cols="50">${p.gptpcontent}</textarea></td>
 							<td>${p.gptpreg}</td>
-							<td><button>작업</button></td>
+							<td><button>선택</button></td>
 						</tr>
 					</c:forEach>
 				</c:when>
