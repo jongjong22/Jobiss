@@ -24,7 +24,6 @@ public class MasterQnAController {
 	// QnA 관리페이지 이동
 	@RequestMapping("masterQnAList.do")
 	public String masterQnAList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-		System.out.println("회원 관리 페이지 이동");
 
 		int limit = 10; // 한 페이지에 출력할 데이터 개수
 
