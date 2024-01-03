@@ -27,11 +27,8 @@ public class ReviewReplyController {
 		int tmp = service.insert(reviewreply);
 
 		if (tmp == 1) {
-
-			int rid = reviewreply.getRid();
-			
 			model.addAttribute("insertResult", tmp);
-			model.addAttribute("rid", rid);
+			model.addAttribute("rid", reviewreply.getRid());
 		}
 
 		return "review/replyInsertResult";

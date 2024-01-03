@@ -149,21 +149,16 @@ h1 {
 						<th>작성일</th>
 						<th>삭제 버튼</th>
 					</tr>
+					
 					<c:forEach var="feedbackreply" items="${Flist}" varStatus="loop">
 						<tr>
-							<c:if test="${member.memail ne feedbackreply.memail }">
-							<td>${feedbackreply.frcontent }</td>
-							</c:if>
-							<c:if test="${member.memail eq feedbackreply.memail }">
-							<td><input type="text" value="${feedbackreply.frcontent}"></td>
-							</c:if>
+							<td>${content }</td>
 							<td>${feedbackreply.memail }</td>
-							<fmt:formatDate value="${feedbackreply.frreg}"
-								pattern="yyyy년 MM월 dd일" var="date" /> 
+							<fmt:formatDate value="${feedbackreply.frreg}" pattern="yyyy년 MM월 dd일" var="date" /> 
 							<td>${date}</td>
+							
 							<c:if test="${member.memail eq feedbackreply.memail }">
-							<td><input type="button"
-									onclick="deletefeedbackreply(${feedbackreply.frid}, ${feedback.fid})" value="댓글 삭제"></td>
+							<td><input type="button" onclick="deletefeedbackreply(${feedbackreply.frid}, ${feedback.fid})" value="댓글 삭제"></td>
 							</c:if>
 						</tr> 
 					</c:forEach>
