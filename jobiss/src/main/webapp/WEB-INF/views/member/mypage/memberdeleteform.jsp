@@ -17,7 +17,8 @@
 		
 	a{
    	font-size: 15px;
-   	}
+   	
+
 </style>
 </head>
 <body>
@@ -35,7 +36,8 @@
             <li><a href="memberdeleteform.do">회원탈퇴</a></li>
         </ul>
     </nav>
-
+		
+		<div class="memberdelete">
 		<form method="post" action="memberdelete.do">
 			<table border=1 width="500" align="center">
 				<caption>회원 탈퇴</caption>
@@ -51,7 +53,7 @@
 					</td>
 				</tr>
 				</table>
-				
+				</div>
 		
 </body>
 </html>
