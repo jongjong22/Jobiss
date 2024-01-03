@@ -20,12 +20,14 @@ public class QnaController {
 	@Autowired
 	private QnAService qs;
 	
-	@RequestMapping("QnAform")
+	//글작성 폼으로 이동
+	@RequestMapping("QnAform.do")
 	public String QnAform() {
 		return "QnA/QnAform";
 	}
 	
-	@RequestMapping("QnAwrite")
+	//글작성
+	@RequestMapping("QnAwrite.do")
 	public String QnAwrite(@ModelAttribute QnA qna,
 							Model model) {
 		
@@ -35,7 +37,8 @@ public class QnaController {
 		return "QnA/insertresult";
 	}
 	
-	@RequestMapping("QnAlist")
+	//리스트 불러오기
+	@RequestMapping("QnAlist.do")
 	public String QnAlist(@RequestParam(value = "page", defaultValue = "1") int page,
 							Model model) {
 	
@@ -68,7 +71,8 @@ public class QnaController {
 		return "QnA/QnAlist";
 	}
 	
-	@RequestMapping("QnAcontent")
+	//상세페이지로 이동
+	@RequestMapping("QnAcontent.do")
 	public String QnAcontent(@RequestParam("qid") int qid,
 							  @RequestParam("page") String page,
 							  Model model) {
@@ -83,8 +87,9 @@ public class QnaController {
 		return "QnA/QnAcontent";
 	}
 	
-	@RequestMapping("QnAupdate")
-	public String QnAupdate(@ModelAttribute QnA qna,
+	//수정폼으로 이동
+	@RequestMapping("QnAupdateform.do")
+	public String QnAupdateform(@ModelAttribute QnA qna,
 							  @RequestParam("page") String page,
 							  Model model) {
 		
@@ -98,7 +103,7 @@ public class QnaController {
 		
 	}
 
-	@RequestMapping("QnAdelete")
+	@RequestMapping("QnAdelete.do")
 	public String QnAdelete(@ModelAttribute QnA qna,
 							  @RequestParam("page") String page,
 							  Model model) {
