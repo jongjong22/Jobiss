@@ -76,7 +76,7 @@
 				<tr>
 					<td>이름</td>
 					<td><input type="text" id="mname" name="mname"
-						value="${member.mname }" readonly="readonly"></td>
+						value="${member.mname }" ></td>
 				</tr>
 				<tr>
 					<td>전화번호</td>

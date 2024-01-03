@@ -13,10 +13,11 @@
 	<form method="post" action="logininsert.do">
 		<table border=1 width="500" align="center" >
 			<caption>회원가입</caption>
-			<tr>
+			<tr >
 				<td>아이디</td>
 				<td><input type="text" id="memail" name="memail" required placeholder="아이디를 입력하세요.">
 				</td>
+				<td><input type="button" value="증복검사" name="memail"></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>

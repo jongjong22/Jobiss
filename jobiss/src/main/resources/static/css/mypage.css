@@ -3,41 +3,123 @@
 /* nav css */
 /* 기본 스타일 초기화 */
 body, ul {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
+
+.caption_main {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.caption_left, .caption_right {
+	flex: 1;
+	text-align: center;
+}
+
+.caption_left {
+	margin-right: 10px; /* 원하는 간격 조절 */
+}
+
+.caption_right {
+	margin-left: 10px; /* 원하는 간격 조절 */
+}
+
+grow_main {
+	border-width: 1px;
+	border-style: solid;
+	/* border-color 속성도 필요에 따라 지정 가능 */
+}
+
+.resume_main {
+	margin-top: 100px;
+	margin-left: 350px;
+	font-size: 20px;
+}
+
+.grow_main {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.grow_left, .grow_right_main, .grow_right {
+	box-sizing: border-box;
+	height: 100%; /* 추가된 부분: 각 엘리먼트의 높이를 100%로 설정 */
+}
+
+.grow_left {
+	width: 50%;
+}
+
+.grow_right_main {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 5%;
+}
+
+.grow_right {
+	width: 75%;
+	margin-right: 10%;
+}
+
+/* 예시로 추가한 스타일 */
+.grow_left td, .grow_right_main td, .grow_right td {
+	padding: 10px;
+	border: 1px solid #ddd; /* 예시로 추가한 테이블 스타일링 */
+	font-size: 20px;
+}
+
+.grow_left th, .grow_right_main th, .grow_right th {
+	padding: 10px;
+	border: 1px solid #ddd; /* 예시로 추가한 테이블 스타일링 */
+	font-size: 20px;
+	width: 15%;
+}
+
+textarea {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+button {
+	margin-top: 10px;
+}
+
+/* 여기에 필요한 다른 스타일을 추가할 수 있습니다. */
 
 /* 내비게이션 메뉴 스타일링 */
 nav {
-    background-color: #3498db; /* 내비게이션 바의 배경 색상 (푸른색) */
-    width: 10%; /* 화면 폭의 30%만큼만 차지하도록 설정 */
-    height: 100vh; /* 화면 세로 높이의 100%만큼 높이 설정 */
-    position: fixed; /* 고정된 위치에 배치 */
-    top: 0; /* 상단에 위치 */
-    left: 0; /* 왼쪽에 위치 */
-    padding: 20px; /* 위아래 여백 추가 */
+	background-color: #3498db; /* 내비게이션 바의 배경 색상 (푸른색) */
+	width: 10%; /* 화면 폭의 30%만큼만 차지하도록 설정 */
+	height: 100vh; /* 화면 세로 높이의 100%만큼 높이 설정 */
+	position: fixed; /* 고정된 위치에 배치 */
+	top: 0; /* 상단에 위치 */
+	left: 0; /* 왼쪽에 위치 */
+	padding: 20px; /* 위아래 여백 추가 */
 }
 
 ul {
-    list-style-type: none; /* 목록의 글머리 기호 제거 */
-    display: flex; /* 레이아웃에 flexbox 사용 */
-    flex-direction: column; /* 아이템을 세로로 배치 */
-    align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
-    height: 100%; /* 내비게이션 바 높이를 100%로 설정 */
+	list-style-type: none; /* 목록의 글머리 기호 제거 */
+	display: flex; /* 레이아웃에 flexbox 사용 */
+	flex-direction: column; /* 아이템을 세로로 배치 */
+	align-items: flex-start; /* 아이템을 왼쪽으로 정렬 */
+	height: 100%; /* 내비게이션 바 높이를 100%로 설정 */
 }
 
 li {
-    margin: 0; /* 목록 아이템 간의 여백 제거 */
+	margin: 0; /* 목록 아이템 간의 여백 제거 */
 }
 
 a {
-    text-decoration: none; /* 링크의 밑줄 제거 */
-    color: #fff; /* 텍스트 색상을 흰색으로 설정 */
-    padding: 10px; /* 링크 주변에 여백 추가 */
-    display: block; /* 링크를 블록 수준 요소로 만들어 스타일링 향상 */
+	text-decoration: none; /* 링크의 밑줄 제거 */
+	color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+	padding: 10px; /* 링크 주변에 여백 추가 */
+	display: block; /* 링크를 블록 수준 요소로 만들어 스타일링 향상 */
 }
 
 a:hover {
-    background-color: #2980b9; /* 마우스 호버 시 배경 색상 변경 (더 진한 푸른색) */
-    transition: background-color 0.3s ease; /* 부드러운 전환 효과 추가 */
+	background-color: #2980b9; /* 마우스 호버 시 배경 색상 변경 (더 진한 푸른색) */
+	transition: background-color 0.3s ease; /* 부드러운 전환 효과 추가 */
 }

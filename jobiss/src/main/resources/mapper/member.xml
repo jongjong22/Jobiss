@@ -120,4 +120,90 @@
 	<select id="gpselect" resultType="gptplan" parameterType="list">
 		select * from gptplan where memail = #{memail} order by gptpid desc limit 2
 	</select>
+	
+	<!-- gid로 성장과정 가져오기 -->
+	<select id="gptgrow" parameterType="String" resultType="gptgrow">
+		select * from gptgrow where gptgid = #{gptgid}
+	</select>
+	
+	<!-- 이력서에 gptgrow가 없을 시 insert  -->
+	<insert id="insertGptgrow" parameterType="Map">
+		insert into personalstatement values(null,#{gid},#{memail},#{psgcontent},null,null,null,now())
+	</insert>
+	
+	<!-- 이력서에 gptgrow가 있을 시 update -->
+	<update id="updateGptgrow" parameterType="Map">
+		update personalstatement set psgcontent = #{psgcontent} , psreg = now() where memail = #{memail}
+	</update>
+	
+	
+	<select id="selectps" parameterType="String" resultType="personalstatement">
+	 	select * from personalstatement where pid = #{pid}
+	</select>
+	
+	<!-- 이력서 gptgrow 직접 수정 -->
+	<update id="psgupdate" parameterType="Map">
+		update personalstatement set psgcontent = #{psgcontent} , psreg = now() where pid = #{pid}
+	</update>
+	
+	<!-- cid로 성격장단점 가져오기 -->
+	<select id="gptcharacter" parameterType="String" resultType="gptcharacter">
+		select * from gptcharacter where gptcid = #{gptcid}
+	</select>
+	
+	<!-- 이력서에 Gptcharacter가 없을 시 insert  -->
+	<insert id="insertGptcharacter" parameterType="map">
+		insert into personalstatement values(null,#{gid},#{memail},null,#{psccontent},null,null,now())
+	</insert>
+	
+	<!-- 이력서에 Gptcharacter가 있을 시 update  -->
+	<update id="updateGptcharacter" parameterType="map">
+		update personalstatement set psccontent = #{psccontent} , psreg = now() where memail = #{memail}
+	</update>
+	
+	<!-- 이력서 gptcharacter 직접 수정 -->
+	<update id="pscupdate" parameterType="map">
+		update personalstatement set psccontent = #{psccontent} , psreg = now() where pid = #{pid}
+	</update>
+	
+	<!-- mid로 지원동기 가져오기 -->
+	<select id="gptmotive" parameterType="String" resultType="gptmotive">
+		select * from gptmotive where gptmid = #{gptmid}
+	</select>
+	
+	<!-- 이력서에 gptmotive가 없을 시 insert -->
+	<insert id="insertgptmotive" parameterType="map">
+		insert into personalstatement values(null,#{gid},#{memail},null,null,#{psmcontent},null,now())
+	</insert>
+	
+	<!-- 이력서에 gptmotive가 있을 시 update  -->
+	<update id="updategptmotive" parameterType="map">
+		update personalstatement set psmcontent = #{psmcontent},psreg = now() where memail = #{memail}
+	</update>
+	
+	<!-- 이력서 gptmotive 직접 수정 -->
+	<update id="psmupdate" parameterType="map">
+		update personalstatement set psmcontent = #{psmcontent} , psreg = now() where pid = #{pid}
+	</update>
+	
+	<!-- pid로 지원동기 가져오기 -->
+	<select id="gptplan" parameterType="String" resultType="gptplan">
+		select * from gptplan where gptpid = #{gptpid}
+	</select>
+	
+	<!-- 이력서에 gptmotive가 없을 시 insert -->
+	<insert id="insertgptplan" parameterType="map">
+		insert into personalstatement values(null,#{gid},#{memail},null,null,null,#{pspcontent},now())
+	</insert>
+	
+	<!-- 이력서에 gptmotive가 있을 시 insert -->
+	<update id="updategptplan" parameterType="map">
+		update personalstatement set pspcontent = #{pspcontent},psreg = now() where memail = #{memail}
+	</update>
+	
+	<!-- 이력서 gptplan 직접 수정 -->
+	<insert id="pspupdate" parameterType="map">
+		update personalstatement set pspcontent = #{pspcontent} , psreg = now() where pid = #{pid}
+	</insert>
+	
 </mapper>
