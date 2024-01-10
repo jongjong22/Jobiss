@@ -10,8 +10,6 @@ import com.example.demo.model.ReviewReply;
 @Mapper
 public interface ReviewReplyDao {
 
-	Review getBoard = null;
-	int update = 0;
 
 	int insert(ReviewReply reviewreply);
 

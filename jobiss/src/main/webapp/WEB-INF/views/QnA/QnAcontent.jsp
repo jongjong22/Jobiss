@@ -55,6 +55,11 @@
 	color: #007bff;
 }
 
+.action-buttons{
+	margin-left: 450px;
+	margin-bottom: 30px;
+}
+
 .view-reply {
 	/* 이 부분에 박스의 너비와 높이를 조정하는 스타일을 추가하세요 */
 	width: 600px !important; /* 예시로 너비를 100%로 설정 */
@@ -81,6 +86,7 @@ textarea{
 	margin-left: 225px;
 	font-family: 'MICEGothic Bold';
 }
+
 </style>
 </head>
 <body>
@@ -96,7 +102,7 @@ textarea{
 			if (confirmDelete) {
 				$.ajax({
 					type : "POST",
-					url : "QnAdelete.do",
+					url : "qnaDelete.do",
 					data : {
 						"qid" : qid
 					},
@@ -116,7 +122,7 @@ textarea{
 			}
 		}
 		
-		function deleteQnAreply(rqid,qid) {
+		function deleteqnareply(qrid,qid) {
 			
 			var confirmDelete1 = confirm("진짜 삭제하시겠습니까?");
 		    console.log("confirmDelete1 : " + confirmDelete1);
@@ -124,14 +130,14 @@ textarea{
 			if (confirmDelete1) {
 				$.ajax({
 					type : "POST",
-					url : "replyDelete.do",
+					url : "deleteqnareply.do",
 					data : {
-						"rqid" : rqid
+						"qrid" : qrid
 					},
 					success : function(response) {
 						if (response === "Y") {
 							alert("글 삭제가 되었습니다.");
-							location.href = "QnAcontent.do?qid=" +qid;
+							location.href = "QnAcontent.do?qid="+qid+"&page="+${page};
 						} else {
 							alert("삭제에 실패했습니다.");
 						}
@@ -142,12 +148,27 @@ textarea{
 
 				});
 			}
-		}
+		} 
+		
+		
+		function check(){
+			if('${sessionScope.member.memail}' == ""){
+				alert("로그인 하세요.");				
+				return false;
+			}
+			
+			
+			if($("#qrcontent").val() == ""){
+				alert("댓글을 입력 하세요.");
+				$("#qrcontent").focus();
+				return false;
+			}
+			
+		}		
 		
 	</script>
 
 
-	<%@ include file="header.jsp"%>
 
 	<div class="container">
 
@@ -159,21 +180,24 @@ textarea{
 		<div class="action-buttons">
 			<c:if test="${member.memail eq qna.memail }">
 				<input type="button"
-					onclick="location.href='QnAupdateform.do?qid=${qna.qid}'"
-					value="글 수정">
+					onclick="location.href='QnAupdateform.do?qid=${qna.qid}&page=${page}'"
+					value="글 수정" 
+					style="width:70px; height:40px; border-radius: 10px; border: none; background-color: blue; color: white;">
 				<input type="button" onclick="deleteQnA(${qna.qid})"
-					value="글 삭제">
+					value="글 삭제" 
+					style="width:70px; height:40px; border-radius: 10px; border: none; background-color: red; color: white;">
 			</c:if>
 		</div>
 
-				<!-- 댓글 작성 폼 -->
+				 <!-- 댓글 작성 폼 -->
 
-		<form action="replyWrite.do" method="post" class="view-reply">
+		<form action="qnareplyWrite.do" method="post" class="view-reply" onSubmit="return check()">
 			<input type="hidden" name="memail" value="${sessionScope.member.memail }"> 
 			<input type="hidden" name="qid" value="${qna.qid }">
+			<input type="hidden" name="page" value="${page}">
 			
 			<div style="position: relative;">
-		        <textarea name="rqcontent" rows="3" cols="50" style="resize: none; width: 100%;"></textarea>
+		        <textarea name="qrcontent" id="qrcontent"  rows="3" cols="50" style="resize: none; width: 100%;"></textarea>
 		        <input class="summit" type="submit" value="등록" 
 		        	style="position: absolute; bottom: 10px; right: 10px; background-color: #808080;
 		        			border: none; border-radius: 5px; color: white;">
@@ -183,35 +207,37 @@ textarea{
 		
 		<div class="review-reply">
 			<!-- 댓글 내용 -->
-			<c:if test="${not empty Qlist}">
-				<table border = "1" align = "center">
-					<tr>
-						<th>내용</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>삭제 버튼</th>
+			
+				<table align = "center">
+					<tr style="border: none; font-weight: bold;">
+						<th>content</th>
+						<th>id</th>
+						<th>date</th>
+						<th></th>
 					</tr>
-					<c:forEach var="reviewreply" items="${Qlist}" varStatus="loop">
+					<c:if test="${not empty Rlist}">
+					<c:forEach var="qnareply" items="${Rlist}">
 						<tr>
-							<c:if test="${member.memail ne reviewreply.memail }">
-							<td>${reviewreply.rqcontent }</td>
+							<c:if test="${member.memail ne qnareply.memail }">
+								<td>${qnareply.qrcontent }</td>
 							</c:if>
-							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="text" value="${reviewreply.rqcontent}"></td>
+							<c:if test="${member.memail eq qnareply.memail }">
+								<td><input type="text" value="${qnareply.qrcontent}"></td>
 							</c:if>
-							<td>${reviewreply.memail }</td>
-							<fmt:formatDate value="${reviewreply.rqreg}"
-								pattern="yyyy년 MM월 dd일" var="date" />
-							<td>${date}</td>
-							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="button"
-									onclick="deletereviewreply(${reviewreply.rqid}, ${qna.qid})" value="댓글 삭제"></td>
+							<td>${qnareply.memail }</td>								
+							<td><fmt:formatDate value="${qnareply.qrreg}" pattern="yyyy년 MM월 dd일"  /></td>
+							<c:if test="${member.memail eq qnareply.memail }">
+								<td><input type="button"
+									onclick="deleteqnareply('${qnareply.qrid}', '${qna.qid}')" value="댓글 삭제"
+									style="border: none; background-color: #ddd;"
+									></td>
 							</c:if>
 						</tr>
 					</c:forEach>
-				</table>
-			</c:if>
-		</div>
+					</c:if>
+				
+			</table>
+		</div> 
 		
 
 	</div>
