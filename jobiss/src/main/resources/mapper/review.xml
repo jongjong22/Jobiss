@@ -31,7 +31,7 @@
 		from review where rid= #{rid}
 	</select>
 
-	<update id="update" parameterType="review">
+	<update id="update" parameterType="Map">
 		UPDATE review
 		SET rtitle = #{rtitle},
 		rcontent = #{rcontent}

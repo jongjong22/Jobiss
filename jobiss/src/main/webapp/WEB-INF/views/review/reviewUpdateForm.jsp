@@ -7,75 +7,9 @@
 <meta charset="UTF-8">
 <title>리뷰 수정 게시판</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="./js/board.js"></script>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f7f7f7;
-	margin: 0;
-	padding: 0;
-}
-
-.layout {
-	width: 500px;
-	margin: 40px auto 0;
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.layout form {
-	display: flex;
-	flex-direction: column;
-}
-
-.layout input[type="text"], .layout textarea, .layout input[type="file"]
-	{
-	width: 100%;
-	box-sizing: border-box;
-	margin-top: 10px;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 14px;
-}
-
-.layout input[type="submit"], .layout input[type="button"] {
-	margin-top: 20px;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 4px;
-	font-size: 16px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.layout input[type="submit"] {
-	background-color: #4caf50;
-	color: #fff;
-}
-
-.layout input[type="submit"]:hover {
-	background-color: #45a049;
-}
-
-.layout input[type="button"] {
-	background-color: #f44336;
-	color: #fff;
-}
-
-.layout input[type="button"]:hover {
-	background-color: #d32f2f;
-}
-</style>
-
-<script>
-	function goBack() {
-		history.go(-1);
-	}
-</script>
-
+<script src="./js/review.js"></script>
+<link rel="stylesheet" type="text/css" href="css/reviewUpdateForm.css">
+ 
 </head>
 
 <body>
@@ -87,7 +21,7 @@ body {
 			<input name="rtitle" id="rtitle" type="text" placeholder="글 제목" value="${review.rtitle}">
 			<textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용">${review.rcontent}</textarea>
 
-			<input type="submit" value="수정"> 
+			<input type="button" onclick="reviewUpdate($('#rtitle').val(),$('#rcontent').val(),${review.rid})" value="등록"> 
 			<input type="button" onclick="goBack()" value="취소">
 		</form>
 	</div>
