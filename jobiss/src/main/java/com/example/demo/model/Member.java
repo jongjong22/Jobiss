@@ -14,108 +14,141 @@ public class Member {
 	private String mgender;
 	private String maddress;
 	private String mcareer;
-	private String meducation;
-	private String mmajor;
-	private String mcertification;
-	private String mlang;
-	private String mdb;
+	private String mschoolname;
+	private String mschooltype;
+	private String mschoolmajor;
+	private Timestamp mschoolstartreg;
+	private Timestamp mschoolendreg;
+	private String mjobtype;
 	private Timestamp mreg;
 	private String mdrop;
-	
+
 	public String getMemail() {
 		return memail;
 	}
+
 	public void setMemail(String memail) {
 		this.memail = memail;
 	}
+
 	public String getMpw() {
 		return mpw;
 	}
+
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
 	}
+
 	public String getMname() {
 		return mname;
 	}
+
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
+
 	public String getMphone() {
 		return mphone;
 	}
+
 	public void setMphone(String mphone) {
 		this.mphone = mphone;
 	}
+
 	public String getMage() {
 		return mage;
 	}
+
 	public void setMage(String mage) {
 		this.mage = mage;
 	}
+
 	public String getMgender() {
 		return mgender;
 	}
+
 	public void setMgender(String mgender) {
 		this.mgender = mgender;
 	}
+
 	public String getMaddress() {
 		return maddress;
 	}
+
 	public void setMaddress(String maddress) {
 		this.maddress = maddress;
 	}
+
 	public String getMcareer() {
 		return mcareer;
 	}
+
 	public void setMcareer(String mcareer) {
 		this.mcareer = mcareer;
 	}
-	public String getMeducation() {
-		return meducation;
+
+	public String getMschoolname() {
+		return mschoolname;
 	}
-	public void setMeducation(String meducation) {
-		this.meducation = meducation;
+
+	public void setMschoolname(String mschoolname) {
+		this.mschoolname = mschoolname;
 	}
-	public String getMmajor() {
-		return mmajor;
+
+	public String getMschooltype() {
+		return mschooltype;
 	}
-	public void setMmajor(String mmajor) {
-		this.mmajor = mmajor;
+
+	public void setMschooltype(String mschooltype) {
+		this.mschooltype = mschooltype;
 	}
-	public String getMcertification() {
-		return mcertification;
+
+	public String getMschoolmajor() {
+		return mschoolmajor;
 	}
-	public void setMcertification(String mcertification) {
-		this.mcertification = mcertification;
+
+	public void setMschoolmajor(String mschoolmajor) {
+		this.mschoolmajor = mschoolmajor;
 	}
-	public String getMlang() {
-		return mlang;
+
+	public Timestamp getMschoolstartreg() {
+		return mschoolstartreg;
 	}
-	public void setMlang(String mlang) {
-		this.mlang = mlang;
+
+	public void setMschoolstartreg(Timestamp mschoolstartreg) {
+		this.mschoolstartreg = mschoolstartreg;
 	}
-	public String getMdb() {
-		return mdb;
+
+	public Timestamp getMschoolendreg() {
+		return mschoolendreg;
 	}
-	public void setMdb(String mdb) {
-		this.mdb = mdb;
+
+	public void setMschoolendreg(Timestamp mschoolendreg) {
+		this.mschoolendreg = mschoolendreg;
 	}
+
+	public String getMjobtype() {
+		return mjobtype;
+	}
+
+	public void setMjobtype(String mjobtype) {
+		this.mjobtype = mjobtype;
+	}
+
 	public Timestamp getMreg() {
 		return mreg;
 	}
+
 	public void setMreg(Timestamp mreg) {
 		this.mreg = mreg;
 	}
+
 	public String getMdrop() {
 		return mdrop;
 	}
+
 	public void setMdrop(String mdrop) {
 		this.mdrop = mdrop;
 	}
-	
-	
-	
+
 }
-
-
-
