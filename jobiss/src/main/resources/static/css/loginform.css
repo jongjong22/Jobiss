@@ -1,70 +1,76 @@
 @charset "UTF-8";
 
 body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	margin: 0;
-	padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 form {
-	margin: 20px auto;
-	width: 500px;
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
 }
 
 th, td {
-	padding: 10px;
-	border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* 모든 테두리에 선 추가 */
+}
+
+/* 특정 TD의 선 스타일을 조절 */
+td.no-border {
+    border: 1px solid #ddd; /* 원하는 스타일로 변경 */
 }
 
 caption {
-	font-size: 1.5em;
-	margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-input[type="text"], input[type="password"], input[type="tel"] {
-	width: 100%;
-	padding: 8px;
-	margin-bottom: 10px;
-	box-sizing: border-box;
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-input[type="radio"] {
-	margin-right: 5px;
+select {
+    font-size: 14px;
+    padding: 8px;
 }
 
 button {
-	padding: 10px;
-	background-color: #4caf50;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
 }
 
 button:hover {
-	background-color: #45a049;
+    background-color: #45a049;
 }
 
-button[type="button"] {
-	background-color: #ccc;
-	margin-left: 10px;
-}
-
-button[type="button"]:hover {
-	background-color: #bbb;
-}
-
-td:last-child {
-	text-align: center;
+/* 수정된 부분: 라디오 버튼 정렬 */
+input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 5px;
 }
