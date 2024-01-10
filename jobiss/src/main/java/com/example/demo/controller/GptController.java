@@ -32,7 +32,7 @@ public class GptController {
 	private GptService gs;
 
 	// 로딩시 session 동시 초기화
-	public static void loading(HttpSession session) {
+	public void loading(HttpSession session) {
 		System.out.println("\n ***** gptLoading 시작 ***** \n");
 		Member member = (Member) session.getAttribute("member");
 
@@ -277,29 +277,72 @@ public class GptController {
 	}
 
 	@RequestMapping("/gptHistory")
-	public String gptHistory(GPT gpt, HttpSession session, Model model) {
+	public String gptHistory(int gid, String type, GPT gpt, HttpSession session, Model model) {
 		// 해당메서드는 gid를 무조건 주기때문에 검증이 필요없음.
 		System.out.println("\n ***** gptHistory ***** \n ");
 		loading(session);
-		gpt = gs.selectGptGid(gpt.getGid());
-		int gid = gpt.getGid();
 
 		System.out.println("gid : " + gid);
+		System.out.println("type : " + type);
+
+		List<GPT> gptList = gs.selectGptList(memail);
+		List<Integer> gidList = gs.selectGidMemail(memail);
+
+		String msg = "";
+
+		int now = 0;
+		for (int i = 0; i < gidList.size(); i++) {
+			if (gidList.get(i) == gid) {
+				now = i;
+				System.out.println("gidList : " + gidList);
+				System.out.println("now번 방에 있음 : " + now);
+			}
+		}
+		switch (type) {
+		case "prev":
+			if (now == 0)
+				msg = "이전 목록이 없습니다.";
+			else
+				now -= 1;
+
+			System.out.println("switch_prev : " + now);
+
+			break;
+		case "now":
+			System.out.println("switch_now : " + now);
+			break;
+
+		case "next":
+			if (now + 1 == gidList.size())
+				msg = "마지막 페이지 입니다.";
+			else
+				now += 1;
+
+			System.out.println("switch_next : " + now);
+			break;
+
+		}
+		gid = gidList.get(now);
+		System.out.println("변경된 gid : " + gid);
 		List<GptGrow> growList = gs.selectGptGrowGid(gid);
 		List<GptCharacter> characterList = gs.selectGptCharacterGid(gid);
 		List<GptMotive> motiveList = gs.selectGptMotiveGid(gid);
 		List<GptPlan> planList = gs.selectGptPlanGid(gid);
 
+		System.out.println("gidList : " + gidList);
+		System.out.println("gidList갯수 : " + gidList.size());
 		System.out.println("growList갯수 : " + growList.size());
 		System.out.println("characterList갯수 : " + characterList.size());
 		System.out.println("motiveList갯수 : " + motiveList.size());
 		System.out.println("planList갯수 : " + planList.size());
 
+		model.addAttribute("gptList", gptList);
 		model.addAttribute("growList", growList);
 		model.addAttribute("characterList", characterList);
 		model.addAttribute("motiveList", motiveList);
 		model.addAttribute("planList", planList);
 		model.addAttribute("gid", gid);
+		model.addAttribute("msg", msg);
 
 		System.out.println("\n ***** Controller_gptHistory ***** 끝\n");
 		return "gpt/gptHistory";
