@@ -92,7 +92,7 @@
 <%@ include file="header.jsp"%>
 
     <div class="layout">
-        <form action="QnAWrite.do" method="post" enctype="multipart/form-data">
+        <form action="qnaWrite.do" method="post" enctype="multipart/form-data">
             <input name="qtitle" id="qtitle" type="text" placeholder="글 제목">
             <textarea name="qcontent" id="qcontent" rows="8" cols="50" placeholder="글 내용"></textarea>
           	<!-- <input type="file" id="rsuccess1" name="rsuccess1">	 -->

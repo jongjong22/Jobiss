@@ -44,7 +44,7 @@ public class ReviewController {
 	// 글작성
 	@RequestMapping(value = "reviewWrite.do" , method = RequestMethod.POST)
 	public String reviewWrite(@RequestParam("rsuccess1") MultipartFile mf, 
-							   String page, Review review, HttpSession session, 
+							   Review review, HttpSession session, 
 							   HttpServletRequest request, Model model) throws Exception {
 
 
@@ -60,12 +60,12 @@ public class ReviewController {
 		// 실제 파일 경로를 반환하는 메서드
 		// 이 메서드는 서블릿 컨터이너가 웹 애플리케이션을 배포할 때 생성하는 디렉터리 구조를 기반으로 함.
 		String path = request.getRealPath("upload");
+		String newfilename = "";
 
+		if(size > 0) {
 		
 		// 파일 중복 문제 해결 
 		
-		String file[] = new String[2];
-		String newfilename = "";
 		
 		// 파일 이름에서 확장자를 추출하는 과정 
 		String extension = filename.substring(filename.lastIndexOf("."));
@@ -75,11 +75,6 @@ public class ReviewController {
 		
 		newfilename = uuid.toString() + extension;
 		
-		StringTokenizer st = new StringTokenizer(filename,".");
-		
-		file[0] = st.nextToken();	// 파일명
-		file[1] = st.nextToken();	// 확장자
-
 		int result = 0; 
 		
 		if(size > 10000000) {
@@ -97,7 +92,7 @@ public class ReviewController {
 			return "review/reviewWriteForm";
 		}
 		
-		
+		} // if end
 		
 		// 첨부파일이 전송된 경우
 		if(size > 0) {
@@ -112,17 +107,15 @@ public class ReviewController {
 		int tmp = service.insert(review);
 
 		if (tmp == 1) {
-
 			model.addAttribute("insertResult", tmp);
-			
+//			model.addAttribute("page", page);
 		}
 		
-		
 		return "review/reviewInsertResult";
-
 	}
 	
-	// 리뷰 리스트
+	
+	// 리뷰 리스트, 댓글 리스트 불러오기
 	@RequestMapping("reviewList.do")
 	public String reviewList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 	    int limit = 10; // 한 페이지에 출력할 데이터 개수

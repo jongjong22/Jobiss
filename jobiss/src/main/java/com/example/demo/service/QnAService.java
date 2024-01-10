@@ -2,48 +2,48 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.QnADao;
 import com.example.demo.model.QnA;
 
 @Service
 public class QnAService {
+	
+	@Autowired
+	private QnADao qdao;
 
 	public int qnaInsert(QnA qna) {
 		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("insert service");
+		return qdao.qnaInsert(qna);
 	}
+	
+	public List<QnA> getqnaList(int start) {
+		// TODO Auto-generated method stub
+		return qdao.getqnaList(start);
+	}
+
 
 	public int getqnaCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return qdao.getqnaCount();
+	}
+	
+	public QnA getqna(int qid) {
+		return qdao.getqna(qid);
 	}
 
-	public List<QnA> getqnaList(int page) {
+	public int qnaUpdate(QnA qna) {
 		// TODO Auto-generated method stub
-		return null;
+		return qdao.qnaUpdate(qna);
 	}
 
-	public void QnAUpdateCount(int qid) {
+	public int qnaDelete(int qid) {
 		// TODO Auto-generated method stub
-		
+		return qdao.qnaDelete(qid);
 	}
-
-	public QnA getQnA(int qid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int delete(int qid) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int QnAUpdate(QnA qna) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 
 
