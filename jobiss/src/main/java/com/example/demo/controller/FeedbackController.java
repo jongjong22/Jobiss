@@ -115,7 +115,7 @@ public class FeedbackController {
 	
 	@RequestMapping("FeedUpdate.do")
 	@ResponseBody
-	public String FeedUpdate(String ftitle, String fcontent, int fid, Model model) {
+	public String FeedUpdate(String ftitle, String fcontent, int fid) {
 
 			Map map = new HashMap();
 			map.put("ftitle", ftitle);

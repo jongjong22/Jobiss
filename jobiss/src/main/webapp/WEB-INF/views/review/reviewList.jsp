@@ -7,98 +7,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/reviewList.css">
 	
     <title>리뷰게시판 목록</title>
-	
-    <style>
-		@font-face {
-		    font-family: 'MICEGothic Bold';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-		    font-weight: 700;
-		    font-style: normal;
-		}
-    
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-            font-family: 'MICEGothic Bold';
-        }
-        
-        
-        .title{
-        	font-family: 'MICEGothic Bold';
-        }
-
-
-        
-		.layout {
-		    width: 800px;
-		    margin: 40px auto;
-		    text-align: center; /* Center-align the content within the layout */
-		    font-family: 'MICEGothic Bold';
-		}
-		
-		table {
-		    margin: 40px auto; /* Center-align the table within the layout */
-		    width: 800px;
-		}
-				
-		th, td {
-			
-			padding: 12px 15px;
-			border-bottom: 1px solid #ddd;
-			text-align: center;
-		}
-		
-		th {
-			background-color: #fff;
-			text-align: center !important;
-			font-size: 20px;
-		}
-		
-		td{
-			font-size: 15px;
-		}
-		
-
-		
-		tbody tr:hover {
-			background-color: #f9f9f9;
-		}
-		
-		tbody td:first-child {
-			font-weight: bold;
-		}
-		
-		nav ul {
-			list-style: none;
-			display: flex;
-			justify-content: center;
-			margin-top: 20px;
-		}
-		
-		nav ul li {
-			margin-right: 5px;
-		}
-		
-		.add-review-button {
-			display: flex;
-			justify-content: flex-end;
-			margin-bottom: 10px;
-			margin-top: 10px;
-		}
-
-        .add-review-button > button{
-        	border-radius: 10px;
-        	border: 1 solid black;
-        	background-color: transparent;
-        	padding: 5px 10px 5px 10px;
-        	
-        }
-        
-    </style>
     
 </head>
 

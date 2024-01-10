@@ -21,7 +21,7 @@ public interface ReviewDao {
 
 	public Review getBoard(int rid);
 
-	public int update(Review review);
+	public int update(Map map);
 
 	public int delete(int rid);
 }

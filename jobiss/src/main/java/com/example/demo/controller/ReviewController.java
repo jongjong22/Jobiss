@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -125,6 +127,7 @@ public class ReviewController {
 	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
 
 	    List<Review> resultList = service.getList(start);
+	    System.out.println(resultList);
 	    
 	    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
@@ -176,30 +179,23 @@ public class ReviewController {
 
 	// 수정하기
 	@RequestMapping("reviewUpdate.do")
-	public String reviewUpdate(Review review, int rid, HttpSession session, Model model) {
+	@ResponseBody
+	public String reviewUpdate(String rtitle, String rcontent, int rid) {
 
-		int updateResult = 0;
-		
-		Review db = service.getBoard(review.getRid());
-		
-		Member member = (Member) session.getAttribute("member"); // session에서 member가져와서 member변수에 넣어줌 ~
-		
-		String id = member.getMemail(); // 멤버에 있는 이메일 가져옴 !
+		Map map = new HashMap();
+		map.put("rcontent", rcontent);
+		map.put("rtitle", rtitle);
+		map.put("rid", rid);
 
-		String emailFromDB = db.getMemail(); // db에 있는 이메일 가져옴
+	
+		int result = service.update(map);
 
-		if(id.equals(emailFromDB)) {
-		    updateResult = service.update(review);
-		} else {
-		    updateResult = -1;
+		if(result == 1) {
+			return "Y";
+		}else {
+			return "N";
 		}
-
-		model.addAttribute("updateResult",updateResult);
-		model.addAttribute("review",review);
-		
-		return "review/reviewUpdateResult";
-
-	}
+}
 
 
 	// 삭제하기
@@ -207,20 +203,8 @@ public class ReviewController {
 	@ResponseBody
 	public String reviewDelete(HttpSession session, int rid) {
 
-		int deleteResult = 0;
-		
-		Review db = service.getBoard(rid);
-		
-		Member member = (Member)session.getAttribute("member");
-		
-		String id = member.getMemail();
-		
-		String emailFromDB = db.getMemail();
-		
-		if(id.equals(emailFromDB)) {
-			deleteResult = service.delete(rid);
-		}
-		
+		int	deleteResult = service.delete(rid);
+
 	    if(deleteResult == 1) {
 	    	return "Y";
 	    }else {
