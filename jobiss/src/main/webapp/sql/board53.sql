@@ -1,4 +1,5 @@
 --board53.sql
+
 drop table board53;
 show tables;
 select * from board53; 

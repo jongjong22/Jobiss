@@ -1,14 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+@charset "UTF-8";
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>QnA 수정 게시판</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="./js/board.js"></script>
-<style>
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f7f7f7;
@@ -68,25 +59,3 @@ body {
 .layout input[type="button"]:hover {
 	background-color: #d32f2f;
 }
-</style>
-</head>
-
-<body>
-	<div class="layout">
-		<form action="QnAupdate.do" method="post">
-		<%-- <input type="hidden" value="${qna.memail}" name="memail"> --%>
-		<input type="hidden" value="${page}" name="page">
-		<input type="hidden" value="${qna.qid}" name="qid">
-		
-			<input name="qtitle" id="qtitle" type="text" placeholder="글 제목" value="${qna.qtitle}">
-			
-			<textarea name="qcontent" id="qcontent" rows="8" cols="50" placeholder="글 내용">${qna.qcontent}</textarea>
-				
-			<div class="form-actions">
-				<input type="submit" value="수정">
-				<input type="button" onclick="history.go(-1);" value="취소">
-			</div>
-		</form>
-	</div>
-</body>
-</html>

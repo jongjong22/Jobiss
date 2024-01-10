@@ -15,6 +15,8 @@
 		* from gpt where gid = #{gid}
 	</select>
 
+
+
 	<!-- 부모 최신글 -->
 	<select id="selectGptTop" resultType="gpt"
 		parameterType="String">
@@ -26,6 +28,12 @@
 	<select id="selectGptList" resultType="gpt"
 		parameterType="String">
 		select * from gpt where memail = #{memail}
+	</select>
+
+	<!-- 부모 특정 전체글 -->
+	<select id="selectGidMemail" resultType="Integer"
+		parameterType="String">
+		select gid from gpt where memail = #{memail}
 	</select>
 
 	<!-- 부모 시간 최신화 -->
