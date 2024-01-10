@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
@@ -25,16 +24,33 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityService cs;
-	
+
 	@RequestMapping("community.do")
-	public String community(Model model) {
-		
+	public String community(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+
+		int limit = 10; // 한 페이지에 출력할 데이터 개수
+
+		int listcount = cs.getCount(); // 전체 데이터 개수
+
+		int start = (page - 1) * 10; // limit로 추출하기 위한 시작번호 : 0, 10, 20...
+
+		int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
+
+		int startPage = ((page - 1) / 10) * 10 + 1; // 시작 페이지
+		int endPage = startPage + 10; // 끝 페이지
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
 		// 전체 커뮤니티 글 리스트 구하기
-		System.out.println("요기?");
-		List<Community> communityList = cs.selectCommunityList();
-		System.out.println("communityList : " + communityList); 
+		List<Community> communityList = cs.selectCommunityList(start);
 		model.addAttribute("communityList", communityList);
-		
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("page", page);
+
 		return "community/communityForm";
 	}
 
@@ -45,11 +61,9 @@ public class CommunityController {
 	public String communityWriteForm(HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
-		System.out.println("member : " + member);
 
 		if (member != null) {
 			String memail = member.getMemail();
-			System.out.println("memail : " + memail);
 			model.addAttribute("memail", memail);
 		}
 
@@ -115,34 +129,34 @@ public class CommunityController {
 			community.setCimage(newFileName);
 			System.out.println("전송됐음!!");
 		}
-		
+
 		// 커뮤니티 글 insert
 		result = cs.communityInsert(community);
 
 		return "redirect:/community.do";
 	}
+
+	@RequestMapping("communityDetail.do")
+	public String communityDetail(String cid, Model model) {
+
+		int id = Integer.parseInt(cid);
+		// 조회수 1 증가
+		int result = cs.readCountUpdate(id);
+		
+		Community community = cs.selectCommunity(id);
+
+		model.addAttribute("community", community);
+
+		return "community/communityDetail";
+	}
+
+	@RequestMapping("deleteCommunity.do")
+	public String deleteCommunity(String cid) {
+
+		int id = Integer.parseInt(cid);
+		// 글 삭제
+		int result = cs.deleteCommunity(id);
+
+		return "redirect:/community.do";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

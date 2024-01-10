@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.Community;
+import com.example.demo.model.Review;
 
 @Mapper
 public interface CommunityDao {
@@ -13,6 +15,14 @@ public interface CommunityDao {
 	int communityInsert(Community community);
 
 	// 전체 커뮤니티 글 리스트 구하기
-	List<Community> selectCommunityList();
+	List<Community> selectCommunityList(int start);
+
+	Community selectCommunity(int id);
+
+	int readCountUpdate(int id);
+
+	int deleteCommunity(int id);
+
+	int getCount();
 
 }

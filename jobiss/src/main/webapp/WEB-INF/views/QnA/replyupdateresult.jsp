@@ -8,14 +8,14 @@
 <body>
 	<c:if test="${updateResult == 1 }">
 		<script type="text/javascript">
-			alert("글수정 성공!");
-			location.href = "QnAcontent.do?qid="+${qna.qid}+"&page="+${page};
+			alert("댓글수정 성공!");
+			location.href = "QnAcontent.do?qid="+${qid};
 		</script>
 	</c:if>
 
 	<c:if test="${updateResult != 1 }">
 		<script type="text/javascript">
-			alert("글수정 실패");
+			alert("댓글 수정 실패");
 			history.go(-1);
 		</script>
 	</c:if>
