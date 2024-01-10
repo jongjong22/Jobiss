@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
@@ -17,8 +18,8 @@ public class Member {
    private String mschoolname;
    private String mschooltype;
    private String mschoolmajor;
-   private Timestamp mschoolstartreg;
-   private Timestamp mschoolendreg;
+   private String mschoolstartreg;
+   private String mschoolendreg;
    private String mlicensename;
    private String mlicensetype;
    private Timestamp mlicensereg;
@@ -92,16 +93,16 @@ public class Member {
    public void setMschoolmajor(String mschoolmajor) {
       this.mschoolmajor = mschoolmajor;
    }
-   public Timestamp getMschoolstartreg() {
+   public String getMschoolstartreg() {
       return mschoolstartreg;
    }
-   public void setMschoolstartreg(Timestamp mschoolstartreg) {
+   public void setMschoolstartreg(String mschoolstartreg) {
       this.mschoolstartreg = mschoolstartreg;
    }
-   public Timestamp getMschoolendreg() {
+   public String getMschoolendreg() {
       return mschoolendreg;
    }
-   public void setMschoolendreg(Timestamp mschoolendreg) {
+   public void setMschoolendreg(String mschoolendreg) {
       this.mschoolendreg = mschoolendreg;
    }
    public String getMlicensename() {

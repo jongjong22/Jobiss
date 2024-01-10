@@ -11,7 +11,7 @@
 
 <c:if test="${result!=1}">
 	<script>
-	alert("회원 탈퇴실패.");
+	alert("회원 비밀번호가 틀립니다.");
 	history.go(-1)
 	</script>
 </c:if>

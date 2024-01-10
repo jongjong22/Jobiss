@@ -15,11 +15,11 @@ public interface QnADao {
 	
 	public int getqnaCount();
 	
-	public QnA getQnA(int qid);
+	public QnA getqna(int qid);
 	
-	public int QnAUpdate(QnA qna);
+	public int qnaUpdate(QnA qna);
 	
-	public int delete(int qid);
+	public int qnaDelete(int qid);
 	
 	
 }

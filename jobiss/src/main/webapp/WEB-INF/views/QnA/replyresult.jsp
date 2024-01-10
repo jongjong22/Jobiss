@@ -6,16 +6,16 @@
 <html lang="en">
 
 <body>
-	<c:if test="${updateResult == 1 }">
+	<c:if test="${insertResult == 1 }">
 		<script type="text/javascript">
-			alert("글수정 성공!");
-			location.href = "QnAcontent.do?qid="+${qna.qid}+"&page="+${page};
+			alert("댓글작성 성공!");
+			location.href = "QnAcontent.do?qid="+${qid}+"&page="+${page};
 		</script>
 	</c:if>
 
-	<c:if test="${updateResult != 1 }">
+	<c:if test="${insertResult != 1 }">
 		<script type="text/javascript">
-			alert("글수정 실패");
+			alert("댓글 작성 실패");
 			history.go(-1);
 		</script>
 	</c:if>

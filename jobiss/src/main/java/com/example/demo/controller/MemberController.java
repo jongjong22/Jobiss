@@ -1,9 +1,15 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.loading.MLet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +86,8 @@ public class MemberController {
 
 	// 회원가입
 	@RequestMapping("logininsert.do")
-	public String logininsert(Model model, Member member) {
+	public String logininsert(Model model, Member member, @RequestParam("mschooltype") String mschooltype,
+			HttpServletRequest request) {
 
 		int result = service.logininsert(member);
 
@@ -89,30 +96,94 @@ public class MemberController {
 		return "member/logininsert";
 	}
 
+	// 회원가입(아이디 중복 검사)
+	@ResponseBody
+	@RequestMapping("idcheck.do")
+	public String idcheck(@RequestParam("memail") String memail) {
+		System.out.println("idcheck");
+		Member member = service.dbselectone(memail);
+		System.out.println("idcheck");
+
+		if (member == null) {
+			return "Y";
+		} else {
+			return "N";
+		}
+	}
+
 	// 회원정보 수정 이동(마이페이지 내에서 가능)
 	@RequestMapping("memberupdateform.do")
-	public String memberupdateform(Model model, Member member, HttpSession session) {
+	public String memberupdateform(Model model, Member member, HttpSession session) throws ParseException {
 
 		member = (Member) session.getAttribute("member");
 
+		String dbStart = member.getMschoolstartreg();
+		String dbEnd = member.getMschoolendreg();
+
+		SimpleDateFormat dbSd = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat newSd = new SimpleDateFormat("yyyy-MM-dd");
+
+		// String 데이트 파싱
+		Date newStart_ = dbSd.parse(dbStart);
+		Date newEnd_ = dbSd.parse(dbEnd);
+
+		// 파싱한 date 다시 format하기
+		String newStart = newSd.format(newStart_);
+		String newEnd = newSd.format(newEnd_);
+
+		System.out.println("newStart_ : " + newStart_);
+		System.out.println("newStart : " + newStart);
+
 		model.addAttribute("member", member);
+		model.addAttribute("startDate", newStart);
+		model.addAttribute("endDate", newEnd);
 
 		return "member/mypage/memberupdateform";
 	}
 
 	// 회원정보 수정
 	@RequestMapping("memberupdate.do")
-	public String memberupdate(Model model, Member member, HttpSession session) {
+	public String memberupdate(Model model, Member member, HttpSession session, HttpServletRequest request) {
 
 		int result = 0;
-		
-		
+		String memail = member.getMemail();
+		String newPw = member.getMpw();
+		String dbPw = "";
+
+		System.out.println("pw : " + member.getMpw());
+
+		if (memail != null && memail != "") {
+			System.out.println("로그인 세션 있음");
+			Member dbMember = service.dbselectone(member.getMemail());
+
+			if (dbMember != null) {
+				System.out.println("db구해옴");
+				dbPw = dbMember.getMpw();
+
+			} else {
+				System.out.println("db못구해옴");
+			}
+		} else {
+			System.out.println("로그인 세션 없음");
+		}
+
+		if ((newPw != null && newPw != "") && newPw.equals(dbPw)) {
+			System.out.println("비밀번호 검증 완료");
+
+		} else {
+			System.out.println("비밀번호 검증 실패");
+			model.addAttribute("msg", "비밀번호가 올바르지 않습니다.");
+			return "member/mypage/memberupdate";
+		}
+		System.out.println("업데이트 전 :" + member);
 
 		result = service.updatemember(member);
 
+		model.addAttribute("member 업데이트 후:", member);
 		model.addAttribute("result", result);
 
 		return "member/mypage/memberupdate";
+
 	}
 
 	// 마이페이지(회원 탈퇴) 이동
@@ -558,7 +629,7 @@ public class MemberController {
 		}
 
 	}
-	
+
 	// 마이페이지 이력서 직접 업데이트(성격장단점)
 	@RequestMapping("pspupdate.do")
 	@ResponseBody
@@ -578,5 +649,5 @@ public class MemberController {
 		} else {
 			return "N";
 		}
-	}	
+	}
 }

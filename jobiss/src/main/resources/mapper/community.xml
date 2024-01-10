@@ -9,7 +9,28 @@
 	</insert>
 	
 	<!-- 커뮤니티 게시글 전체 구하기 -->
-	<select id="selectCommunityList" resultType="community">
-	    select * from community
+	<select id="selectCommunityList" parameterType="int" resultType="community">
+	    SELECT *
+		FROM community
+		WHERE cdrop = 'N'
+		ORDER BY cid DESC
+		LIMIT #{start}, 10
 	</select>
+	
+	<select id="selectCommunity" parameterType="int" resultType="community">
+		select * from community where cid=#{id}
+	</select>
+	
+	<update id="readCountUpdate" parameterType="int">
+		update community set creadcount=#{creadcount}+1 where cid=#{id}
+	</update>
+	
+	<update id="deleteCommunity" parameterType="int">
+		update community set cdrop='Y' where cid=#{id}
+	</update>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from community where cdrop = 'N'
+	</select>
+	
 </mapper>

@@ -118,9 +118,9 @@
                     <th>작성자</th>
                     <th>작성일</th>
                 </tr>
-                    <c:forEach var="QnA" items="${list}" varStatus="loop">
+                    <c:forEach var="qna" items="${list}" varStatus="loop">
                         <tr>
-                        	<td><a href="QnAcontent.do?rid=${qna.qid}">${qna.qtitle }</a></td>
+                        	<td><a href="QnAcontent.do?qid=${qna.qid}&page=${page}">${qna.qtitle }</a></td>
                             <td>${qna.qcontent }</td>
                             <td>${qna.memail }</td>
                             <fmt:formatDate value="${qna.qreg}"
@@ -147,7 +147,7 @@
                     <li><a href="QnAlist.do?page=${pageNum}">${pageNum }</a></li>
                 </c:forEach>
                 <c:if test="${endPage < pageCount}">
-                    <li><a href="rQnAlist.do?page=${endPage + 1}">다음</a></li>
+                    <li><a href="QnAlist.do?page=${endPage + 1}">다음</a></li>
                 </c:if>
             </ul>
         </nav>

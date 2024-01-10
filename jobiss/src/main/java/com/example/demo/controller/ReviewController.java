@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -44,7 +46,7 @@ public class ReviewController {
 	// 글작성
 	@RequestMapping(value = "reviewWrite.do" , method = RequestMethod.POST)
 	public String reviewWrite(@RequestParam("rsuccess1") MultipartFile mf, 
-							   String page, Review review, HttpSession session, 
+							   Review review, HttpSession session, 
 							   HttpServletRequest request, Model model) throws Exception {
 
 
@@ -60,12 +62,12 @@ public class ReviewController {
 		// 실제 파일 경로를 반환하는 메서드
 		// 이 메서드는 서블릿 컨터이너가 웹 애플리케이션을 배포할 때 생성하는 디렉터리 구조를 기반으로 함.
 		String path = request.getRealPath("upload");
+		String newfilename = "";
 
+		if(size > 0) {
 		
 		// 파일 중복 문제 해결 
 		
-		String file[] = new String[2];
-		String newfilename = "";
 		
 		// 파일 이름에서 확장자를 추출하는 과정 
 		String extension = filename.substring(filename.lastIndexOf("."));
@@ -75,11 +77,6 @@ public class ReviewController {
 		
 		newfilename = uuid.toString() + extension;
 		
-		StringTokenizer st = new StringTokenizer(filename,".");
-		
-		file[0] = st.nextToken();	// 파일명
-		file[1] = st.nextToken();	// 확장자
-
 		int result = 0; 
 		
 		if(size > 10000000) {
@@ -97,7 +94,7 @@ public class ReviewController {
 			return "review/reviewWriteForm";
 		}
 		
-		
+		} // if end
 		
 		// 첨부파일이 전송된 경우
 		if(size > 0) {
@@ -112,17 +109,15 @@ public class ReviewController {
 		int tmp = service.insert(review);
 
 		if (tmp == 1) {
-
 			model.addAttribute("insertResult", tmp);
-			
+//			model.addAttribute("page", page);
 		}
 		
-		
 		return "review/reviewInsertResult";
-
 	}
 	
-	// 리뷰 리스트
+	
+	// 리뷰 리스트, 댓글 리스트 불러오기
 	@RequestMapping("reviewList.do")
 	public String reviewList(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 	    int limit = 10; // 한 페이지에 출력할 데이터 개수
@@ -132,6 +127,7 @@ public class ReviewController {
 	    int start = (page - 1) * 10;  // limit로 추출하기 위한 시작번호 : 0, 10, 20...
 
 	    List<Review> resultList = service.getList(start);
+	    System.out.println(resultList);
 	    
 	    int pageCount = (int) Math.ceil((double) listcount / limit); // 전체 페이지 개수
 
@@ -183,30 +179,23 @@ public class ReviewController {
 
 	// 수정하기
 	@RequestMapping("reviewUpdate.do")
-	public String reviewUpdate(Review review, int rid, HttpSession session, Model model) {
+	@ResponseBody
+	public String reviewUpdate(String rtitle, String rcontent, int rid) {
 
-		int updateResult = 0;
-		
-		Review db = service.getBoard(review.getRid());
-		
-		Member member = (Member) session.getAttribute("member"); // session에서 member가져와서 member변수에 넣어줌 ~
-		
-		String id = member.getMemail(); // 멤버에 있는 이메일 가져옴 !
+		Map map = new HashMap();
+		map.put("rcontent", rcontent);
+		map.put("rtitle", rtitle);
+		map.put("rid", rid);
 
-		String emailFromDB = db.getMemail(); // db에 있는 이메일 가져옴
+	
+		int result = service.update(map);
 
-		if(id.equals(emailFromDB)) {
-		    updateResult = service.update(review);
-		} else {
-		    updateResult = -1;
+		if(result == 1) {
+			return "Y";
+		}else {
+			return "N";
 		}
-
-		model.addAttribute("updateResult",updateResult);
-		model.addAttribute("review",review);
-		
-		return "review/reviewUpdateResult";
-
-	}
+}
 
 
 	// 삭제하기
@@ -214,20 +203,8 @@ public class ReviewController {
 	@ResponseBody
 	public String reviewDelete(HttpSession session, int rid) {
 
-		int deleteResult = 0;
-		
-		Review db = service.getBoard(rid);
-		
-		Member member = (Member)session.getAttribute("member");
-		
-		String id = member.getMemail();
-		
-		String emailFromDB = db.getMemail();
-		
-		if(id.equals(emailFromDB)) {
-			deleteResult = service.delete(rid);
-		}
-		
+		int	deleteResult = service.delete(rid);
+
 	    if(deleteResult == 1) {
 	    	return "Y";
 	    }else {

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.dao.ReviewReplyDao">
+<mapper namespace="com.example.demo.dao.ReQnADao">
 
 
 	<insert id="insert" parameterType="ReQnA">
 		INSERT
-		INTO reviewreply
+		INTO qnareply
 		VALUES
-		(null, #{rid}, #{memail}, #{rrcontent}, now(), default)
+		(null, #{qid}, #{memail}, #{qrcontent}, now(), default)
 	</insert>
 
 	<select id="RgetList" parameterType="int" resultType="ReQnA" >
 		SELECT *
-		FROM reviewreply
-		WHERE rrdrop = 'N' and rid = #{rid}
-		ORDER BY rrreg desc
+		FROM qnareply
+		WHERE qrdrop = 'N' and qid = #{qid}
+		ORDER BY qrreg desc
 	</select>
 
 	<select id="getCount" resultType="int">
-		select count(*) from reviewreply WHERE rrdrop = 'N'
+		select count(*) from qnareply WHERE qrdrop = 'N'
 	</select>
 
 	<select id="getBoard" parameterType="int" resultType="ReQnA">
 		select *
-		from reviewreply where rrid= #{rrid}
+		from qnareply where qrid= #{qrid}
 	</select>
 
 
 	<update id="delete" parameterType="int">
-		update reviewreply set rrdrop='Y' 
-		where rrid=#{rrid}
+		update qnareply set qrdrop='Y' 
+		where qrid=#{qrid}
 	</update>
 
 

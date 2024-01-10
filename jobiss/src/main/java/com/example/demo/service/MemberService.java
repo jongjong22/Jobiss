@@ -191,5 +191,7 @@ public class MemberService {
 	public int pspupdate(Map map) {
 		return dao.pspupdate(map);
 	}
+	
+	
 
 }

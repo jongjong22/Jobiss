@@ -1,57 +1,210 @@
-.container_main {
-	max-width: 80%;
-	padding: 20px;
-	background-color: #ffefef;
+/* 헤딩 스타일 */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: "Open sans", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	color: #333333;
+}
+
+h1 {
+	font-size: 40px;
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 36px;
+	font-size: 2.25rem;
+}
+
+h3 {
 	font-size: 30px;
-	margin: 0 auto; /* 수평 가운데 정렬 */
+	font-size: 1.875rem;
 }
 
-.table_qRequest, .table_cRequest {
-	margin-bottom: 60px;
-	padding: 30px;
-	background-color: #f5f0e1; /* 부드러운 파스텔톤 배경 */
-	border-radius: 15px;
-	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+h4 {
+	font-size: 24px;
+	font-size: 1.5rem;
 }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
-	align-items: center;
+h5 {
+	font-size: 20px;
+	font-size: 1.25rem;
 }
 
-th, td {
-	font-size: 30px;
-	margin-bottom: 20px;
-	color: #333;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-	font-style: italic;
+/* 캡션 스타일 */
+.caption_main {
 	text-align: center;
 }
 
-/* 텍스트 에어리어 스타일 */
-textarea {
-	width: calc(100% - 20px); /* 전체 너비에서 padding 값 제외 */
+.caption_main h1 {
+	font-size: 36px;
+	color: #333;
+}
+
+.caption_main h2 {
+	font-size: 24px;
+	color: #666;
+}
+
+/* 전체 폰트 변경 (Arial로 대체) */
+body {
+	font-family: Arial, sans-serif;
+}
+
+.main {
+	display: flex;
+	justify-content: space-between; /* 요소 사이의 간격을 최대화하여 양쪽 끝으로 정렬 */
+	align-items: flex-start; /* 위쪽 정렬 */
+}
+
+.container_main {
+	width: 100%;
+	margin-top: 0;
+	margin-right: 20px; /* 오른쪽 간격을 없애줍니다. */
+	padding: 20px;
+	background-color: #f5f5f5;
+	font-size: 30px;
+	border-radius: 20px;
+}
+/* 히스토리 스타일 */
+.history_main {
+	width: 18%;
+	justify-content: flex-start;
+	margin-left: 10px;
+	margin-top: 0; /* 이전에 -20%로 되어있던 것을 수정합니다. */
+	margin-right: 20px; /* 오른쪽 간격 추가 */
+	position: sticky;
+	top: 10%;
+	left: 20px; /* 왼쪽에 위치 */
+	padding: 10px 15px;
+	background-color: #f0f0f0;
+	color: #333;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.table_qRequest, .table_cRequest, .table_mRequest, .table_pRequest {
+	margin-bottom: 40px;
+	padding: 25px;
+	background-color: #f0f0f0; /* 더 연한 회색 */
+	border-radius: 20px; /* 동그란 테두리 */
+	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.container_main table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 15px;
+	border: 2px solid #ccc;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container_main table th, .container_main table td {
+	font-size: 22px;
+	color: #333;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 	padding: 10px;
-	border: 1px solid #ccc;
+	font-style: normal;
+	text-align: center !important; /* 텍스트 가운데 정렬 */
+	border-radius: 15px;
+}
+
+.container_main textarea {
+	width: calc(100% - 20px);
+	padding: 15px;
+	border: 2px solid #ccc; /* 변경된 border 값 */
+	border-radius: 20px;
+	border-color: deeppink;
+	resize: vertical;
+	margin-bottom: 15px;
+	font-size: 18px;
+	background-color: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(8px);
+	resize: vertical;
+}
+
+/* 히스토리 스타일 */
+.history_main {
+	width: 18%;
+	justify-content: flex-start;
+	margin-left: 20px;
+	margin-top: 0; /* 이전에 -20%로 되어있던 것을 수정합니다. */
+	margin-right: 20px; /* 오른쪽 간격 추가 */
+	position: sticky;
+	top: 10%;
+	left: 20px; /* 왼쪽에 위치 */
+	padding: 10px 15px;
+	background-color: #f0f0f0;
+	color: #333;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 호버 효과 */
+.history_main:hover {
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+}
+
+/* 작은 화면에서 위치 조정 */
+@media screen and (max-width: 768px) {
+	.history_main {
+		left: 10px;
+		top: 10px;
+		box-shadow: none;
+	}
+}
+/* 기본 select 스타일 */
+select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding: 10px;
 	border-radius: 5px;
-	resize: vertical; /* 수직 리사이즈만 가능하도록 설정 */
-	margin-bottom: 10px;
-	font-size: 20px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	color: #333;
+	font-size: 16px;
+}
+
+/* option에 hover 효과 */
+select option:hover {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+/* 선택된 옵션 스타일 */
+select option:checked {
+	background-color: #f0f0f0;
+	color: #333;
 }
 
 /* 버튼 스타일 */
 button {
-	padding: 8px 16px;
+	padding: 15px 25px; /* 조금 더 큰 크기로 변경 */
 	border: none;
-	background-color: #007bff;
+	background-color: #ff9f00;
 	color: white;
-	border-radius: 5px;
+	border-radius: 30px; /* 더 동그랗고 둥근 테두리 */
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	font-size: 26px; /* 버튼 텍스트 사이즈 변경 */
 }
 
 button:hover {
-	background-color: #0056b3;
+	background-color: #ffba5a;
+}
+
+.button_bottom {
+	display: flex;
+	justify-content: center;
+	/* 다른 스타일들 */
+}
+
+.button_bottom button {
+	font-size: 26px;
+	margin-right: 30px;
+	margin-top: 30px;
 }

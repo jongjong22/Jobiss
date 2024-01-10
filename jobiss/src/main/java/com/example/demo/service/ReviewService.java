@@ -40,9 +40,9 @@ public class ReviewService {
 		return dao.getBoard(rid);
 	}
 
-	public int update(Review review) {
+	public int update(Map map) {
 		
-		return dao.update(review);
+		return dao.update(map);
 	}
 
 	public int delete(int rid) {

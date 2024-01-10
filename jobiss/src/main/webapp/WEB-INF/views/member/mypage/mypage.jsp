@@ -128,7 +128,7 @@ a {
 									<td><textarea rows="5" cols="50" value="11"
 											name="gptccontent">${gptcharacter.gptccontent}</textarea>
 										<button type="button"
-											onclick="updateGptcharacter(${gptcharacter.gptcid })">선택</button>성장과정</td>
+											onclick="updateGptcharacter(${gptcharacter.gptcid })">선택</button>성격장단점</td>
 								</tr>
 							</table>
 						</form>
@@ -140,7 +140,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="7" cols="50" value="11"
-										name="gptccontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptccontent">gpt한테 물어보신 성격장단점 글이 없습니다</textarea> 성격장단점</td>
 							</tr>
 						</table>
 					</form>
@@ -150,7 +150,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="6" cols="50" value="11"
-										name="gptccontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptccontent">gpt한테 물어보신 성격장단점 글이 없습니다</textarea> 성격장단점</td>
 							</tr>
 						</table>
 					</form>
@@ -180,7 +180,7 @@ a {
 									<td><textarea rows="5" cols="50" value="11"
 											name="gptmcontent">${gptmotive.gptmcontent}</textarea>
 										<button type="button"
-											onclick="updateGptmotive(${gptmotive.gptmid })">선택</button>성장과정</td>
+											onclick="updateGptmotive(${gptmotive.gptmid })">선택</button>지원동기</td>
 								</tr>
 							</table>
 						</form>
@@ -192,7 +192,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="7" cols="50" value="11"
-										name="gptmcontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptmcontent">gpt한테 물어보신 지원동기 글이 없습니다</textarea> 지원동기</td>
 							</tr>
 						</table>
 					</form>
@@ -202,7 +202,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="6" cols="50" value="11"
-										name="gptmcontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptmcontent">gpt한테 물어보신 지원동기 글이 없습니다</textarea> 지원동기</td>
 							</tr>
 						</table>
 					</form>
@@ -230,7 +230,7 @@ a {
 									<td><textarea rows="5" cols="50" value="11"
 											name="gptpcontent">${gptplan.gptpcontent}</textarea>
 										<button type="button"
-											onclick="updateGptplan(${gptplan.gptpid })">선택</button>성장과정</td>
+											onclick="updateGptplan(${gptplan.gptpid })">선택</button>입사후포부</td>
 								</tr>
 							</table>
 						</form>
@@ -242,7 +242,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="7" cols="50" value="11"
-										name="gptpcontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptpcontent">gpt한테 물어보신 입사후포부 글이 없습니다</textarea> 입사후포부</td>
 							</tr>
 						</table>
 					</form>
@@ -252,7 +252,7 @@ a {
 						<table class="grow_right">
 							<tr>
 								<td><textarea rows="6" cols="50" value="11"
-										name="gptpcontent">gpt한테 물어보신 성장과정 글이 없습니다</textarea> 성장과정</td>
+										name="gptpcontent">gpt한테 물어보신 입사후포부 글이 없습니다</textarea> 입사후포부</td>
 							</tr>
 						</table>
 					</form>
