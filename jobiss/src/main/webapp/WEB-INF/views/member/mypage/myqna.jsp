@@ -48,43 +48,45 @@
 
 		<div class="mypage_small">
 		<c:choose>
-				<c:when test="${not empty qnalist}">
-			<table border="1" align="center">
-				<h1 align="center">내가 쓴 QnA</h1>
-				<tr>
-					<th>이메일</th>
-					<th>제목</th>
-					<th>내용</th>
-					<th>작성날짜</th>
-				</tr>
-				<c:forEach items="${qnalist }" varStatus="loop" var="qna">
-					<tr onclick="location.href='#'">
-						<td>${qna.memail }</td>
-						<td>${qna.qtitle }</td>
-						<td>${qna.qcontent }</td>
-						<fmt:formatDate value="${qna.qreg}"
+				<c:when test="${not empty qlist}">
+					<table border="1" align="center">
+						<h1 align="center">내가 쓴 QnA</h1>
+						<tr>
+							<th>이메일</th>
+							<th>제목</th>
+							<th>내용</th>
+							<th>작성날짜</th>
+						</tr>
+
+						<c:forEach items="${qlist }" varStatus="loop" var="qna">
+							<tr
+								onclick="location.href='qnaform.do?&&qid=${qna.qid}'">
+								<td>${qna.memail }</td>
+								<td>${qna.qtitle }</td>
+								<td>${qna.qcontent }</td>
+								<fmt:formatDate value="${qna.qreg}"
                                 pattern="yyyy년 MM월 dd일" var="date" />
                             <td>${date}</td>
 
-					</tr>
-				</c:forEach>
-			</table>
-
-			<div class="page" align="center">
-				<c:if test="${startPage > 10 }">
-					<a href="myqna.do?page=${pageNum}.do?page=${startPage+1 }">이전</a>
-				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-					<a href="myqna.do?page=${pageNum}">${pageNum }</a>
-				</c:forEach>
-				<c:if test="${endPage < pageCount}">
-					<a href="myqna.do?page=${pageNum}.do?page=${endPage + 1}">다음</a>
-				</c:if>
-			</div>
-			</c:when>
-			<c:otherwise>
-				<h1 align="center">QnA가 없습니다.</h1>
-			</c:otherwise>
-			</c:choose>
+							</tr>
+						</c:forEach>
+					</table>
+						
+					<div class="page" align="center">
+						<c:if test="${startPage > 10 }">
+							<a href="myqna.do?page=${startPage+1 }">이전</a>
+						</c:if>
+						<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+							<a href="myqna.do?page=${pageNum}">${pageNum }</a>
+						</c:forEach>
+						<c:if test="${endPage < pageCount}">
+							<a href="myqna.do?page=${endPage + 1}">다음</a>
+						</c:if>
+					</div>
+					</c:when>
+						<c:otherwise>
+							<h1 align="center">QnA가 없습니다.</h1>
+						</c:otherwise>
+						</c:choose>
 </body>
 </html>
