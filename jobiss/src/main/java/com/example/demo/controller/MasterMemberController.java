@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Member;
+import com.example.demo.model.PersonalStatement;
 import com.example.demo.service.MasterMemberService;
 
 @Controller
@@ -107,5 +111,18 @@ public class MasterMemberController {
 		
 		return "master/masterMember/masterMemberList";
 	}
-
+	
+	@RequestMapping("ps.do")
+	public String ps(HttpSession session,Model model) {
+		
+		Member member = (Member) session.getAttribute("member");
+		
+		String memail = member.getMemail();
+		
+		PersonalStatement ps = service.selectps(memail);
+		
+		model.addAttribute("ps", ps);
+		
+		return "master/ps";
+	}
 }

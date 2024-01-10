@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MasterMemberDao;
 import com.example.demo.model.Member;
+import com.example.demo.model.PersonalStatement;
 
 @Service
 public class MasterMemberService {
@@ -44,6 +45,11 @@ public class MasterMemberService {
 	// 검색 목록 구해오기
 	public List<Member> searchMember(Map<String, Object> map) {
 		return dao.searchMember(map);
+	}
+	
+	
+	public PersonalStatement selectps(String memail) {
+		return dao.selectps(memail);
 	}
 
 	
