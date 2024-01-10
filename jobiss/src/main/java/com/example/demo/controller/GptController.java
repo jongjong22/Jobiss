@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -33,7 +32,7 @@ public class GptController {
 	private GptService gs;
 
 	// 로딩시 session 동시 초기화
-	public static void loading(HttpSession session) {
+	public void loading(HttpSession session) {
 		System.out.println("\n ***** gptLoading 시작 ***** \n");
 		Member member = (Member) session.getAttribute("member");
 
@@ -53,11 +52,9 @@ public class GptController {
 	public String gptMain(String mainMsg, Model model, HttpSession session) {
 		System.out.println("\n ***** gptMain 시작 ***** \n");
 		loading(session);
-
-		List<GPT> gptList = new ArrayList<GPT>();
-		List<Integer> gidList = new ArrayList<Integer>();
-
 		System.out.println("memail : " + memail);
+		List<GPT> gptList = new ArrayList<GPT>();
+
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
 
 		GptGrow grow = new GptGrow();
@@ -66,12 +63,9 @@ public class GptController {
 		GptPlan plan = new GptPlan();
 
 		gptList = gs.selectGptList(memail);
+
 		int i = 0;
-		for (GPT gpt : gptList) {
-			gidList.add(gpt.getGid());
-		}
-		;
-		System.out.println("gid갯수 : " + gidList.size());
+		System.out.println("gpt갯수 : " + gptList.size());
 
 		int gid = 0;
 		System.out.println("grow : " + grow.getGid());
@@ -100,43 +94,16 @@ public class GptController {
 		System.out.println("motive : " + motive.getGid());
 		System.out.println("plan : " + plan.getGid());
 		System.out.println("mainMsg : " + mainMsg);
-		System.out.println("gid갯수 : " + gidList.size());
+		System.out.println("gpt갯수 : " + gptList.size());
 
 		model.addAttribute("grow", grow);
 		model.addAttribute("character", character);
 		model.addAttribute("motive", motive);
 		model.addAttribute("plan", plan);
 		model.addAttribute("mainMsg", mainMsg);
-		model.addAttribute("gidList", gidList);
+		model.addAttribute("gptList", gptList);
 		System.out.println("\n ***** gptMain 끝 ***** \n");
-
 		return "gpt/gptMain";
-	}
-
-	@RequestMapping("/gptHistory")
-	public String gptHistory(int gid, HttpSession session, Model model) {
-		System.out.println("\n ***** gptHistory ***** \n ");
-		loading(session);
-		System.out.println("gid : " + gid);
-
-		List<GptGrow> growList = gs.selectGptGrowGid(gid);
-		List<GptCharacter> characterList = gs.selectGptCharacterGid(gid);
-		List<GptMotive> motiveList = gs.selectGptMotiveGid(gid);
-		List<GptPlan> planList = gs.selectGptPlanGid(gid);
-
-		System.out.println("growList갯수 : " + growList.size());
-		System.out.println("characterList갯수 : " + characterList.size());
-		System.out.println("motiveList갯수 : " + motiveList.size());
-		System.out.println("planList갯수 : " + planList.size());
-
-		model.addAttribute("growList", growList);
-		model.addAttribute("characterList", characterList);
-		model.addAttribute("motiveList", motiveList);
-		model.addAttribute("planList", planList);
-		model.addAttribute("gid", "" + gid);
-
-		System.out.println("\n ***** Controller_gptHistory ***** 끝\n");
-		return "gpt/gptHistory";
 	}
 
 	@ResponseBody
@@ -155,18 +122,14 @@ public class GptController {
 
 	@RequestMapping("/gptSelect")
 	public String gptSelect(String resumeType, GptGrow grow, GptCharacter character, GptMotive motive, GptPlan plan,
-			Model model, HttpSession session, HttpServletRequest request) {
+			Model model, HttpSession session) {
 		System.out.println("\n ***** gptSelect ***** \n ");
 		System.out.println("mEmail : " + memail);
 		System.out.println("resumeType : " + resumeType);
-		System.out.println("getGptgcontent : " + grow.getGptgcontent());
-		System.out.println("getGptgcontent : " + character.getGptccontent());
-		System.out.println("getGptgcontent : " + motive.getGptmcontent());
-		System.out.println("getGptgcontent : " + plan.getGptpcontent());
-		GptGrow gptGrowTop;
-		GptCharacter gptCharacterTop;
-		GptMotive gptMotiveTop;
-		GptPlan gptPlanTop;
+		System.out.println("getGptgContent : " + grow.getGptgcontent());
+		System.out.println("getGptcContent : " + character.getGptccontent());
+		System.out.println("getGptmContent : " + motive.getGptmcontent());
+		System.out.println("getGptpContent : " + plan.getGptpcontent());
 
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
 		int gid = 0;
@@ -213,11 +176,6 @@ public class GptController {
 
 		}
 		System.out.println("gid 스위치 : " + gid);
-		gptGrowTop = gs.selectGptGrowTop(memail);
-		gptCharacterTop = gs.selectGptCharacterTop(memail);
-		gptMotiveTop = gs.selectGptMotiveTop(memail);
-		gptPlanTop = gs.selectGptPlanTop(memail);
-
 		// gptTop의 값이있고, 종류상관없이 Content가 있을경우.
 		if ((gptTop != null)
 				&& (resumeType != null && (grow.getGptgcontent() != null || character.getGptccontent() != null
@@ -316,6 +274,78 @@ public class GptController {
 
 		System.out.println("\n ***** Controller_gptSelect끝 ***** \n");
 		return "redirect:/gptMain";
+	}
+
+	@RequestMapping("/gptHistory")
+	public String gptHistory(int gid, String type, GPT gpt, HttpSession session, Model model) {
+		// 해당메서드는 gid를 무조건 주기때문에 검증이 필요없음.
+		System.out.println("\n ***** gptHistory ***** \n ");
+		loading(session);
+
+		System.out.println("gid : " + gid);
+		System.out.println("type : " + type);
+
+		List<GPT> gptList = gs.selectGptList(memail);
+		List<Integer> gidList = gs.selectGidMemail(memail);
+
+		String msg = "";
+
+		int now = 0;
+		for (int i = 0; i < gidList.size(); i++) {
+			if (gidList.get(i) == gid) {
+				now = i;
+				System.out.println("gidList : " + gidList);
+				System.out.println("now번 방에 있음 : " + now);
+			}
+		}
+		switch (type) {
+		case "prev":
+			if (now == 0)
+				msg = "이전 목록이 없습니다.";
+			else
+				now -= 1;
+
+			System.out.println("switch_prev : " + now);
+
+			break;
+		case "now":
+			System.out.println("switch_now : " + now);
+			break;
+
+		case "next":
+			if (now + 1 == gidList.size())
+				msg = "마지막 페이지 입니다.";
+			else
+				now += 1;
+
+			System.out.println("switch_next : " + now);
+			break;
+
+		}
+		gid = gidList.get(now);
+		System.out.println("변경된 gid : " + gid);
+		List<GptGrow> growList = gs.selectGptGrowGid(gid);
+		List<GptCharacter> characterList = gs.selectGptCharacterGid(gid);
+		List<GptMotive> motiveList = gs.selectGptMotiveGid(gid);
+		List<GptPlan> planList = gs.selectGptPlanGid(gid);
+
+		System.out.println("gidList : " + gidList);
+		System.out.println("gidList갯수 : " + gidList.size());
+		System.out.println("growList갯수 : " + growList.size());
+		System.out.println("characterList갯수 : " + characterList.size());
+		System.out.println("motiveList갯수 : " + motiveList.size());
+		System.out.println("planList갯수 : " + planList.size());
+
+		model.addAttribute("gptList", gptList);
+		model.addAttribute("growList", growList);
+		model.addAttribute("characterList", characterList);
+		model.addAttribute("motiveList", motiveList);
+		model.addAttribute("planList", planList);
+		model.addAttribute("gid", gid);
+		model.addAttribute("msg", msg);
+
+		System.out.println("\n ***** Controller_gptHistory ***** 끝\n");
+		return "gpt/gptHistory";
 	}
 
 }

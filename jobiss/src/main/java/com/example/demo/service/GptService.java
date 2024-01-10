@@ -30,7 +30,7 @@ public class GptService {
 
 	@Value("${openai.url}")
 	private String url;
-	
+
 	@Value("${openai.api_key}")
 	private String api_key;
 
@@ -43,14 +43,24 @@ public class GptService {
 		return dao.insertGpt(gpt);
 	}
 
+	// 부모 특정글
+	public GPT selectGptGid(int gid) {
+		return dao.selectGptGid(gid);
+	}
+
 	// 부모 최신글
-	public GPT selectGptTop(String mEmail) {
-		return dao.selectGptTop(mEmail);
+	public GPT selectGptTop(String memail) {
+		return dao.selectGptTop(memail);
 	}
 
 	// 부모 전체글
-	public List<GPT> selectGptList(String mEmail) {
-		return dao.selectGptList(mEmail);
+	public List<GPT> selectGptList(String memail) {
+		return dao.selectGptList(memail);
+	}
+
+	// 부모 특정 전체글
+	public List<Integer> selectGidMemail(String memail) {
+		return dao.selectGidMemail(memail);
 	}
 
 	// 부모 시간 최신화
@@ -247,7 +257,6 @@ public class GptService {
 
 			try {
 				HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-				System.out.println("서비스-직려로하 : " + response.body());
 				JSONObject jsonResponse = new JSONObject(response.body());
 				resultContent = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message")
 						.getString("content");

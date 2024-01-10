@@ -21,9 +21,15 @@ public interface GptDao {
 	// 부모 최신글
 	GPT selectGptTop(String mEmail);
 
+	// 부모 특정글
+	GPT selectGptGid(int gid);
+
 	// 부모 전체글
 	List<GPT> selectGptList(String mEmail);
 
+	// 부모 특정 전체글
+	List<Integer> selectGidMemail(String memail);
+	
 	// 부모 시간 최신화
 	int updateGptReg(int gid);
 
@@ -88,5 +94,6 @@ public interface GptDao {
 
 	// 조회수 최신화
 	int updateReadCount(ReadCount readCount);
+
 
 }

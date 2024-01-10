@@ -1,3 +1,4 @@
+/* 헤딩 스타일 */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Open sans", Helvetica, Arial, sans-serif;
 	font-weight: 400;
@@ -29,12 +30,97 @@ h5 {
 	font-size: 1.25rem;
 }
 
+/* 캡션 스타일 */
+.caption_main {
+	text-align: center;
+}
+
+.caption_main h1 {
+	font-size: 36px;
+	color: #333;
+}
+
+.caption_main h2 {
+	font-size: 24px;
+	color: #666;
+}
+
+.main {
+	display: flex;
+	align-items: flex-start; /* 위쪽 정렬 */
+}
+
 .container_main {
-	max-width: 80%;
+	width: 100%;
+	margin-top: 0;
+	margin-right: 20px; /* 오른쪽 간격을 없애줍니다. */
 	padding: 20px;
-	background-color: #ffefef;
+	background-color: #f5f5f5;
 	font-size: 30px;
-	margin: 0 auto; /* 수평 가운데 정렬 */
+	border-radius: 20px;
+}
+
+/* 히스토리 스타일 */
+.history_main {
+	width: 18%;
+	justify-content: flex-start;
+	margin-left: 20px;
+	margin-top: 0; /* 이전에 -20%로 되어있던 것을 수정합니다. */
+	margin-right: 20px; /* 오른쪽 간격 추가 */
+	position: sticky;
+	top: 10%;
+	left: 20px; /* 왼쪽에 위치 */
+	padding: 10px 15px;
+	background-color: #f0f0f0;
+	color: #333;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 호버 효과 */
+.history_main:hover {
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+}
+
+/* 작은 화면에서 위치 조정 */
+@media screen and (max-width: 768px) {
+	.history_main {
+		left: 10px;
+		top: 10px;
+		box-shadow: none;
+	}
+}
+
+/* 기본 select 스타일 */
+select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	color: #333;
+	font-size: 16px;
+}
+
+/* option에 hover 효과 */
+select option:hover {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+/* 선택된 옵션 스타일 */
+select option:checked {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+/* 테이블 관련 스타일 */
+table tr th td {
+	text-align: center;
 }
 
 .table_main {
@@ -46,99 +132,110 @@ h5 {
 
 .table_main th {
 	font-size: 30px;
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 	color: #333;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 	font-style: italic;
 }
 
-.table_qRequest, .table_cRequest {
-	margin-bottom: 60px;
-	padding: 30px;
-	background-color: #f5f0e1; /* 부드러운 파스텔톤 배경 */
-	border-radius: 15px;
-	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+/* 요청 테이블 스타일 */
+.table_qRequest textarea, .table_cRequest textarea, .table_mRequest textarea,
+	.table_pRequest textarea {
+	height: 100%;
+	margin-right: 0;
+	margin-bottom: 20px;
 }
 
-.contetn_request {
-	padding: 15px; /* 텍스트 영역의 안쪽 여백 추가 */
-	border: 2px solid #ccc; /* 회색 테두리 */
-	border-radius: 10px; /* 둥근 테두리 */
-	resize: none; /* 크기 조절 비활성화 */
-	background-color: #f9f9f9; /* textarea 배경색 */
-	color: forestgreen; /* 텍스트 색상 */
-	font-size: 20px; /* 텍스트 크기 설정 */
+/* 요청과 응답 텍스트 영역 스타일 */
+.content_request, .content_response {
+	width: 100%;
+	padding: 15px;
+	border: 2px solid #ccc;
+	border-radius: 20px;
+	resize: none;
+	background-color: #f9f9f9;
+	font-size: 20px;
 }
 
-.contetn_response {
-	padding: 15px; /* 텍스트 영역의 안쪽 여백 추가 */
-	border: 2px solid #ccc; /* 회색 테두리 */
-	border-radius: 10px; /* 둥근 테두리 */
-	resize: none; /* 크기 조절 비활성화 */
-	background-color: #f9f9f9; /* textarea 배경색 */
-	color: cornflowerblue; /* 텍스트 색상 */
-	font-size: 20px; /* 텍스트 크기 설정 */
+.content_request {
+	border-color: deeppink;
+	color: forestgreen;
+}
+
+.content_response {
+	color: cornflowerblue;
 	font-weight: bold;
 }
-/* 기본 스타일 */
-.button_request {
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 20px;
-	padding: 10px 10px; /* 더 큰 패딩 */
-	font-size: 24px; /* 더 큰 폰트 크기 */
-	background-color: #0077ff; /* 푸른톤 */
-	color: honeydew; /* 텍스트 색상 변경 */
-	border: none;
-	border-radius: 10px; /* 둥근 테두리 */
-	transition: background-color 0.3s ease, transform 0.5s ease;
-	/* 호버 효과를 위한 transition */
+
+.loading {
+	width: 100%;
+	height: 100%;
+	margin-left: 5%;
 }
 
-/* 호버 효과 */
+.button-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* 2개의 열로 구성 */
+	gap: 10px; /* 버튼 사이의 간격 설정 */
+}
+
+/* 버튼 스타일 */
+.button_request {
+	width: 100%;
+	height: 100%;
+	margin-left: 5%;
+	padding: 10px 10px;
+	font-size: 15px;
+	color: honeydew;
+	border: none;
+	border-radius: 10px;
+	transition: background-color 0.3s ease, transform 0.5s ease;
+	padding: 10px 10px;
+}
+
 .button_request:hover.medium, .button_request:hover.short,
 	.button_request:hover.test {
-	background-color: deeppink; /* 더 진한 푸른톤 */
-	box-shadow: 0px 20px 50px rgba(255, 0, 153, 0.8); /* 더 강한 그림자 효과 */
-	transform: scale(1.1); /* 호버 시 크기 변환 */
+	background-color: deeppink;
+	box-shadow: 0px 20px 50px rgba(255, 0, 153, 0.8);
+	transform: scale(1.1);
 }
 
 .button_request:hover.long {
-	background-color: #0000ff; /* 더 진한 푸른톤 */
-	box-shadow: 0px 20px 50px rgba(0, 0, 255, 0.8); /* 호버 시 그림자 강화 */
-	transform: scale(1.5); /* 호버 시 크기 변환 */
+	background-color: #0000ff;
+	box-shadow: 0px 20px 50px rgba(0, 0, 255, 0.8);
+	transform: scale(1.5);
 }
-/* 가장 화려한 버튼 */
+
 .button_request.long {
-	/* 	background-color: #ff0099; 더 화려한 색상 */
-	background-color: #0000ff; /* 더 진한 푸른톤 */
-	color: lemonchiffon; /* 텍스트 색상 변경 */
+	background-color: #0000ff;
+	color: lemonchiffon;
 	box-shadow: 10px 10px 30px rgba(0, 255, 255, 1.8);
 }
 
 .button_request.medium {
-	background-color: #ff6600; /* 중간 정도의 화려한 버튼 */
+	background-color: #ff6600;
 }
 
 .button_request.short {
-	background-color: black; /* 다소 화려하지만 보통 수준의 버튼 */
+	background-color: black;
 }
 
 .button_request.test {
-	background-color: #ff3d00; /* 기본 버튼 */
+	background-color: #ff3d00;
 }
 
+/* 선택 버튼 스타일 */
 .button_select {
-	margin-left: auto;
-	padding: 15px 30px; /* 더 큰 패딩 */
-	font-size: 24px; /* 더 큰 폰트 크기 */
-	background-color: lightseagreen; /* 버튼의 밝은 주황색 */
-	color: #fff; /* 버튼 텍스트의 흰색 */
+	margin-left: 20px;
+	padding: 15px 30px;
+	font-size: 24px;
+	background-color: lightseagreen;
+	color: #fff;
 	border: none;
-	border-radius: 10px; /* 둥근 테두리 */
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button_select:hover {
-	background-color: darkcyan; /* 호버 시 색상 변경 */
+	background-color: darkcyan;
 }
