@@ -58,5 +58,8 @@
 		order by mdrop asc, mreg desc
 		LIMIT #{start}, 10
 	</select>
-
+	
+	<select id = "selectps" resultType="personalstatement" parameterType="String">
+	  	select * from personalstatement where memail = #{memail}
+	</select>
 </mapper>

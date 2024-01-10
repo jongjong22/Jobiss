@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Member;
+import com.example.demo.model.PersonalStatement;
 
 @Mapper
 public interface MasterMemberDao {
@@ -29,5 +30,7 @@ public interface MasterMemberDao {
 	
 	// 검색 회원목록 구해오기
 	public List<Member> searchMember(Map<String, Object> map);
+
+	public PersonalStatement selectps(String memail);
 
 }
