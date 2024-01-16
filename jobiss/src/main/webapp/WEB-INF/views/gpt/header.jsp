@@ -45,7 +45,6 @@
 	display: block;
 	float: left;
 	padding-right: 20px
-	
 }
 
 .info>.info01>li>a {
@@ -82,7 +81,7 @@
 						<li><a href="QnAlist.do">Q&A</a></li>
 						<li><a href="reviewList.do">REVIEW</a></li>
 						<li><a href="#">FEEDBACK</a></li>
-						<li><a href="community.do">커뮤니티</a></li>
+						<li><a href="community.do">공지사항</a></li>
 						<li><a href="masterMemberList.do">관리자</a></li>
 						<li><a href="gptMain">GPT</a></li>
 					</ul>
@@ -92,14 +91,14 @@
 				<!-- 세션 로그인이 없을경우 -->
 
 
-				<div class="info">
+				<div class="info" style="font-size: 20px; font-weight: bold;">
 					<ul class="info01">
 						<c:if test="${empty sessionScope.member.memail}">
 							<li><a href="loginform.do">로그인</a></li>
 						</c:if>
 						<!-- 세션에 로그인 정보가 있을 경우 -->
 						<c:if test="${not empty sessionScope.member.memail}">
-             ${sessionScope.member.mname}님 환영합니다
+             ${sessionScope.member.mname}님 환영합니다!
 						<li><a href="mypage.do">MYPAGE</a></li>
 							<li><a href="logout.do">로그아웃</a></li>
 						</c:if>

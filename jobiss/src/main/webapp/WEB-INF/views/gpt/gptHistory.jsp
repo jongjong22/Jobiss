@@ -18,22 +18,13 @@
 	</c:if>
 
 	<c:choose>
-		<c:when test="${request.member.memail eq null}">
-			<h3>null초기값 : master</h3>
-		</c:when>
-
-		<c:when test="${request.member.memail ne null}">
-			<h3>ID : ${member.memail }</h3>
-		</c:when>
-	</c:choose>
-
-	<c:choose>
 		<c:when test="${empty gid }">
 			<h3>이전이력이 없습니다.</h3>
 		</c:when>
 
 		<c:when test="${!empty gid }">
-			<h3>gID : ${gid }</h3>
+			<h3 style="margin-left: 20px;">세션번호 : ${gid }</h3>
+			<h3 style="margin-left: 20px;">대화날짜 : ${gReg }</h3>
 		</c:when>
 	</c:choose>
 	<div class="main">
@@ -79,7 +70,7 @@
 
 
 		<div class="container_main">
-			<h1>성장과정</h1>
+			<h1>&nbsp; &lt;성장과정&gt;</h1>
 			<table border="1" style="text-align: center;">
 				<tr>
 					<th>No</th>
@@ -109,7 +100,7 @@
 					</c:otherwise>
 				</c:choose>
 			</table>
-			<h1>성격 장단점</h1>
+			<h1>&nbsp; &lt;성격 장단점&gt;</h1>
 			<table border="1">
 				<tr>
 					<th>No</th>
@@ -138,8 +129,7 @@
 					</c:otherwise>
 				</c:choose>
 			</table>
-
-			<h1>지원동기</h1>
+			<h1>&nbsp; &lt;지원동기&gt;</h1>
 			<table border="1">
 				<tr>
 					<th>No</th>
@@ -168,7 +158,7 @@
 					</c:otherwise>
 				</c:choose>
 			</table>
-			<h1>입사포부</h1>
+			<h1>&nbsp; &lt;입사포부&gt;</h1>
 			<table border="1">
 				<tr>
 					<th>No</th>

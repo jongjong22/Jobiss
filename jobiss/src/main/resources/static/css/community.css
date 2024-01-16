@@ -2,7 +2,9 @@
 /////////////////////////////////////////////////////////////////////*/
 @font-face {
 	font-family: 'MICEGothic Bold';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -32,7 +34,6 @@
 	justify-content: flex-start;
 	border-radius: 15px; /* 박스의 모서리를 둥글게 만듦 */
 	margin-right: 50px;
-	
 }
 
 .box:last-child {
@@ -76,7 +77,6 @@ a {
 	position: absolute;
 	top: 280px;
 	width: 100%;
-
 }
 
 .content {
@@ -100,8 +100,6 @@ body {
 	width: 800px;
 	margin: 40px auto;
 }
-
-
 
 table {
 	width: 100%;
@@ -146,4 +144,12 @@ nav ul li {
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+
+.add-review-button>button {
+	border-radius: 10px;
+	border: 1 solid black;
+	background-color: transparent;
+	padding: 5px 10px 5px 10px;
+}
+
 }

@@ -1,3 +1,16 @@
+@font-face {
+	font-family: iceJaram-Rg;
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'iceJaram-Rg', sans-serif !important;
+}
+
 /* 헤딩 스타일 */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Open sans", Helvetica, Arial, sans-serif;
@@ -54,6 +67,7 @@ body {
 	display: flex;
 	justify-content: space-between; /* 요소 사이의 간격을 최대화하여 양쪽 끝으로 정렬 */
 	align-items: flex-start; /* 위쪽 정렬 */
+	margin-top: 50px;
 }
 
 .container_main {
@@ -117,8 +131,9 @@ body {
 	border-radius: 20px;
 	border-color: deeppink;
 	resize: vertical;
-	margin-bottom: 15px;
-	font-size: 18px;
+	margin-bottom: 20px;
+	font-size: 25px;
+	font-weight: 400 !important;
 	background-color: rgba(255, 255, 255, 0.8);
 	backdrop-filter: blur(8px);
 	resize: vertical;
@@ -166,7 +181,8 @@ select {
 	border: 1px solid #ccc;
 	background-color: #fff;
 	color: #333;
-	font-size: 16px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 /* option에 hover 효과 */
@@ -191,6 +207,7 @@ button {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	font-size: 26px; /* 버튼 텍스트 사이즈 변경 */
+	font-weight: bold;
 }
 
 button:hover {

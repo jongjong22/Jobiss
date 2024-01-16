@@ -54,6 +54,9 @@ public class GptController {
 		loading(session);
 		System.out.println("memail : " + memail);
 		List<GPT> gptList = new ArrayList<GPT>();
+		ReadCount readCount = gs.selectReadCountTop();
+		if (readCount == null)
+			readCount = new ReadCount();
 
 		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
 
@@ -102,6 +105,7 @@ public class GptController {
 		model.addAttribute("plan", plan);
 		model.addAttribute("mainMsg", mainMsg);
 		model.addAttribute("gptList", gptList);
+		model.addAttribute("readCount", readCount);
 		System.out.println("\n ***** gptMain 끝 ***** \n");
 		return "gpt/gptMain";
 	}
@@ -287,7 +291,7 @@ public class GptController {
 
 		List<GPT> gptList = gs.selectGptList(memail);
 		List<Integer> gidList = gs.selectGidMemail(memail);
-
+		Timestamp gReg = null;
 		String msg = "";
 
 		int now = 0;
@@ -299,8 +303,9 @@ public class GptController {
 			}
 		}
 		switch (type) {
+		// 이전페이지일경우
 		case "prev":
-			if (now == 0)
+			if (now == 0) // 현재 gid가 총 리스트에서 0번방에 해당할경우
 				msg = "이전 목록이 없습니다.";
 			else
 				now -= 1;
@@ -323,6 +328,7 @@ public class GptController {
 
 		}
 		gid = gidList.get(now);
+		gReg = gptList.get(now).getGptreg();
 		System.out.println("변경된 gid : " + gid);
 		List<GptGrow> growList = gs.selectGptGrowGid(gid);
 		List<GptCharacter> characterList = gs.selectGptCharacterGid(gid);
@@ -335,6 +341,7 @@ public class GptController {
 		System.out.println("characterList갯수 : " + characterList.size());
 		System.out.println("motiveList갯수 : " + motiveList.size());
 		System.out.println("planList갯수 : " + planList.size());
+		System.out.println("대화일 : " + gReg);
 
 		model.addAttribute("gptList", gptList);
 		model.addAttribute("growList", growList);
@@ -342,6 +349,7 @@ public class GptController {
 		model.addAttribute("motiveList", motiveList);
 		model.addAttribute("planList", planList);
 		model.addAttribute("gid", gid);
+		model.addAttribute("gReg", gReg);
 		model.addAttribute("msg", msg);
 
 		System.out.println("\n ***** Controller_gptHistory ***** 끝\n");
