@@ -134,7 +134,9 @@
 						<li><a href="reviewList.do">REVIEW</a></li>
 						<li><a href="FeedbackList.do">FEEDBACK</a></li>
 						<li><a href="community.do">커뮤니티</a></li>
+						<c:if test="${member.memail == 'master' }">
 						<li><a href="masterMemberList.do">관리자</a></li>
+						</c:if>
 						<li><a href="gptMain">GPT</a></li>
 					</ul>
 

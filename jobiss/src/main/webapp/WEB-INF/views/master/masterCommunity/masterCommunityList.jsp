@@ -21,12 +21,12 @@
 	padding: 5px;
 }
 </style>
-<title>커뮤니티 관리</title>
+<title>공지사항 관리</title>
 </head>
 <body>
 
 	<div class="Big_container">
-		<h1>커뮤니티 관리</h1>
+		<h1>공지사항 관리</h1>
 
 		<div class="container1">
 			<c:if test="${not empty clist}">

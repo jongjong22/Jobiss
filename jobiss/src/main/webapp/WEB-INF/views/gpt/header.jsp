@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    	
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +84,9 @@
 						<li><a href="reviewList.do">REVIEW</a></li>
 						<li><a href="#">FEEDBACK</a></li>
 						<li><a href="community.do">커뮤니티</a></li>
+						<c:if test="${member.memail == 'master' }">
 						<li><a href="masterMemberList.do">관리자</a></li>
+						</c:if>
 						<li><a href="gptMain">GPT</a></li>
 					</ul>
 

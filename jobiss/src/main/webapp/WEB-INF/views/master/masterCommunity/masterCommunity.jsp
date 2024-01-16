@@ -15,7 +15,7 @@
 <body>
 
 	<div class="Big_container">
-		<h1>커뮤니티 상세 정보</h1>
+		<h1>공지사항</h1>
 
 		<div class="container_detailmember">
 			<table border="1">
