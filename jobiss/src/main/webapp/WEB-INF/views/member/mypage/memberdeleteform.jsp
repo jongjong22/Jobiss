@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="css/mypage.css">
+<link rel="stylesheet" type="text/css" href="css/mydelete.css">
 <title>마이페이지</title>
 <style>
 @font-face {
@@ -21,63 +22,6 @@ a {
 	font-size: 15px; body { font-family : 'Arial', sans-serif;
 	background-color: #f4f4f4;
 }
-
-.memberdelete {
-	width: 500px;
-	margin: 50px auto;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-caption {
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-td {
-	padding: 10px;
-}
-
-input[type="password"] {
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	margin-top: 5px;
-}
-
-button {
-	background-color: #4caf50;
-	color: #fff;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	margin-right: 10px;
-}
-
-button[type="reset"] {
-	background-color: #f44336;
-}
-
-button:hover {
-	background-color: #45a049;
-}
-
-button[type="reset"]:hover {
-	background-color: #d32f2f;
-}
 </style>
 </head>
 <body>
@@ -91,11 +35,12 @@ button[type="reset"]:hover {
 				<li><a href="myqna.do">MY QnA</a></li>
 				<li><a href="myfeedback.do">MY FEEDBACK</a></li>
 				<li><a href="mycommunity.do">MY 커뮤니티</a></li>
+				<li><a href="ps.do">이력서 다운받기</a></li>
 				<li><a href="memberupdateform.do">회원정보수정</a></li>
 				<li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
 		</nav>
-
+			<div class="mydelete_small">
 			<form method="post" action="memberdelete.do">
 				<table border=1 width="500" align="center">
 					<caption>회원 탈퇴</caption>

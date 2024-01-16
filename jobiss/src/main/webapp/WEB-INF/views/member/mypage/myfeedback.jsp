@@ -40,6 +40,7 @@
             <li><a href="myqna.do?&&memail=${member.memail }">MY QnA</a></li>
             <li><a href="myfeedback.do?&&memail=${member.memail }">MY FEEDBACK</a></li>
             <li><a href="mycommunity.do?&&memail=${member.memail }">MY 커뮤니티</a></li>
+            <li><a href="ps.do">이력서 다운받기</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
             <li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
@@ -57,7 +58,7 @@
 					<th>작성날짜</th>
 				</tr>
 				<c:forEach items="${fblist }" varStatus="loop" var="feedback">
-					<tr onclick="location.href='#'">
+					<tr onclick="location.href='FeedDetails.do?&&fid=${feedback.fid}'">
 						<td>${feedback.memail }</td>
 						<td>${feedback.ftitle }</td>
 						<td>${feedback.fcontent }</td>

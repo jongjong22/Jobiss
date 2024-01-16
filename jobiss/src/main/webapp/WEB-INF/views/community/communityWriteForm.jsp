@@ -6,6 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background: url('images/background.jpg') no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Arial', sans-serif;
+	height: 100%;
+	overflow: hidden;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/* background-color: rgba(0, 0, 0, 0.7); */
+}
+</style>
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"

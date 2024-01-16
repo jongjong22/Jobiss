@@ -9,6 +9,8 @@
 <script src="./js/mypage.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/mypage.css">
+<!-- 자기소개서 css -->
+<link rel="stylesheet" type="text/css" href="css/myps.css">
 <title>마이페이지</title>
 
 <style>
@@ -40,6 +42,7 @@ a {
 						FEEDBACK</a></li>
 				<li><a href="mycommunity.do?&&memail=${member.memail }">MY
 						커뮤니티</a></li>
+				<li><a href="ps.do">이력서 다운받기</a></li>
 				<li><a href="memberupdateform.do">회원정보수정</a></li>
 				<li><a href="memberdeleteform.do">회원탈퇴</a></li>
 				<!-- 추가적인 메뉴 항목을 필요에 따라 추가할 수 있습니다. -->
@@ -47,7 +50,7 @@ a {
 		</nav>
 		<div class="resume_main">
 			<h1>마이페이지</h1>
-			
+
 			<div class="caption_main">
 				<div class="caption_left">
 					<h2>내가 쓴 자기소개서</h2>
@@ -56,13 +59,13 @@ a {
 					<h2>Gpt가 추천한 글</h2>
 				</div>
 			</div>
-			
-			
+
+
 			<div class="grow_main">
 				<table class="grow_left">
 					<tr>
 						<th>성장과정</th>
-						<td style="text-align: center;"><textarea rows="15"
+						<td style="text-align: center; "><textarea rows="19"
 								cols="100" name="grow">${ps.psgcontent}</textarea>
 							<button type="button"
 								onclick="psgupdate(${ps.pid},$('textarea[name=grow]').val() )"
@@ -113,7 +116,7 @@ a {
 				<table class="grow_left">
 					<tr>
 						<th>성격장단점</th>
-						<td style="text-align: center;"><textarea rows="15"
+						<td style="text-align: center;"><textarea rows="19"
 								cols="100" name="character">${ps.psccontent}</textarea>
 							<button type="button"
 								onclick="pscupdate(${ps.pid},$('textarea[name=character]').val() )"
@@ -165,7 +168,7 @@ a {
 				<table class="grow_left">
 					<tr>
 						<th>지원동기</th>
-						<td style="text-align: center;"><textarea rows="15"
+						<td style="text-align: center;"><textarea rows="19"
 								cols="100" name="motive">${ps.psmcontent}</textarea>
 							<button type="button"
 								onclick="psmupdate(${ps.pid},$('textarea[name=motive]').val() )"
@@ -215,7 +218,7 @@ a {
 				<table class="grow_left">
 					<tr>
 						<th>입사후포부</th>
-						<td style="text-align: center;"><textarea rows="15"
+						<td style="text-align: center;"><textarea rows="19"
 								cols="100" name="plan">${ps.pspcontent}</textarea>
 							<button type="button"
 								onclick="pspupdate(${ps.pid},$('textarea[name=plan]').val() )"

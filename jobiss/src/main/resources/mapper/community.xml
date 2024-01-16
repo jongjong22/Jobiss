@@ -33,4 +33,49 @@
 		select count(*) from community where cdrop = 'N'
 	</select>
 	
+	<select id="selectCommuniytTop3" resultType="community">
+	    select *
+	    from (select *
+	    	  from community
+	    	  where cdrop = 'N'
+	    	  order by creadcount desc) as top3
+	    limit 3	  
+	</select>
+	
+	<select id="searchCommunityList" parameterType="search" resultType="community">
+		select * from community where
+      <choose>
+         <when test="searchtype == 'memail'">
+            memail like '%' #{keyword} '%'
+         </when>
+
+         <when test="searchtype == 'ctitle'">
+            ctitle like '%' #{keyword} '%'
+         </when>
+
+         <when test="searchtype == 'creg'">
+            creg like '%' #{keyword} '%'
+         </when>
+
+      </choose>
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
