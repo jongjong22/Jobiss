@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.resume_main {
+	margin: 20px auto;
+	width: 80%;
+	margin-left: 20%;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+.caption_main {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+
+.caption_left, .caption_right {
+	width: 48%;
+}
+
+h2 {
+	color: #555;
+}
+
+.grow_main {
+	margin-bottom: 30px;
+}
+
+.grow_left, .grow_right, .grow_right_main {
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 20px;
+}
+
+.grow_left {
+	width: 48%;
+}
+
+textarea {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	border: 1px solid #ccc; /* 테두리 스타일 추가 */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 5px;
+	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+}

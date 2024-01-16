@@ -43,6 +43,7 @@
             <li><a href="myqna.do?&&memail=${member.memail }">MY QnA</a></li>
             <li><a href="myfeedback.do?&&memail=${member.memail }">MY FEEDBACK</a></li>
             <li><a href="mycommunity.do?&&memail=${member.memail }">MY 커뮤니티</a></li>
+            <li><a href="ps.do">이력서 다운받기</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
             <li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
@@ -58,19 +59,22 @@
 							<th>제목</th>
 							<th>내용</th>
 							<th>작성날짜</th>
+							<th>인증여부</th>
 						</tr>
 
 						<c:forEach items="${reviewlist }" varStatus="loop" var="review">
-							<tr
-								onclick="location.href='reviewDetails.do?&&rid=${review.rid}'">
+							<c:if test="${review.rconfirm eq 'Y'}">
+							<tr onclick="location.href='reviewDetails.do?&&rid=${review.rid}'">
 								<td>${review.memail }</td>
 								<td>${review.rtitle }</td>
 								<td>${review.rcontent }</td>
 								<fmt:formatDate value="${review.rreg}"
                                 pattern="yyyy년 MM월 dd일" var="date" />
                             <td>${date}</td>
+								<td>${review.rconfirm }</td>
 
 							</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 						
