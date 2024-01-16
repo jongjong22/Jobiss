@@ -16,6 +16,25 @@
         return true; 
     }
     
+    /* 리뷰 댓글 작성 유효성 검사 reviewDetails.jsp */
+
+		function check1() {
+		var memail = $('#memail').val();
+		 if (memail === null || memail === '') {
+        alert('로그인이 필요합니다.');
+        return false; 
+    } else if ($('#rrcontent').val() === '') {
+        alert('댓글을 입력하세요.');
+        $('#rrcontent').focus();
+        return false; 
+    } 
+    		
+    return true;
+}
+    
+    
+    
+    
    /* 글 작성 취소 버튼 (뒤로가기) reviewWriteForm.jsp */ 
     
     function goBack() {

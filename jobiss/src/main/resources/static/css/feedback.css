@@ -31,11 +31,57 @@ h1 {
 	color: #007bff;
 }
 
-.view-reply {
-	/* 이 부분에 박스의 너비와 높이를 조정하는 스타일을 추가하세요 */
-	width: 100%; /* 예시로 너비를 100%로 설정 */
-	height: 400px; /* 예시로 높이를 400px로 설정 */
-	/* 필요에 따라 다른 속성도 조정할 수 있습니다 */
+
+   
+
+   .review-reply {
+    margin-top: 20px;
 }
 
+.review-reply table {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+.review-reply th, .review-reply td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.review-reply th {
+    background-color: #f2f2f2;
+}
+
+.review-reply tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.review-reply input[type="button"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.review-reply input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+		.add-review-button {
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
+
+        .add-review-button > button{
+        	border-radius: 10px;
+        	border: 1 solid black;
+        	background-color: transparent;
+        	padding: 5px 10px 5px 10px;
+        	
+        }
 

@@ -12,28 +12,44 @@
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
-            font-family: 'MICEGothic Bold';
         }
+/*         body { */
+/*             font-family: Arial, sans-serif; */
+/*             background-color: #f7f7f7; */
+/*             margin: 0; */
+/*             padding: 0; */
+/*             font-family: 'MICEGothic Bold'; */
+/*         } */
         
         
         .title{
-        	font-family: 'MICEGothic Bold';
+        	font-family: "맑은고딕"
         }
 
-
+	    .layout {
+            width: 800px;
+            margin: 40px auto;
+        }
         
-		.layout {
-		    width: 800px;
-		    margin: 40px auto;
-		    text-align: center; /* Center-align the content within the layout */
-		    font-family: 'MICEGothic Bold';
-		}
+/* 		.layout { */
+/* 			width: 800px; */
+/* 			margin: 40px auto; */
+/* 		} */
+        
+/* 		.layout { */
+/* 		    width: 800px; */
+/* 		    margin: 40px auto; */
+/* 		    text-align: center; Center-align the content within the layout */
+/* 		    font-family: 'MICEGothic Bold'; */
+/* 		} */
 		
 		table {
-		    margin: 40px auto; /* Center-align the table within the layout */
-		    width: 800px;
-		}
-				
+			width: 100%;
+			border-collapse: collapse;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			overflow: hidden;
+		}	
 		th, td {
 			
 			padding: 12px 15px;

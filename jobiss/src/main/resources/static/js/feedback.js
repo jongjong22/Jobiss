@@ -72,6 +72,23 @@ function deletefeedback(fid) {
     return true; // 모든 필드가 비어있지 않으면 폼 제출 허용.
 }
 
+/* 피드백 댓글 작성 유효성 검사 feedDetails.jsp */
+
+		function check1() {
+		var memail = $('#memail').val();
+		 if (memail === null || memail === '') {
+        alert('로그인이 필요합니다.');
+        return false; 
+    } else if ($('#frcontent').val() === '') {
+        alert('댓글을 입력하세요.');
+        $('#frcontent').focus();
+        return false; 
+    } 
+    		
+    return true;
+}
+
+
 /* 피드백 작성, 업데이트시 취소(뒤로가기) 버튼 feedWriteForm.jsp */
 
 function goBack() {

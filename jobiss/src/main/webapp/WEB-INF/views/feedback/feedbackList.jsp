@@ -31,7 +31,17 @@
                     <c:forEach var="feedback" items="${Flist}" varStatus="loop">
                         <tr>
                         	<td><a href="FeedDetails.do?fid=${feedback.fid}">${feedback.ftitle }</a></td>
-                            <td>${feedback.fcontent }</td>
+                        	  <td>
+                  			  <c:choose>
+                    		    <c:when test="${feedback.fcontent.length() > 30}">
+                          		  ${feedback.fcontent.substring(0, 30)}....
+                      		  </c:when>
+                      		  <c:otherwise>
+                           		  ${feedback.fcontent}
+                       		 </c:otherwise>
+                  			  </c:choose>
+              			    </td>
+                            
                             <td>${feedback.memail }</td>
                             <fmt:formatDate value="${feedback.freg}"
                                 pattern="yyyy년 MM월 dd일" var="date" />
@@ -44,6 +54,8 @@
                 	<h1 style="text-align: center; margin-top: 150px; color:red;">작성된 글이 없습니다.</h1>
                 </c:if>
             </tbody>
+            
+            
         </table>
         <div class="add-review-button">
             <button onclick="location.href='FeedWriteForm.do'">글작성</button>
@@ -62,6 +74,8 @@
             </ul>
         </nav>
     </div>
+    
+    
  <%@ include file="footer.jsp" %>
 </body>
 </html>

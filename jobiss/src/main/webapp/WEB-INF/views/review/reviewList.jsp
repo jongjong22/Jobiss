@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/reviewList.css">
+    <link rel="stylesheet" type="text/css" href="css/feedbackList.css">
 	
     <title>리뷰게시판 목록</title>
     
@@ -32,7 +32,16 @@
                     <c:forEach var="review" items="${list}" varStatus="loop">
                         <tr>
                         	<td><a href="reviewDetails.do?rid=${review.rid}">${review.rtitle }</a></td>
-                            <td>${review.rcontent }</td>
+               			    <td>
+                  			  <c:choose>
+                    		    <c:when test="${review.rcontent.length() > 30}">
+                          		  ${review.rcontent.substring(0, 30)}....
+                      		  </c:when>
+                      		  <c:otherwise>
+                           		  ${review.rcontent}
+                       		 </c:otherwise>
+                  			  </c:choose>
+              			    </td>
                             <td>${review.memail }</td>
                             <fmt:formatDate value="${review.rreg}"
                                 pattern="yyyy년 MM월 dd일" var="date" />

@@ -36,26 +36,26 @@ body {
 	margin-top: 20px;
 	padding: 10px 20px;
 	border: none;
-	border-radius: 4px;
 	font-size: 16px;
 	cursor: pointer;
 	transition: background-color 0.3s;
-}
+	}
 
 .layout input[type="submit"] {
-	background-color: #4caf50;
-	color: #fff;
-}
+    background-color: #4caf50; /* 원하는 초록색으로 변경 */
+    color: #fff;
+	}
 
-.layout input[type="submit"]:hover {
-	background-color: #45a049;
-}
+	.layout input[type="submit"]:hover {
+    background-color: #45a049; /* 원하는 호버 색으로 변경 */
+	}
 
-.layout input[type="button"] {
-	background-color: #f44336;
-	color: #fff;
-}
+        .layout input[type="button"] {
+            background-color: #f44336;
+            color: #fff;
+        }
 
-.layout input[type="button"]:hover {
-	background-color: #d32f2f;
-}
+        .layout input[type="button"]:hover {
+            background-color: #d32f2f;
+        }
+        

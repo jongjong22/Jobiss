@@ -81,7 +81,7 @@
 						<li><a href="main.do">HOME</a></li>
 						<li><a href="QnAlist.do">Q&A</a></li>
 						<li><a href="reviewList.do">REVIEW</a></li>
-						<li><a href="#">FEEDBACK</a></li>
+						<li><a href="FeedbackList.do">FEEDBACK</a></li>
 						<li><a href="community.do">커뮤니티</a></li>
 						<li><a href="masterMemberList.do">관리자</a></li>
 						<li><a href="gptMain">GPT</a></li>
