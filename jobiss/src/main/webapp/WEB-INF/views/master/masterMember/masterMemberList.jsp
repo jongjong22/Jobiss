@@ -25,6 +25,15 @@
 </head>
 <body>
 
+
+	<c:if test="${not empty loginErr}">
+		<script>
+			alert('${loginErr}');
+			location.href = "main.do";
+		</script>
+
+	</c:if>
+
 	<div class="Big_container">
 		<h1>회원 관리</h1>
 
@@ -56,7 +65,7 @@
 					</c:forEach>
 				</table>
 		</div>
-		
+
 		<ul class="center" align="center">
 			<c:if test="${startPage > 10}">
 				<li><a href="masterMemberList.do?page=${startPage +1}">Previous</a></li>
@@ -72,7 +81,8 @@
 		</ul>
 
 		<div class="search">
-			<form action="masterMemberSearch.do" method="post" onsubmit="return checkSearchForm()">
+			<form action="masterMemberSearch.do" method="post"
+				onsubmit="return checkSearchForm()">
 				<select class="search" name="searchtype">
 					<option value="memail">이메일</option>
 					<option value="mname">이름</option>

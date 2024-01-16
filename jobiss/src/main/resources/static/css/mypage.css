@@ -19,11 +19,11 @@ body, ul {
 }
 
 .caption_left {
-	margin-right: 10px; /* 원하는 간격 조절 */
+	margin-right: 0px; /* 원하는 간격 조절 */
 }
 
 .caption_right {
-	margin-left: 10px; /* 원하는 간격 조절 */
+	margin-left: -60px; /* 원하는 간격 조절 */
 }
 
 grow_main {

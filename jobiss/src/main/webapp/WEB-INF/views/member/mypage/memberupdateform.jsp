@@ -55,7 +55,6 @@ a {
 				<li><a href="myreview.do">MY 리뷰</a></li>
 				<li><a href="myqna.do">MY QnA</a></li>
 				<li><a href="myfeedback.do">MY FEEDBACK</a></li>
-				<li><a href="mycommunity.do">MY 커뮤니티</a></li>
 				<li><a href="ps.do">이력서 다운받기</a></li>
 				<li><a href="memberupdate.do">회원정보수정</a></li>
 				<li><a href="memberdeleteform.do">회원탈퇴</a></li>

@@ -21,12 +21,12 @@
 	padding: 5px;
 }
 </style>
-<title>커뮤니티 관리</title>
+<title>공지사항 관리</title>
 </head>
 <body>
 
 	<div class="Big_container">
-		<h1>커뮤니티 관리</h1>
+		<h1>공지사항 관리</h1>
 
 		<div class="container1">
 			<c:if test="${not empty clist}">
@@ -45,8 +45,8 @@
 							<td>${community.memail }</td>
 							<td>${community.ctitle }</td>
 							<td>${community.cdrop }</td>
-							<fmt:formatDate value="${community.creg }" pattern="YYYY년 MM월 dd일"
-								var="date" />
+							<fmt:formatDate value="${community.creg }"
+								pattern="YYYY년 MM월 dd일" var="date" />
 							<td>${date }</td>
 						</tr>
 					</c:forEach>
@@ -68,7 +68,8 @@
 		</ul>
 
 		<div class="search">
-			<form action="masterSearchCommunity.do" method="post" onsubmit="return checkSearchForm()">
+			<form action="masterSearchCommunity.do" method="post"
+				onsubmit="return checkSearchForm()">
 				<select class="search" name="searchtype">
 					<option value="memail">이메일</option>
 					<option value="ctitle">제목</option>
@@ -79,7 +80,7 @@
 			</form>
 		</div>
 		</c:if>
-		
+
 		<c:if test="${empty clist }">
 			<h1>작성된 글이 없습니다.</h1>
 		</c:if>

@@ -10,12 +10,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="css/masterMemberList.css">
 <script src="./js/master.js"></script>
-<title>커뮤니티 관리</title>
+<title>공지사항 관리</title>
 </head>
 <body>
 
 	<div class="Big_container">
-		<h1>커뮤니티 상세 정보</h1>
+		<h1>공지사항 상세 정보</h1>
 
 		<div class="container_detailmember">
 			<table border="1">
@@ -45,7 +45,7 @@
 					<td>${date }</td>
 				</tr>
 			</table>
-				<button class="button-style" onClick="masterCommunityDelete('${community.cid}')">커뮤니티 글 삭제</button>
+				<button class="button-style" onClick="masterCommunityDelete('${community.cid}')">공지사항 글 삭제</button>
 		</div>
 	</div>
 </body>

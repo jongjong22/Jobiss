@@ -31,10 +31,11 @@
 
 <!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
 <style>
-
 @font-face {
 	font-family: 'MICEGothic Bold';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -134,7 +135,9 @@
 						<li><a href="reviewList.do">REVIEW</a></li>
 						<li><a href="FeedbackList.do">FEEDBACK</a></li>
 						<li><a href="community.do">공지사항</a></li>
-						<li><a href="masterMemberList.do">관리자</a></li>
+						<c:if test="${member.memail == 'master' }">
+							<li><a href="masterMemberList.do">관리자</a></li>
+						</c:if>
 						<li><a href="gptMain">GPT</a></li>
 					</ul>
 
@@ -152,7 +155,7 @@
 						<c:if test="${not empty sessionScope.member.memail}">
              ${sessionScope.member.mname}님 환영합니다
 						<li><a href="mypage.do">MYPAGE</a></li>
-						<li><a href="logout.do">로그아웃</a></li>
+							<li><a href="logout.do">로그아웃</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -169,9 +172,9 @@
 				<div class="col-md-12">
 					<p class="lead text-center text-muted">
 						Let me tell you something my friend. hope is a dangerous thing.
-						hope can drive a man insane. you <a href="about.html">measure</a>
+						hope can drive a man insane. you <a href="#">measure</a>
 						yourself by the people who measure themselves by you. it only took
-						me <a href="sidebar-right.html">six days</a>.
+						me <a href="#">six days</a>.
 					</p>
 				</div>
 			</div>
@@ -268,9 +271,9 @@
 					<h3 class="widget-title">Follow me</h3>
 					<div class="widget-body">
 						<p class="follow-me-icons">
-							<a href=""><i class="fa fa-twitter fa-2"></i></a> <a href=""><i
-								class="fa fa-dribbble fa-2"></i></a> <a href=""><i
-								class="fa fa-github fa-2"></i></a> <a href=""><i
+							<a href="#"><i class="fa fa-twitter fa-2"></i></a> <a href="#"><i
+								class="fa fa-dribbble fa-2"></i></a> <a href="#"><i
+								class="fa fa-github fa-2"></i></a> <a href="#"><i
 								class="fa fa-facebook fa-2"></i></a>
 						</p>
 					</div>
@@ -294,7 +297,7 @@
 					<h3 class="widget-title">Form widget</h3>
 					<div class="widget-body">
 						<p>
-							+234 23 9873237<br> <a href="mailto:#">some.email@somewhere.com</a><br>
+							+234 23 9873237<br> <a href="#">some.email@somewhere.com</a><br>
 							<br> 234 Hidden Pond Road, Ashland City, TN 37015
 						</p>
 					</div>
@@ -319,7 +322,7 @@
 					<div class="widget-body">
 						<p class="text-right">
 							Copyright &copy; 2014, Your awesome name here<br> Design: <a
-								href="http://www.gettemplate.com" rel="designer">Initio by
+								href="#" rel="designer">Initio by
 								GetTemplate</a>
 						</p>
 					</div>
