@@ -27,11 +27,15 @@
 					<th>성별</th>
 					<th>주소</th>
 					<th>경력</th>
-					<th>학력</th>
-					<th>전공</th>
-					<th>자격증</th>
-					<th>언어</th>
-					<th>데이터베이스</th>
+					<th>학교 이름</th>
+					<th>재학 상태</th>
+					<th>학교 전공</th>
+					<th>학교 입학일</th>
+					<th>학교 졸업일</th>
+					<th>자격증 이름</th>
+					<th>자격증 발급기관</th>
+					<th>자격증 발급일</th>
+					<th>희망직종</th>
 					<th>가입 날짜</th>
 					<th>삭제 여부</th>
 				</tr>
@@ -44,11 +48,15 @@
 					<td>${member.mgender }</td>
 					<td>${member.maddress }</td>
 					<td>${member.mcareer }</td>
-					<td>${member.meducation }</td>
-					<td>${member.mmajor }</td>
-					<td>${member.mcertification }</td>
-					<td>${member.mlang }</td>
-					<td>${member.mdb }</td>
+					<td>${member.mschoolname }</td>
+					<td>${member.mschooltype }</td>
+					<td>${member.mschoolmajor }</td>
+					<td>${member.mschoolstartreg }</td>
+					<td>${member.mschoolendreg }</td>
+					<td>${member.mlicensename }</td>
+					<td>${member.mlicensetype }</td>
+					<td>${member.mlicensereg }</td>
+					<td>${member.mjobtype }</td>
 					<fmt:formatDate value="${member.mreg }" pattern="YYYY년 MM월 dd일"
 						var="date" />
 					<td>${date }</td>
