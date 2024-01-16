@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -163,8 +164,6 @@ footer {
 			<!-- 제목2 -->
 			<div class="float-wrap">
 				<p class="title-text">학력</p>
-				<fmt:formatDate value="${member.mschoolstartreg }" var="startreg" pattern="YYYY.MM"/>
-				<fmt:formatDate value="${member.mschoolendreg }" var="endreg" pattern="YYYY.MM"/>
 				<p class="desc-text">${startreg } ~ ${endreg }   &nbsp;&nbsp;     ${member.mschoolname }    &nbsp;&nbsp;     ${member.mschooltype} (${member.mschoolmajor })</p>
 			</div>
 
@@ -199,22 +198,43 @@ footer {
 			<div class="float-wrap">
 				<p class="title-text">성장 과정</p>
 			</div>
-			<p class="desc-text">${ps.psgcontent }</p>
+			<c:if test="${not empty ps.psgcontent }">
+				<p class="desc-text">${ps.psgcontent }</p>
+			</c:if>
+			<c:if test="${empty ps.psgcontent }">
+				<p class="desc-text"> </p>
+			</c:if>
 
 			<div class="float-wrap">
 				<p class="title-text">성격 장단점</p>
 			</div>
-			<p class="desc-text">${ps.psccontent }</p>
+			<c:if test="${not empty ps.psccontent }">
+				<p class="desc-text">${ps.psccontent }</p>
+			</c:if>
+			<c:if test="${empty ps.psccontent }">
+				<p class="desc-text"> </p>
+			</c:if>
 
 			<div class="float-wrap">
 				<p class="title-text">지원동기</p>
 			</div>
-			<p class="desc-text">${ps.psmcontent }</p>
-
+			<c:if test="${not empty ps.psmcontent }">
+				<p class="desc-text">${ps.psmcontent }</p>
+			</c:if>
+			<c:if test="${empty ps.psmcontent }">
+				<p class="desc-text"> </p>
+			</c:if>
+			
 			<div class="float-wrap">
 				<p class="title-text">입사 후 포부</p>
 			</div>
-			<p class="desc-text">${ps.pspcontent }</p>
+			<c:if test="${not empty ps.pspcontent }">
+				<p class="desc-text">${ps.pspcontent }</p>
+			</c:if>
+			<c:if test="${empty ps.pspcontent }">
+				<p class="desc-text"> </p>
+			</c:if>
+			
 		</section>
 	</div>
 			<p align="center">지원서 상의 모든 기재 사항은 사실과 다름이 없음을 확인합니다.</p>
