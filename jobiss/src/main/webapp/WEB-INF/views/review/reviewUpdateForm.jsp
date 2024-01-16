@@ -14,6 +14,7 @@
 
 <body>
 	<div class="layout">
+		<p>후기 수정</p>
 		<form action="reviewUpdate.do" method="post">
 			<input type="hidden" value="${review.memail}" name="memail">
 			<input type="hidden" value="${review.rid}" name="rid">
@@ -21,7 +22,7 @@
 			<input name="rtitle" id="rtitle" type="text" placeholder="글 제목" value="${review.rtitle}">
 			<textarea name="rcontent" id="rcontent" rows="8" cols="50" placeholder="글 내용">${review.rcontent}</textarea>
 
-			<input type="button" onclick="reviewUpdate($('#rtitle').val(),$('#rcontent').val(),${review.rid})" value="등록"> 
+			<input type="submit" onclick="reviewUpdate($('#rtitle').val(),$('#rcontent').val(),${review.rid})" value="등록"> 
 			<input type="button" onclick="goBack()" value="취소">
 		</form>
 	</div>
