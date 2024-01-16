@@ -45,7 +45,6 @@
 	display: block;
 	float: left;
 	padding-right: 20px
-	
 }
 
 .info>.info01>li>a {
@@ -92,14 +91,14 @@
 				<!-- 세션 로그인이 없을경우 -->
 
 
-				<div class="info">
+				<div class="info" style="font-size: 20px; font-weight: bold;">
 					<ul class="info01">
 						<c:if test="${empty sessionScope.member.memail}">
 							<li><a href="loginform.do">로그인</a></li>
 						</c:if>
 						<!-- 세션에 로그인 정보가 있을 경우 -->
 						<c:if test="${not empty sessionScope.member.memail}">
-             ${sessionScope.member.mname}님 환영합니다
+             ${sessionScope.member.mname}님 환영합니다!
 						<li><a href="mypage.do">MYPAGE</a></li>
 							<li><a href="logout.do">로그아웃</a></li>
 						</c:if>
