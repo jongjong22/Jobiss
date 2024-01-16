@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Community;
 import com.example.demo.model.Member;
+import com.example.demo.model.Search;
 import com.example.demo.service.CommunityService;
 
 @Controller
@@ -26,8 +27,14 @@ public class CommunityController {
 	private CommunityService cs;
 
 	@RequestMapping("community.do")
-	public String community(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-
+	public String community(@RequestParam(value = "page", defaultValue = "1") int page, Model model, Search search,
+			HttpSession session) {
+		System.out.println("search : " + search);
+		Member member = (Member) session.getAttribute("member");
+		if (member != null) {
+			String memail = member.getMemail();
+			model.addAttribute("memail", memail);
+		}
 		int limit = 10; // 한 페이지에 출력할 데이터 개수
 
 		int listcount = cs.getCount(); // 전체 데이터 개수
@@ -44,12 +51,37 @@ public class CommunityController {
 
 		// 전체 커뮤니티 글 리스트 구하기
 		List<Community> communityList = cs.selectCommunityList(start);
+
+		// 게시글 조회수 탑3 구하기
+		List<Community> communityTop = cs.selectCommuniytTop3();
+		System.out.println("쿼리문 동작 : " + communityTop);
+		System.out.println("첫번째 : " + communityTop.get(0));
+		System.out.println("두번째 : " + communityTop.get(1));
+		System.out.println("세번째 : " + communityTop.get(2));
+
+		if (search.getKeyword() != "" && search.getSearchtype() != "") {
+			if (search.getKeyword() != "" && search.getSearchtype() != "") {
+				communityList = cs.searchCommunityList(search);
+				System.out.println("검색명 : " + search.getKeyword());
+				System.out.println("제목검색:" + communityList.get(0).getCtitle());
+				model.addAttribute("communityList", communityList);
+				model.addAttribute("startPage", "-1");
+
+			}
+		}
+		for (int i = 0; i < communityTop.size(); i++) {
+			model.addAttribute("communityTop" + i, communityTop.get(i));
+		}
+
+		if(search.getKeyword() == "" && search.getSearchtype() == "") {
+			
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("page", page);
+		}
 
 		return "community/communityForm";
 	}
@@ -142,7 +174,7 @@ public class CommunityController {
 		int id = Integer.parseInt(cid);
 		// 조회수 1 증가
 		int result = cs.readCountUpdate(id);
-		
+
 		Community community = cs.selectCommunity(id);
 
 		model.addAttribute("community", community);
@@ -159,4 +191,5 @@ public class CommunityController {
 
 		return "redirect:/community.do";
 	}
+
 }

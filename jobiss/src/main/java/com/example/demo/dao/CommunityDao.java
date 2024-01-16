@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.Community;
 import com.example.demo.model.Review;
+import com.example.demo.model.Search;
 
 @Mapper
 public interface CommunityDao {
@@ -24,5 +25,9 @@ public interface CommunityDao {
 	int deleteCommunity(int id);
 
 	int getCount();
+
+	List<Community> selectCommuniytTop3();
+
+	List<Community> searchCommunityList(Search search);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.CommunityDao;
 import com.example.demo.model.Community;
 import com.example.demo.model.Review;
+import com.example.demo.model.Search;
 
 @Service
 public class CommunityService {
@@ -44,5 +45,15 @@ public class CommunityService {
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return dao.getCount();
+	}
+
+	public List<Community> selectCommuniytTop3() {
+		// TODO Auto-generated method stub
+		return dao.selectCommuniytTop3();
+	}
+
+	public List<Community> searchCommunityList(Search search) {
+		// TODO Auto-generated method stub
+		return dao.searchCommunityList(search);
 	}
 }

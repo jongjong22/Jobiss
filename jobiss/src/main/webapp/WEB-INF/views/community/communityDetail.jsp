@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
 <title>커뮤니티 상세페이지</title>
 <style>
 body {
@@ -40,11 +41,29 @@ h1 {
 	color: #007bff;
 }
 
+.review-content h4 {
+	margin-top: 0;
+	color: #007bff;
+}
+
 .view-reply {
 	/* 이 부분에 박스의 너비와 높이를 조정하는 스타일을 추가하세요 */
 	width: 100%; /* 예시로 너비를 100%로 설정 */
 	height: 400px; /* 예시로 높이를 400px로 설정 */
 	/* 필요에 따라 다른 속성도 조정할 수 있습니다 */
+}
+.add-review-button {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.add-review-button>button {
+	border-radius: 10px;
+	border: 1 solid black;
+	background-color: transparent;
+	padding: 5px 10px 5px 10px;
 }
 </style>
 </head>
@@ -52,7 +71,7 @@ h1 {
 	<%@ include file="header.jsp"%>
 
 	<div class="container">
-		<h1>커뮤니티 상세 페이지</h1>
+		<h1>공지사항</h1>
 
 		<div class="review-content">
 			<h2>제목</h2>
@@ -60,16 +79,20 @@ h1 {
 
 			<h2>내용</h2>
 			<p>${community.ccontent}</p>
+			<h4>작성일</h4>
+			<p><fmt:formatDate value="${community.creg}" pattern="yyyy-MM-dd" /></p>
 		</div>
 
-		<div class="action-buttons">
-			<c:if test="${member.memail eq community.memail }">
-				<input type="button"
+		<div class="add-review-button">
+			<c:if test="${member.memail eq 'master' }">
+				<%-- <button type="button"
 					onclick="location.href='communityUpdateForm.do?cid=${community.cid}'"
-					value="글 수정">
-				<input type="button" onclick="location.href='deleteCommunity.do?cid=${community.cid}'"
-					value="글 삭제">
+					value="글 수정"> --%>
+				<%-- <button onclick="location.href='communityUpdateForm.do?cid=${community.cid}'">글수정</button>	 --%>
+				<%-- <button type="button" onclick="location.href='deleteCommunity.do?cid=${community.cid}'" --%>
+				<button onclick="location.href='deleteCommunity.do?cid=${community.cid}'">글삭제</button>	
 			</c:if>
+			<button onclick="location.href='main.do'">Home</button>	
 		</div>
 
 
@@ -109,7 +132,7 @@ h1 {
 
 		<!-- 댓글 작성 폼 -->
 
-		<form action="feedReplyWrite.do" method="post" class="view-reply">
+		<%-- <form action="feedReplyWrite.do" method="post" class="view-reply">
 			<input type="hidden" name="memail"
 				value="${sessionScope.member.memail }"> <input type="hidden"
 				name="cid" value="${community.cid }">
@@ -117,10 +140,9 @@ h1 {
 			<textarea name="frcontent" rows="6" cols="50"
 				style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
 			<br> <input type="submit" value="댓글 작성">
-		</form>
+		</form> --%>
 
 	</div>
-
 
 	<%@ include file="footer.jsp"%>
 
