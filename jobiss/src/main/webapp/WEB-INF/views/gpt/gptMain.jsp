@@ -18,8 +18,12 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-
-
+	<c:if test="${loginErr ne null}">
+		<script>
+		alert('${loginErr}');
+		location.href="main.do";
+	   </script>
+	</c:if>
 	<div id="chart_div"></div>
 
 	<c:if test="${not empty readCount}">
@@ -290,9 +294,6 @@
 
 
 	<%@ include file="footer.jsp"%>
-
-
-
 </body>
 
 </html>

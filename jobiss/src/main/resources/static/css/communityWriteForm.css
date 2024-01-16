@@ -6,8 +6,8 @@
 
 body {
     font-family: "Open sans", Helvetica, Arial, sans-serif;
-    font-size: 16px; /* �룿�듃 �궗�씠利� 蹂�寃� */
-    color: #333; /* �룿�듃 �깋�긽 蹂�寃� */
+    font-size: 16px; 
+    color: #333; 
     background: url('images/background.jpg') no-repeat center center fixed; 
     background-size: cover;
     display: flex;
@@ -20,14 +20,15 @@ body {
 }
 
 body::before {
-    content: "";
+    
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); 
+/*     background-color: rgba(0, 0, 0, 0.7);  */
  }
+
 
 .card {
 	position: absolute;

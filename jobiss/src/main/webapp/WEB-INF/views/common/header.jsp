@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
-	<title>header</title>
+<title>header</title>
 <link rel="shortcut icon" href="images/gt_favicon.png">
 
 <!-- Bootstrap -->
@@ -27,30 +28,38 @@
 <!-- Custom styles -->
 <link rel="stylesheet" href="css/headfoot.css">
 <style>
-		.info {
-		overflow: hidden;
-		float: right;
-		margin-top: -40px;
-		}
-		
-		.info>.info01>li {
-			display: block;
-			float: left;
-			padding-right: 20px
-		}
-		
-		.info>.info01>li>a {
-			font-size: 15px;
-			color: black;
-		}
-		
+#logo {
+	margin-top: -30px;
+	margin-bottom: -70px;
+	padding-top: -30px;
+	padding-bottom: -30px;
+	line-height: 1;
+}
+
+.info {
+	overflow: hidden;
+	float: right;
+	margin-top: -60px;
+}
+
+.info>.info01>li {
+	display: block;
+	float: left;
+	padding-right: 20px
+}
+
+.info>.info01>li>a {
+	font-size: 15px;
+	color: black;
+}
 </style>
 </head>
 <body class="home">
 	<header id="header">
 		<div id="head" class="parallax" parallax-speed="2">
 			<h1 id="logo" class="text-center">
-				<span class="title">Jobiss</span> 
+				<span class="title">Jobiss</span>
+				<!-- <a href="">anthony.russel42@example.com</a></span> -->
 			</h1>
 		</div>
 
@@ -69,11 +78,14 @@
 				<div class="navbar-collapse collapse">
 
 					<ul class="nav navbar-nav">
-						<li><a href="QnAlist.do">Q&A</a></li>
+						<li><a href="main.do">HOME</a></li>
+						<li><a href="#">Q&A</a></li>
 						<li><a href="reviewList.do">REVIEW</a></li>
-						<li><a href="FeedbackList.do">FEEDBACK</a></li>
+						<li><a href="#">FEEDBACK</a></li>
 						<li><a href="community.do">공지사항</a></li>
-						<li><a href="masterMemberList.do">관리자</a></li>
+						<c:if test="${member.memail == 'master' }">
+							<li><a href="masterMemberList.do">관리자</a></li>
+						</c:if>
 						<li><a href="gptMain">GPT</a></li>
 					</ul>
 
@@ -91,7 +103,7 @@
 						<c:if test="${not empty sessionScope.member.memail}">
              ${sessionScope.member.mname}님 환영합니다
 						<li><a href="mypage.do">MYPAGE</a></li>
-						<li><a href="logout.do">로그아웃</a></li>
+							<li><a href="logout.do">로그아웃</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -99,7 +111,7 @@
 			</div>
 		</nav>
 	</header>
-		
+
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

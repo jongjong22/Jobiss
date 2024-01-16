@@ -5,7 +5,7 @@
 
 	<!-- 커뮤니티 게시글 인서트 -->
 	<insert id="communityInsert" parameterType="community">
-		insert into community values(null,#{memail},#{ctitle},#{ccontent},#{cimage},0,now(),default)
+		insert into community values(null,#{memail},#{ctitle},#{ccontent},#{cimage, jdbcType=VARCHAR},0,now(),default)
 	</insert>
 	
 	<!-- 커뮤니티 게시글 전체 구하기 -->

@@ -40,8 +40,6 @@ a {
 				<li><a href="myqna.do?&&memail=${member.memail }">MY QnA</a></li>
 				<li><a href="myfeedback.do?&&memail=${member.memail }">MY
 						FEEDBACK</a></li>
-				<li><a href="mycommunity.do?&&memail=${member.memail }">MY
-						커뮤니티</a></li>
 				<li><a href="ps.do">이력서 다운받기</a></li>
 				<li><a href="memberupdateform.do">회원정보수정</a></li>
 				<li><a href="memberdeleteform.do">회원탈퇴</a></li>
@@ -55,7 +53,7 @@ a {
 				<div class="caption_left">
 					<h2>내가 쓴 자기소개서</h2>
 				</div>
-				<div class="caption_right">
+				<div class="caption_right" style="margin-right: 40px;">
 					<h2>Gpt가 추천한 글</h2>
 				</div>
 			</div>

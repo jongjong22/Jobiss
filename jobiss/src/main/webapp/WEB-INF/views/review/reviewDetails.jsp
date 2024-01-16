@@ -10,79 +10,89 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="./js/review.js"></script>
 <link rel="stylesheet" type="text/css" href="css/feedback.css">
-
+<style>
+.info {
+	margin-top: 30px;
+}
+</style>
 <title>리뷰 게시판 상세페이지</title>
 
 </head>
 <body>
+	<div style="">
+		<%@ include file="header.jsp"%>
+	</div>
+	<div class="container">
 
-	<%@ include file="header.jsp" %>
+		<div class="review-content" style="text-align: right;">
+			<h2 class="reviewtitle" style="text-align: center;">${review.rtitle}</h2>
+			<p>작성자 : ${review.memail}</p>
+			<fmt:formatDate value="${review.rreg}" pattern="yyyy년 MM월 dd일"
+				var="date1" />
+			<p>작성일 : ${date1}</p>
+			<p style="text-align: left;">${content}</p>
+		</div>
 
-<div class="container">
-
-    <div class="review-content" style="text-align: right;">        
-        <h2 class="reviewtitle" style="text-align: center;">${review.rtitle}</h2>
-        <p>작성자: ${review.memail}</p>
-        <fmt:formatDate value="${review.rreg}" pattern="yyyy년 MM월 dd일" var="date1" />
-        <p>작성일: ${date1}</p>
-        <p style="text-align: left;">${content}</p>
-    </div>
-
-    <div class="add-review-button" style="text-align: right;">
-        <c:if test="${member.memail eq review.memail }">
-            <button onclick="location.href='reviewUpdateForm.do?rid=${review.rid}'" >글 수정</button>
-            <button onclick="deletereview(${review.rid})">글 삭제</button>
-        </c:if>
-    </div>
-</div>
+		<div class="add-review-button" style="text-align: right;">
+			<c:if test="${member.memail eq review.memail }">
+				<button
+					onclick="location.href='reviewUpdateForm.do?rid=${review.rid}'">글
+					수정</button>
+				<button onclick="deletereview(${review.rid})">글 삭제</button>
+			</c:if>
+		</div>
 
 
 		<!-- 댓글 작성 폼 -->
-		<div class="review-content">	
-			<form action="replyWrite.do" method="post" class="view-reply" onsubmit="return check1()"> 
-			<input type="hidden" id="memail" name="memail" value="${sessionScope.member.memail }"> 
-			<input type="hidden" name="rid" value="${review.rid}">
-			
-			<textarea name="rrcontent" id="rrcontent" rows="6" cols="50" style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea> 
-			<br>  
-			
- 			<div class="add-review-button">
-       				 <button type="submit">댓글 작성</button>
-    		</div>
-		</form> 
-</div>
-		
+		<div class="review-content">
+			<form action="replyWrite.do" method="post" class="view-reply"
+				onsubmit="return check1()">
+				<input type="hidden" id="memail" name="memail"
+					value="${sessionScope.member.memail }"> <input
+					type="hidden" name="rid" value="${review.rid}">
+
+				<textarea name="rrcontent" id="rrcontent" rows="6" cols="50"
+					style="resize: vertical; width: 100%;" placeholder="댓글을 작성해주세요"></textarea>
+				<br>
+
+				<div class="add-review-button">
+					<button type="submit">댓글 작성</button>
+				</div>
+			</form>
+		</div>
+
 		<div class="review-reply">
 			<!-- 댓글 내용 -->
 			<c:if test="${not empty Rlist}">
-				<table border = "1" align = "center">
+				<table border="1" align="center">
 					<tr>
 						<th>내용</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						
+
 						<th>삭제 버튼</th>
 					</tr>
 					<c:forEach var="reviewreply" items="${Rlist}" varStatus="loop">
 						<tr>
 							<td>${reviewreply.rrcontent }</td>
 							<td>${reviewreply.memail }</td>
-							<fmt:formatDate value="${reviewreply.rrreg}" pattern="yyyy년 MM월 dd일" var="date" />
+							<fmt:formatDate value="${reviewreply.rrreg}"
+								pattern="yyyy년 MM월 dd일" var="date" />
 							<td>${date}</td>
-							
+
 							<c:if test="${member.memail eq reviewreply.memail }">
-							<td><input type="button" onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})" value="댓글 삭제"></td>
+								<td><input type="button"
+									onclick="deletereviewreply(${reviewreply.rrid}, ${review.rid})"
+									value="댓글 삭제"></td>
 							</c:if>
-							
+
 						</tr>
 					</c:forEach>
 				</table>
 			</c:if>
 		</div>
-		
-
 	</div>
-	
+
 	<%@ include file="footer.jsp"%>
 
 </body>

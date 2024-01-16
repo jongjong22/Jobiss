@@ -39,9 +39,7 @@ public class GptController {
 		System.out.println("로딩 전 memail : " + memail);
 		if (member != null)
 			memail = member.getMemail();
-
-		else
-			memail = "master";
+		 
 		System.out.println("로딩 !null 변경 : " + memail);
 		System.out.println("로딩 null 변경 : " + memail);
 		System.out.println("\n ***** gptLoading 끝 ***** \n");
@@ -52,6 +50,14 @@ public class GptController {
 	public String gptMain(String mainMsg, Model model, HttpSession session) {
 		System.out.println("\n ***** gptMain 시작 ***** \n");
 		loading(session);
+		System.out.println("session : " + session);
+		if (memail == null) {
+			model.addAttribute("loginErr", "로그인을 해주세요.");
+			return "gpt/gptMain";
+		}else {
+			
+			
+		}
 		System.out.println("memail : " + memail);
 		List<GPT> gptList = new ArrayList<GPT>();
 		ReadCount readCount = gs.selectReadCountTop();
