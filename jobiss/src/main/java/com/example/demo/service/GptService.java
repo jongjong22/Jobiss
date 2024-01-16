@@ -196,7 +196,7 @@ public class GptService {
 				+ "Please answer according to the conditions above. and Think step by step Answer in Korean"; // GPT 대전제
 
 		final String startConetnet = " 이력서를 수정할꺼야 내용은"; // 시작점
-		String endConetnet = ""; // 끝점
+		String endConetnet = ""; // 마지막지점
 		String userContent = ""; // 최종질문
 		String resultContent = ""; // 최종답변
 
@@ -306,17 +306,17 @@ public class GptService {
 			break;
 		case "c":
 			creadcount += 1;
-			readCount.setGreadcount(creadcount);
+			readCount.setCreadcount(creadcount);
 			System.out.println("readCount : c");
 			break;
 		case "m":
 			mreadcount += 1;
-			readCount.setGreadcount(mreadcount);
+			readCount.setMreadcount(mreadcount);
 			System.out.println("readCount : m");
 			break;
 		case "p":
 			preadcount += 1;
-			readCount.setGreadcount(preadcount);
+			readCount.setPreadcount(preadcount);
 			System.out.println("readCount : p");
 			break;
 		}
