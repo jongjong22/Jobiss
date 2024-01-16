@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-	<div class="mypage_big" style="font-family: 'MICEGothic Bold';">
+	<div class="myqna_big" style="font-family: 'MICEGothic Bold';">
 		<h1>마이페이지</h1>
 		<nav>
 			<ul>
@@ -41,6 +41,7 @@
             <li><a href="myqna.do?&&memail=${member.memail }">MY QnA</a></li>
             <li><a href="myfeedback.do?&&memail=${member.memail }">MY FEEDBACK</a></li>
             <li><a href="mycommunity.do?&&memail=${member.memail }">MY 커뮤니티</a></li>
+            <li><a href="ps.do">이력서 다운받기</a></li>
             <li><a href="memberupdateform.do">회원정보수정</a></li>
             <li><a href="memberdeleteform.do">회원탈퇴</a></li>
 			</ul>
@@ -48,7 +49,7 @@
 
 		<div class="mypage_small">
 		<c:choose>
-				<c:when test="${not empty qlist}">
+				<c:when test="${not empty qnalist}">
 					<table border="1" align="center">
 						<h1 align="center">내가 쓴 QnA</h1>
 						<tr>
@@ -58,9 +59,9 @@
 							<th>작성날짜</th>
 						</tr>
 
-						<c:forEach items="${qlist }" varStatus="loop" var="qna">
+						<c:forEach items="${qnalist }" varStatus="loop" var="qna">
 							<tr
-								onclick="location.href='qnaform.do?&&qid=${qna.qid}'">
+								onclick="location.href='QnAcontent.do?&&qid=${qna.qid}&&&page=${page}'">
 								<td>${qna.memail }</td>
 								<td>${qna.qtitle }</td>
 								<td>${qna.qcontent }</td>
