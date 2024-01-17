@@ -18,9 +18,9 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-	<c:if test="${loginErr ne null}">
+	<c:if test="${not empty loginErr}">
 		<script>
-		alert('${loginErr}');
+		alert(`${loginErr}`);
 		location.href="main.do";
 	   </script>
 	</c:if>
