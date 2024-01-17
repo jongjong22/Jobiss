@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,9 @@ public class GptController {
 		System.out.println("로딩 전 memail : " + memail);
 		if (member != null)
 			memail = member.getMemail();
-		 
+		else {
+			memail = "";
+		}
 		System.out.println("로딩 !null 변경 : " + memail);
 		System.out.println("로딩 null 변경 : " + memail);
 		System.out.println("\n ***** gptLoading 끝 ***** \n");
@@ -51,12 +54,11 @@ public class GptController {
 		System.out.println("\n ***** gptMain 시작 ***** \n");
 		loading(session);
 		System.out.println("session : " + session);
-		if (memail == null) {
+		if (memail == null || memail == "") {
 			model.addAttribute("loginErr", "로그인을 해주세요.");
 			return "gpt/gptMain";
-		}else {
-			
-			
+		} else {
+
 		}
 		System.out.println("memail : " + memail);
 		List<GPT> gptList = new ArrayList<GPT>();

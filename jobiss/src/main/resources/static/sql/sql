@@ -1,0 +1,664 @@
+-- 커뮤니티
+CREATE TABLE `community` (
+	`cid`        INT           NOT NULL COMMENT '커뮤니티글 번호', -- 커뮤니티글 번호
+	`memail`     VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`ctitle`     VARCHAR(200)  NOT NULL COMMENT '제목', -- 제목
+	`ccontent`   VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`cimage`     VARCHAR(1000) NULL     COMMENT '이미지', -- 이미지
+	`creadcount` INT           NOT NULL COMMENT 'default: 0', -- 조회수
+	`creg`       TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`cdrop`      VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '커뮤니티';
+
+-- 커뮤니티
+ALTER TABLE `community`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`cid` -- 커뮤니티글 번호
+		);
+
+ALTER TABLE `community`
+	MODIFY COLUMN `cid` INT NOT NULL AUTO_INCREMENT COMMENT '커뮤니티글 번호';
+
+ALTER TABLE `community`
+	AUTO_INCREMENT = 1;
+
+-- 커뮤니티 댓글
+CREATE TABLE `communityreply` (
+	`crid`      INT           NOT NULL COMMENT '커뮤니티 댓글번호', -- 커뮤니티 댓글번호
+	`cid`       INT           NOT NULL COMMENT '커뮤니티 글번호', -- 커뮤니티글 번호
+	`memail`    VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`crcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`crreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`crdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '커뮤니티 댓글';
+
+-- 커뮤니티 댓글
+ALTER TABLE `communityreply`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`crid` -- 커뮤니티 댓글번호
+		);
+
+ALTER TABLE `communityreply`
+	MODIFY COLUMN `crid` INT NOT NULL AUTO_INCREMENT COMMENT '커뮤니티 댓글번호';
+
+ALTER TABLE `communityreply`
+	AUTO_INCREMENT = 1;
+
+-- 피드백 게시판
+CREATE TABLE `feedback` (
+	`fid`      INT           NOT NULL COMMENT '피드백 번호', -- 피드백 번호
+	`memail`   VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`ftitle`   VARCHAR(200)  NOT NULL COMMENT '제목', -- 제목
+	`fcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`freg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`fdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '피드백 게시판';
+
+-- 피드백 게시판
+ALTER TABLE `feedback`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`fid` -- 피드백 번호
+		);
+
+ALTER TABLE `feedback`
+	MODIFY COLUMN `fid` INT NOT NULL AUTO_INCREMENT COMMENT '피드백 번호';
+
+ALTER TABLE `feedback`
+	AUTO_INCREMENT = 1;
+
+-- 피드백 댓글
+CREATE TABLE `feedbackreply` (
+	`frid`      INT           NOT NULL COMMENT '피드백 번호', -- 피드백 댓글 번호
+	`fid`       INT           NOT NULL COMMENT '후기 글번호', -- 후기 글번호
+	`memail`    VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`frcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`frreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`frdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '피드백 댓글';
+
+-- 피드백 댓글
+ALTER TABLE `feedbackreply`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`frid` -- 피드백 댓글 번호
+		);
+
+ALTER TABLE `feedbackreply`
+	MODIFY COLUMN `frid` INT NOT NULL AUTO_INCREMENT COMMENT '피드백 번호';
+
+ALTER TABLE `feedbackreply`
+	AUTO_INCREMENT = 1;
+
+-- 지피티
+CREATE TABLE `gpt` (
+	`gid`    INT         NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail` VARCHAR(50) NOT NULL COMMENT '이메일', -- 이메일
+	`gptreg` TIMESTAMP   NULL     COMMENT '최종 답변일' -- 최종 답변일
+)
+COMMENT '지피티';
+
+-- 지피티
+ALTER TABLE `gpt`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`gid` -- 대화 세션 번호
+		);
+
+ALTER TABLE `gpt`
+	MODIFY COLUMN `gid` INT NOT NULL AUTO_INCREMENT COMMENT '대화 세션 번호';
+
+ALTER TABLE `gpt`
+	AUTO_INCREMENT = 1;
+
+-- 성장과정
+CREATE TABLE `gptgrow` (
+	`gptgid`      INT           NOT NULL COMMENT '성장과정 번호', -- 성장과정 번호
+	`gid`         INT           NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail`      VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`gptgcontent` VARCHAR(4000) NULL     COMMENT '답변 내용', -- 답변 내용
+	`gptgreg`     TIMESTAMP     NULL     COMMENT '최종 답변일' -- 최종 답변일
+)
+COMMENT '성장과정';
+
+-- 성장과정
+ALTER TABLE `gptgrow`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`gptgid` -- 성장과정 번호
+		);
+
+ALTER TABLE `gptgrow`
+	MODIFY COLUMN `gptgid` INT NOT NULL AUTO_INCREMENT COMMENT '성장과정 번호';
+
+ALTER TABLE `gptgrow`
+	AUTO_INCREMENT = 1;
+
+-- 좋아요
+CREATE TABLE `like` (
+	`likeid`     INT         NOT NULL COMMENT '좋아요 Id', -- 좋아요 Id
+	`memail`     VARCHAR(50) NOT NULL COMMENT '이메일', -- 이메일
+	`liketype`   VARCHAR(50) NOT NULL COMMENT '게시판 타입', -- 게시판 타입
+	`liketypeId` INT         NOT NULL COMMENT '게시판 글번호', -- 게시판 글번호
+	`likedrop`   VARCHAR(10) NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '좋아요';
+
+-- 좋아요
+ALTER TABLE `like`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`likeid` -- 좋아요 Id
+		);
+
+ALTER TABLE `like`
+	MODIFY COLUMN `likeid` INT NOT NULL AUTO_INCREMENT COMMENT '좋아요 Id';
+
+ALTER TABLE `like`
+	AUTO_INCREMENT = 1;
+
+-- 공지사항
+CREATE TABLE `masternotice` (
+	`mnid`      INT          NOT NULL COMMENT 'seq', -- 공지사항 번호
+	`mntitle`   VARCHAR(50)  NOT NULL COMMENT '제목', -- 제목
+	`mncontent` VARCHAR(500) NOT NULL COMMENT '내용', -- 내용
+	`mnreg`     TIMESTAMP    NOT NULL COMMENT '작성 날짜' -- 작성 날짜
+)
+COMMENT '공지사항';
+
+-- 공지사항
+ALTER TABLE `masternotice`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`mnid` -- 공지사항 번호
+		);
+
+ALTER TABLE `masternotice`
+	MODIFY COLUMN `mnid` INT NOT NULL AUTO_INCREMENT COMMENT 'seq';
+
+ALTER TABLE `masternotice`
+	AUTO_INCREMENT = 1;
+
+-- 멤버
+CREATE TABLE `member` (
+	`memail`          VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`mpw`             VARCHAR(150)  NOT NULL COMMENT '비밀번호', -- 비밀번호
+	`mname`           VARCHAR(30)   NOT NULL COMMENT '이름', -- 이름
+	`mphone`          VARCHAR(50)   NOT NULL COMMENT '전화번호', -- 전화번호
+	`mage`            VARCHAR(50)   NOT NULL COMMENT '나이', -- 나이
+	`mgender`         VARCHAR(30)   NOT NULL COMMENT '성별', -- 성별
+	`maddress`        VARCHAR(50)   NOT NULL COMMENT '주소', -- 주소
+	`mcareer`         VARCHAR(1000) NOT NULL COMMENT '경력 신입, n년차', -- 경력
+	`mschoolname`     VARCHAR(50)   NOT NULL COMMENT '학교 이름', -- 학교 이름
+	`mschooltype`     VARCHAR(50)   NOT NULL COMMENT '재학 여부(졸업 재학 등등)', -- 학교 재학여부
+	`mschoolmajor`    VARCHAR(50)   NULL     COMMENT '학교 전공', -- 학교 전공
+	`mschoolstartreg` VARCHAR(50)   NOT NULL COMMENT '학교 입학일', -- 학교 입학일
+	`mschoolendreg`   VARCHAR(50)   NOT NULL COMMENT '학교 졸업일', -- 학교 졸업일
+	`mjobtype`        VARCHAR(50)   NOT NULL COMMENT '희망직종(back,front)', -- 희망직종
+	`mreg`            TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`mdrop`           VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '멤버';
+
+-- 멤버
+ALTER TABLE `member`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`memail` -- 이메일
+		);
+
+-- 이력서
+CREATE TABLE `personalstatement` (
+	`pid`        INT           NOT NULL COMMENT '이력서 번호', -- 이력서 번호
+	`gid`        INT           NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail`     VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`psgcontent` VARCHAR(4000) NULL     COMMENT '성장과정', -- 성장과정
+	`psccontent` VARCHAR(4000) NULL     COMMENT '성격장단점', -- 성격장단점
+	`psmcontent` VARCHAR(4000) NULL     COMMENT '지원동기', -- 지원동기
+	`pspcontent` VARCHAR(4000) NULL     COMMENT '입사후포부', -- 입사후포부
+	`psreg`      TIMESTAMP     NULL     COMMENT '최종 작성일' -- 최종 작성일
+)
+COMMENT '이력서';
+
+-- 이력서
+ALTER TABLE `personalstatement`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`pid` -- 이력서 번호
+		);
+
+ALTER TABLE `personalstatement`
+	MODIFY COLUMN `pid` INT NOT NULL AUTO_INCREMENT COMMENT '이력서 번호';
+
+ALTER TABLE `personalstatement`
+	AUTO_INCREMENT = 1;
+
+-- Qna
+CREATE TABLE `qna` (
+	`qid`      INT           NOT NULL COMMENT 'Qna 글번호', -- Qna 글번호
+	`memail`   VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`qtitle`   VARCHAR(200)  NOT NULL COMMENT '제목', -- 제목
+	`qcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`qreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`qdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT 'Qna';
+
+-- Qna
+ALTER TABLE `qna`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`qid` -- Qna 글번호
+		);
+
+ALTER TABLE `qna`
+	MODIFY COLUMN `qid` INT NOT NULL AUTO_INCREMENT COMMENT 'Qna 글번호';
+
+ALTER TABLE `qna`
+	AUTO_INCREMENT = 1;
+
+-- QnaReply
+CREATE TABLE `qnareply` (
+	`qrid`      INT           NOT NULL COMMENT 'Qna 댓글번호', -- Qna 댓글번호
+	`qid`       INT           NOT NULL COMMENT 'QnA 글번호', -- Qna 글번호
+	`memail`    VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`qrcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`qrreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`qrdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT 'QnaReply';
+
+-- QnaReply
+ALTER TABLE `qnareply`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`qrid` -- Qna 댓글번호
+		);
+
+ALTER TABLE `qnareply`
+	MODIFY COLUMN `qrid` INT NOT NULL AUTO_INCREMENT COMMENT 'Qna 댓글번호';
+
+ALTER TABLE `qnareply`
+	AUTO_INCREMENT = 1;
+
+-- 후기 게시판
+CREATE TABLE `review` (
+	`rid`      INT           NOT NULL COMMENT '후기글 번호', -- 후기글 번호
+	`memail`   VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`rtitle`   VARCHAR(200)  NOT NULL COMMENT '제목', -- 제목
+	`rcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`rsuccess` VARCHAR(1000) NOT NULL COMMENT '합격 증명 사진 올려야함', -- 합격증명사진
+	`rreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`rconfirm` VARCHAR(10)   NOT NULL DEFAULT 'Y' COMMENT 'default: Y -> N ( 관리자가 확인 누르면 update ) ', -- 인증여부
+	`rdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '후기 게시판';
+
+-- 후기 게시판
+ALTER TABLE `review`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`rid` -- 후기글 번호
+		);
+
+ALTER TABLE `review`
+	MODIFY COLUMN `rid` INT NOT NULL AUTO_INCREMENT COMMENT '후기글 번호';
+
+ALTER TABLE `review`
+	AUTO_INCREMENT = 1;
+
+-- 후기 댓글
+CREATE TABLE `reviewreply` (
+	`rrid`      INT           NOT NULL COMMENT '후기 댓글번호', -- 후기 댓글번호
+	`rid`       INT           NOT NULL COMMENT '후기 글번호', -- 후기글 번호
+	`memail`    VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`rrcontent` VARCHAR(1000) NOT NULL COMMENT '내용', -- 내용
+	`rrreg`     TIMESTAMP     NOT NULL COMMENT '작성일', -- 작성일
+	`rrdrop`    VARCHAR(10)   NOT NULL DEFAULT 'N' COMMENT 'default : N -> Y' -- 삭제여부
+)
+COMMENT '후기 댓글';
+
+-- 후기 댓글
+ALTER TABLE `reviewreply`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`rrid` -- 후기 댓글번호
+		);
+
+ALTER TABLE `reviewreply`
+	MODIFY COLUMN `rrid` INT NOT NULL AUTO_INCREMENT COMMENT '후기 댓글번호';
+
+ALTER TABLE `reviewreply`
+	AUTO_INCREMENT = 1;
+
+-- 입사후포부
+CREATE TABLE `gptplan` (
+	`gptpid`      INT           NOT NULL COMMENT '성장과정 번호', -- 입사후포부 번호
+	`gid`         INT           NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail`      VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`gptpcontent` VARCHAR(4000) NULL     COMMENT '답변 내용', -- 답변 내용
+	`gptpreg`     TIMESTAMP     NULL     COMMENT '최종 답변일' -- 최종 답변일
+)
+COMMENT '성장과정';
+
+-- 입사후포부
+ALTER TABLE `gptplan`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`gptpid` -- 입사후포부 번호
+		);
+
+ALTER TABLE `gptplan`
+	MODIFY COLUMN `gptpid` INT NOT NULL AUTO_INCREMENT COMMENT '성장과정 번호';
+
+ALTER TABLE `gptplan`
+	AUTO_INCREMENT = 1;
+
+-- 성격장단점
+CREATE TABLE `gptcharacter` (
+	`gptcid`      INT           NOT NULL COMMENT '성장과정 번호', -- 성격장단점 번호
+	`gid`         INT           NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail`      VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`gptccontent` VARCHAR(4000) NULL     COMMENT '답변 내용', -- 답변 내용
+	`gptcreg`     TIMESTAMP     NULL     COMMENT '최종 답변일' -- 최종 답변일
+)
+COMMENT '성장과정';
+
+-- 성격장단점
+ALTER TABLE `gptcharacter`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`gptcid` -- 성격장단점 번호
+		);
+
+ALTER TABLE `gptcharacter`
+	MODIFY COLUMN `gptcid` INT NOT NULL AUTO_INCREMENT COMMENT '성장과정 번호';
+
+ALTER TABLE `gptcharacter`
+	AUTO_INCREMENT = 1;
+
+-- 지원동기
+CREATE TABLE `gptmotive` (
+	`gptmid`      INT           NOT NULL COMMENT '성장과정 번호', -- 지원동기 번호
+	`gid`         INT           NOT NULL COMMENT '대화 세션 번호', -- 대화 세션 번호
+	`memail`      VARCHAR(50)   NOT NULL COMMENT '이메일', -- 이메일
+	`gptmcontent` VARCHAR(4000) NULL     COMMENT '답변 내용', -- 답변 내용
+	`gptmreg`     TIMESTAMP     NULL     COMMENT '최종 답변일' -- 최종 답변일
+)
+COMMENT '성장과정';
+
+-- 지원동기
+ALTER TABLE `gptmotive`
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			`gptmid` -- 지원동기 번호
+		);
+
+ALTER TABLE `gptmotive`
+	MODIFY COLUMN `gptmid` INT NOT NULL AUTO_INCREMENT COMMENT '성장과정 번호';
+
+ALTER TABLE `gptmotive`
+	AUTO_INCREMENT = 1;
+
+-- 조회수
+CREATE TABLE `readcount` (
+	`greadcount` INT NULL DEFAULT 0 COMMENT 'default: 0', -- 성장과정 조회수
+	`creadcount` INT NULL DEFAULT 0 COMMENT 'default: 0', -- 성격장단점 조회수
+	`mreadcount` INT NULL DEFAULT 0 COMMENT 'default: 0', -- 지원동기 조회수
+	`preadcount` INT NULL DEFAULT 0 COMMENT 'default: 0' -- 입사후포부 조회수
+)
+COMMENT '지피티';
+
+-- 커뮤니티 댓글
+ALTER TABLE `communityreply`
+	ADD CONSTRAINT `FK_community_TO_communityreply` -- FK_community_TO_communityreply
+		FOREIGN KEY (
+			`cid` -- 커뮤니티글 번호
+		)
+		REFERENCES `community` ( -- 커뮤니티
+			`cid` -- 커뮤니티글 번호
+		),
+	ADD INDEX `FK_community_TO_communityreply` (
+		`cid` -- 커뮤니티글 번호
+	);
+
+-- 커뮤니티 댓글
+ALTER TABLE `communityreply`
+	ADD CONSTRAINT `FK_member_TO_communityreply` -- FK_member_TO_communityreply
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_communityreply` (
+		`memail` -- 이메일
+	);
+
+-- 피드백 게시판
+ALTER TABLE `feedback`
+	ADD CONSTRAINT `FK_member_TO_feedback` -- FK_member_TO_feedback
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_feedback` (
+		`memail` -- 이메일
+	);
+
+-- 피드백 댓글
+ALTER TABLE `feedbackreply`
+	ADD CONSTRAINT `FK_feedback_TO_feedbackreply` -- FK_feedback_TO_feedbackreply
+		FOREIGN KEY (
+			`fid` -- 후기 글번호
+		)
+		REFERENCES `feedback` ( -- 피드백 게시판
+			`fid` -- 피드백 번호
+		),
+	ADD INDEX `FK_feedback_TO_feedbackreply` (
+		`fid` -- 후기 글번호
+	);
+
+-- 피드백 댓글
+ALTER TABLE `feedbackreply`
+	ADD CONSTRAINT `FK_member_TO_feedbackreply` -- FK_member_TO_feedbackreply
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_feedbackreply` (
+		`memail` -- 이메일
+	);
+
+-- 지피티
+ALTER TABLE `gpt`
+	ADD CONSTRAINT `FK_member_TO_gpt` -- FK_member_TO_gpt
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_gpt` (
+		`memail` -- 이메일
+	);
+
+-- 성장과정
+ALTER TABLE `gptgrow`
+	ADD CONSTRAINT `FK_gpt_TO_gptgrow` -- FK_gpt_TO_gptgrow
+		FOREIGN KEY (
+			`gid` -- 대화 세션 번호
+		)
+		REFERENCES `gpt` ( -- 지피티
+			`gid` -- 대화 세션 번호
+		),
+	ADD INDEX `FK_gpt_TO_gptgrow` (
+		`gid` -- 대화 세션 번호
+	);
+
+-- 좋아요
+ALTER TABLE `like`
+	ADD CONSTRAINT `FK_member_TO_like` -- FK_member_TO_like
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_like` (
+		`memail` -- 이메일
+	);
+
+-- 이력서
+ALTER TABLE `personalstatement`
+	ADD CONSTRAINT `FK_gpt_TO_personalstatement` -- FK_gpt_TO_personalstatement
+		FOREIGN KEY (
+			`gid` -- 대화 세션 번호
+		)
+		REFERENCES `gpt` ( -- 지피티
+			`gid` -- 대화 세션 번호
+		),
+	ADD INDEX `FK_gpt_TO_personalstatement` (
+		`gid` -- 대화 세션 번호
+	);
+
+-- 이력서
+ALTER TABLE `personalstatement`
+	ADD CONSTRAINT `FK_member_TO_personalstatement` -- FK_member_TO_personalstatement
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_personalstatement` (
+		`memail` -- 이메일
+	);
+
+-- Qna
+ALTER TABLE `qna`
+	ADD CONSTRAINT `FK_member_TO_qna` -- FK_member_TO_qna
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_qna` (
+		`memail` -- 이메일
+	);
+
+-- QnaReply
+ALTER TABLE `qnareply`
+	ADD CONSTRAINT `FK_member_TO_qnareply` -- FK_member_TO_qnareply
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_qnareply` (
+		`memail` -- 이메일
+	);
+
+-- QnaReply
+ALTER TABLE `qnareply`
+	ADD CONSTRAINT `FK_qna_TO_qnareply` -- FK_qna_TO_qnareply
+		FOREIGN KEY (
+			`qid` -- Qna 글번호
+		)
+		REFERENCES `qna` ( -- Qna
+			`qid` -- Qna 글번호
+		),
+	ADD INDEX `FK_qna_TO_qnareply` (
+		`qid` -- Qna 글번호
+	);
+
+-- 후기 게시판
+ALTER TABLE `review`
+	ADD CONSTRAINT `FK_member_TO_review` -- FK_member_TO_review
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_review` (
+		`memail` -- 이메일
+	);
+
+-- 후기 댓글
+ALTER TABLE `reviewreply`
+	ADD CONSTRAINT `FK_member_TO_reviewreply` -- FK_member_TO_reviewreply
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		),
+	ADD INDEX `FK_member_TO_reviewreply` (
+		`memail` -- 이메일
+	);
+
+-- 후기 댓글
+ALTER TABLE `reviewreply`
+	ADD CONSTRAINT `FK_review_TO_reviewreply` -- FK_review_TO_reviewreply
+		FOREIGN KEY (
+			`rid` -- 후기글 번호
+		)
+		REFERENCES `review` ( -- 후기 게시판
+			`rid` -- 후기글 번호
+		),
+	ADD INDEX `FK_review_TO_reviewreply` (
+		`rid` -- 후기글 번호
+	);
+
+-- 커뮤니티
+ALTER TABLE `community`
+	ADD CONSTRAINT `FK_member_TO_community` -- 멤버 -> 커뮤니티
+		FOREIGN KEY (
+			`memail` -- 이메일
+		)
+		REFERENCES `member` ( -- 멤버
+			`memail` -- 이메일
+		);
+
+-- 입사후포부
+ALTER TABLE `gptplan`
+	ADD CONSTRAINT `FK_gpt_TO_gptplan` -- 지피티 -> 입사후포부
+		FOREIGN KEY (
+			`gid` -- 대화 세션 번호
+		)
+		REFERENCES `gpt` ( -- 지피티
+			`gid` -- 대화 세션 번호
+		);
+
+-- 성격장단점
+ALTER TABLE `gptcharacter`
+	ADD CONSTRAINT `FK_gpt_TO_gptcharacter` -- 지피티 -> 성격장단점
+		FOREIGN KEY (
+			`gid` -- 대화 세션 번호
+		)
+		REFERENCES `gpt` ( -- 지피티
+			`gid` -- 대화 세션 번호
+		);
+
+-- 지원동기
+ALTER TABLE `gptmotive`
+	ADD CONSTRAINT `FK_gpt_TO_gptmotive` -- 지피티 -> 지원동기
+		FOREIGN KEY (
+			`gid` -- 대화 세션 번호
+		)
+		REFERENCES `gpt` ( -- 지피티
+			`gid` -- 대화 세션 번호
+		);

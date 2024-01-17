@@ -170,12 +170,8 @@
 
 			<div class="row section topspace">
 				<div class="col-md-12">
-					<p class="lead text-center text-muted">
-						Let me tell you something my friend. hope is a dangerous thing.
-						hope can drive a man insane. you <a href="#">measure</a>
-						yourself by the people who measure themselves by you. it only took
-						me <a href="#">six days</a>.
-					</p>
+					<p class="lead text-center text-muted" style="color: deeppink">"독창적이고
+						강렬한 자기소개서, 우수한 컨설팅으로 빛나는 미래를 함께 향해 가는 여정에 함께해보세요."</p>
 				</div>
 			</div>
 			<!-- / section -->
@@ -322,8 +318,7 @@
 					<div class="widget-body">
 						<p class="text-right">
 							Copyright &copy; 2014, Your awesome name here<br> Design: <a
-								href="#" rel="designer">Initio by
-								GetTemplate</a>
+								href="#" rel="designer">Initio by GetTemplate</a>
 						</p>
 					</div>
 				</div>
