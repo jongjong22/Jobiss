@@ -61,7 +61,7 @@ public class ReviewController {
 		
 		// 실제 파일 경로를 반환하는 메서드
 		// 이 메서드는 서블릿 컨터이너가 웹 애플리케이션을 배포할 때 생성하는 디렉터리 구조를 기반으로 함.
-		String path = request.getRealPath("upload");
+		String path = request.getRealPath("images");
 		String newfilename = "";
 
 		if(size > 0) {

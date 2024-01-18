@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,103 +26,111 @@ import com.example.demo.service.GptService;
 
 @Controller
 public class GptController {
-	private static String memail;
 
 	@Autowired
 	private GptService gs;
 
-	// 로딩시 session 동시 초기화
-	public void loading(HttpSession session) {
-		System.out.println("\n ***** gptLoading 시작 ***** \n");
-		Member member = (Member) session.getAttribute("member");
-
-		System.out.println("로딩 전 memail : " + memail);
-		if (member != null)
-			memail = member.getMemail();
-		else {
-			memail = "";
-		}
-		System.out.println("로딩 !null 변경 : " + memail);
-		System.out.println("로딩 null 변경 : " + memail);
-		System.out.println("\n ***** gptLoading 끝 ***** \n");
-
-	}
+//	// 로딩시 session 동시 초기화
+//	public void loading(HttpSession session) {
+//		System.out.println("\n ***** gptLoading 시작 ***** \n");
+//		Member member = (Member) session.getAttribute("member");
+//
+//		System.out.println("로딩 전 memail : " + memail);
+//		if (member != null)
+//			memail = member.getMemail();
+//		else {
+//			memail = "";
+//		}
+//		System.out.println("로딩 !null 변경 : " + memail);
+//		System.out.println("로딩 null 변경 : " + memail);
+//		System.out.println("\n ***** gptLoading 끝 ***** \n");
+//
+//	}
 
 	@RequestMapping("/gptMain")
 	public String gptMain(String mainMsg, Model model, HttpSession session) {
 		System.out.println("\n ***** gptMain 시작 ***** \n");
-		loading(session);
-		System.out.println("session : " + session);
-		if (memail == null || memail == "") {
+//		loading(session);
+		Member member = (Member) session.getAttribute("member");
+		String memail;
+		if (member != null) {
+			memail = member.getMemail();
+			System.out.println("memail : " + memail);
+			List<GPT> gptList = new ArrayList<GPT>();
+			ReadCount readCount = gs.selectReadCountTop();
+			if (readCount == null)
+				readCount = new ReadCount();
+
+			GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
+
+			GptGrow grow = new GptGrow();
+			GptCharacter character = new GptCharacter();
+			GptMotive motive = new GptMotive();
+			GptPlan plan = new GptPlan();
+
+			gptList = gs.selectGptList(memail);
+
+			int i = 0;
+			System.out.println("gpt갯수 : " + gptList.size());
+
+			int gid = 0;
+			System.out.println("grow : " + grow.getGid());
+			System.out.println("character : " + character.getGid());
+			// 처음작성이 아닐때 : 부모글번호 초기화, 하위 4개 dto초기화
+			if (gptTop != null) {
+				gid = gptTop.getGid();
+				grow = gs.selectGptGrowTop(memail);
+				character = gs.selectGptCharacterTop(memail);
+				motive = gs.selectGptMotiveTop(memail);
+				plan = gs.selectGptPlanTop(memail);
+			}
+
+			if (grow == null)
+				grow = new GptGrow();
+			if (character == null)
+				character = new GptCharacter();
+			if (motive == null)
+				motive = new GptMotive();
+			if (plan == null)
+				plan = new GptPlan();
+			if (mainMsg == null)
+				mainMsg = "";
+			System.out.println("grow : " + grow.getGid());
+			System.out.println("character : " + character.getGid());
+			System.out.println("motive : " + motive.getGid());
+			System.out.println("plan : " + plan.getGid());
+			System.out.println("mainMsg : " + mainMsg);
+			System.out.println("gpt갯수 : " + gptList.size());
+
+			model.addAttribute("grow", grow);
+			model.addAttribute("character", character);
+			model.addAttribute("motive", motive);
+			model.addAttribute("plan", plan);
+			model.addAttribute("mainMsg", mainMsg);
+			model.addAttribute("gptList", gptList);
+			model.addAttribute("readCount", readCount);
+			System.out.println("\n ***** gptMain 끝 ***** \n");
+			return "gpt/gptMain";
+
+		} else {
+			memail = null;
 			model.addAttribute("loginErr", "로그인을 해주세요.");
 			return "gpt/gptMain";
-		} else {
-
-		}
-		System.out.println("memail : " + memail);
-		List<GPT> gptList = new ArrayList<GPT>();
-		ReadCount readCount = gs.selectReadCountTop();
-		if (readCount == null)
-			readCount = new ReadCount();
-
-		GPT gptTop = gs.selectGptTop(memail); // 세션의 최신질문 1개 구해옴
-
-		GptGrow grow = new GptGrow();
-		GptCharacter character = new GptCharacter();
-		GptMotive motive = new GptMotive();
-		GptPlan plan = new GptPlan();
-
-		gptList = gs.selectGptList(memail);
-
-		int i = 0;
-		System.out.println("gpt갯수 : " + gptList.size());
-
-		int gid = 0;
-		System.out.println("grow : " + grow.getGid());
-		System.out.println("character : " + character.getGid());
-		// 처음작성이 아닐때 : 부모글번호 초기화, 하위 4개 dto초기화
-		if (gptTop != null) {
-			gid = gptTop.getGid();
-			grow = gs.selectGptGrowTop(memail);
-			character = gs.selectGptCharacterTop(memail);
-			motive = gs.selectGptMotiveTop(memail);
-			plan = gs.selectGptPlanTop(memail);
 		}
 
-		if (grow == null)
-			grow = new GptGrow();
-		if (character == null)
-			character = new GptCharacter();
-		if (motive == null)
-			motive = new GptMotive();
-		if (plan == null)
-			plan = new GptPlan();
-		if (mainMsg == null)
-			mainMsg = "";
-		System.out.println("grow : " + grow.getGid());
-		System.out.println("character : " + character.getGid());
-		System.out.println("motive : " + motive.getGid());
-		System.out.println("plan : " + plan.getGid());
-		System.out.println("mainMsg : " + mainMsg);
-		System.out.println("gpt갯수 : " + gptList.size());
-
-		model.addAttribute("grow", grow);
-		model.addAttribute("character", character);
-		model.addAttribute("motive", motive);
-		model.addAttribute("plan", plan);
-		model.addAttribute("mainMsg", mainMsg);
-		model.addAttribute("gptList", gptList);
-		model.addAttribute("readCount", readCount);
-		System.out.println("\n ***** gptMain 끝 ***** \n");
-		return "gpt/gptMain";
 	}
 
 	@ResponseBody
 	@RequestMapping("/gptRequest")
 	public Map<String, Object> gptRequest(@RequestBody String jString, HttpSession session) {
 		System.out.println("\n ***** gptRequest ***** \n ");
-		loading(session);
-		System.out.println("mEmail : " + memail);
+//		loading(session);
+		Member member = (Member) session.getAttribute("member");
+		String memail;
+		if (member != null) {
+			memail = member.getMemail();
+			System.out.println("mEmail : " + memail);
+		}
 
 		JSONObject json = new JSONObject(jString);
 		Map<String, Object> qResult = gs.request(json); // 최종답변 및 필요값들 담긴상태
@@ -136,6 +143,13 @@ public class GptController {
 	public String gptSelect(String resumeType, GptGrow grow, GptCharacter character, GptMotive motive, GptPlan plan,
 			Model model, HttpSession session) {
 		System.out.println("\n ***** gptSelect ***** \n ");
+		Member member = (Member) session.getAttribute("member");
+		String memail;
+		if (member != null) {
+			memail = member.getMemail();
+		} else {
+			memail = null;
+		}
 		System.out.println("mEmail : " + memail);
 		System.out.println("resumeType : " + resumeType);
 		System.out.println("getGptgContent : " + grow.getGptgcontent());
@@ -292,8 +306,14 @@ public class GptController {
 	public String gptHistory(int gid, String type, GPT gpt, HttpSession session, Model model) {
 		// 해당메서드는 gid를 무조건 주기때문에 검증이 필요없음.
 		System.out.println("\n ***** gptHistory ***** \n ");
-		loading(session);
-
+//		loading(session);
+		Member member = (Member) session.getAttribute("member");
+		String memail;
+		if (member != null) {
+			memail = member.getMemail();
+		} else {
+			memail = null;
+		}
 		System.out.println("gid : " + gid);
 		System.out.println("type : " + type);
 

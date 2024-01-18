@@ -80,7 +80,7 @@
 
 
 		<div class="container_main">
-			<table class="table_qRequest">
+			<table class="table_gRequest">
 				<tr>
 					<th>&nbsp; &lt;성장과정&gt;</th>
 				</tr>
@@ -186,6 +186,7 @@
 			<div id="pResponse"></div>
 		</div>
 	</div>
+
 	<script>
 		$(document).ready(function() {
 
@@ -247,11 +248,11 @@
 										+ '<table style="margin-bottom:20px;">'
 										+ '<tr>'
 										+ '<td><input type="hidden" id="' + resumeType + '" name="resumeType" value="' + resumeType + '" /></td>'
-										+ '<td><input type="hidden" id="gpt' + resumeType + 'content" name="gpt' + resumeType + 'content" value="' + resultContent + '" /></td>'
+// 										+ '<td><input type="hidden" id="gpt' + resumeType + 'content" name="gpt' + resumeType + 'content" value="' + resultContent + '" /></td>'
 										+ '</tr>'
 										+ '<tr>'
 										+ '<th>수정안 - &nbsp;</th>'
-										+ '<td><textarea rows="5" cols="65" class="content_response" placeholder="컨설팅 받을 이력서 내용을 입력하세요.">'
+										+ '<td><textarea rows="5" cols="65"  id="gpt' + resumeType + 'content" name="gpt' + resumeType + 'content" value="' + resultContent + '" class="content_response" placeholder="컨설팅 받을 이력서 내용을 입력하세요.">'
 										+ resultContent
 										+ '</textarea></td>'
 										+ '<td><button type="submit" id="selectRequest" name="selectRequest" class="button_select" value="' + resumeType + '">선택</button></td>'
@@ -262,8 +263,6 @@
 							});
 		}
 	</script>
-
-
 	<script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
